@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Martian Grotesk';
+  font-display: swap;
+  src: url('@assets/fonts/MartianGrotesk.woff2') format('woff2');
+  font-weight: 100 800;
+  font-stretch: 100%;
+}
+
+@font-face {
+  font-family: 'Martian Mono';
+  font-display: swap;
+  src: url('@assets/fonts/MartianMono.woff2') format('woff2');
+  font-weight: 100 800;
+  /*font-stretch: 75% 150%;*/
+}

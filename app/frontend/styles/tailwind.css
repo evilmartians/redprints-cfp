@@ -1,14 +1,53 @@
+@import "./fonts.css";
+
 @import "tailwindcss";
 @source "../../views";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-primary: #ff2e55;
-  --color-primary-hover: #ff4d6e;
+  --font-display: 'Martian Grotesk', 'sans-serif';
 
-  --color-secondary: #757480;
-  --color-secondary-dark: #c3c3d5;
+  --color-ruby-50: oklch(97% 0.25 25);
+  --color-ruby-100: oklch(95% 0.25 25);
+  --color-ruby-200: oklch(90% 0.25 25);
+  --color-ruby-300: oklch(85% 0.25 25);
+  --color-ruby-400: oklch(75% 0.25 25);
+  --color-ruby-500: oklch(65% 0.25 25);
+  --color-ruby: oklch(65% 0.25 25);
+  --color-ruby-600: oklch(55% 0.25 25);
+  --color-ruby-700: oklch(45% 0.25 25);
+  --color-ruby-800: oklch(35% 0.25 25);
+  --color-ruby-900: oklch(25% 0.25 25);
+  --color-ruby-950: oklch(15% 0.25 25);
+
+  --color-sky-50: oklch(97% 0.17 250);
+  --color-sky-100: oklch(95% 0.17 250);
+  --color-sky-200: oklch(90% 0.17 250);
+  --color-sky-300: oklch(85% 0.17 250);
+  --color-sky-400: oklch(75% 0.17 250);
+  --color-sky-500: oklch(65% 0.17 250); /* Bright blue */
+  --color-sky: oklch(65% 0.17 250);
+  --color-sky-600: oklch(55% 0.17 250);
+  --color-sky-700: oklch(45% 0.17 250);
+  --color-sky-800: oklch(35% 0.17 250);
+  --color-sky-900: oklch(25% 0.17 250);
+  --color-sky-950: oklch(15% 0.17 250);
+
+  --color-cloud-50: oklch(100% 0 0); /* Pure white */
+  --color-cloud-100: oklch(95% 0.0 0);
+  --color-cloud-200: oklch(90% 0.0 0);
+  --color-cloud-300: oklch(85% 0.0 0);
+  --color-cloud-400: oklch(75% 0.0 0);
+  --color-cloud-500: oklch(65% 0.0 0);
+  --color-cloud-600: oklch(55% 0.0 0);
+  --color-cloud-700: oklch(45% 0.0 0);
+  --color-cloud-800: oklch(35% 0.0 0);
+  --color-cloud-900: oklch(25% 0.0 0);
+  --color-cloud-950: oklch(15% 0.0 0); /* dark grey */
+
+  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 /*
@@ -26,5 +65,55 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-ruby {
+    @apply bg-ruby-500 text-white hover:bg-ruby-700 focus:ring-ruby-600;
+  }
+
+  .btn-sky {
+    @apply bg-sky-500 text-white hover:bg-sky-700 focus:ring-sky-600;
+  }
+
+  .btn-outline {
+    @apply border border-cloud-700 bg-white text-cloud-700 hover:bg-cloud-200 focus:ring-cloud-700;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-cloud-700 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-sky-800 mb-1;
+  }
+
+  .card {
+    @apply bg-cloud-50 rounded-lg shadow-soft p-6;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-submitted {
+    @apply bg-sky-100 text-sky-700;
+  }
+
+  .badge-accepted {
+    @apply bg-green-200 text-green-800;
+  }
+
+  .badge-rejected {
+    @apply bg-red-100 text-red-800;
+  }
+
+  .badge-waitlist {
+    @apply bg-orange-200 text-orange-700;
   }
 }

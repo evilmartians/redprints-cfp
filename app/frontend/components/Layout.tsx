@@ -1,4 +1,5 @@
 import { Header } from './Header';
+import { Footer } from './Footer';
 import { User } from '../serializers';
 
 interface LayoutProps {
@@ -8,12 +9,16 @@ interface LayoutProps {
 
 export default function Layout({ currentUser, children }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0B1516] text-gray-900 dark:text-white relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-white text-gray-900 relative overflow-hidden transition-colors duration-300 font-display">
       <Header currentUser={currentUser} />
 
-      <main className="container mx-auto px-4 py-8 relative z-10">
-        {children}
+      <main className="flex-grow">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {children}
+        </div>
       </main>
+
+      <Footer />
     </div>
   )
 }

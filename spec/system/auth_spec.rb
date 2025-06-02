@@ -7,9 +7,9 @@ describe "Authentication" do
     it "via OAuth (developer)" do
       visit root_url
 
-      expect(page).to have_text "Welcome to SF Ruby CFP app!"
+      expect(page).to have_text "Call for Proposals"
 
-      click_on "Sign in with developer"
+      click_on "Sign in as developer"
 
       # OmniAuth dev login page
       expect(page).to have_text "User Info"
@@ -20,7 +20,7 @@ describe "Authentication" do
 
       click_on "Sign In"
 
-      expect(page).to have_link "Submit a proposal"
+      expect(page).to have_link "Submit a Proposal"
 
       expect(page).to have_current_path("/")
 
@@ -36,7 +36,7 @@ describe "Authentication" do
     it "redirects to the sign in page" do
       visit root_url
 
-      expect(page).to have_text "Welcome to SF Ruby CFP app!"
+      expect(page).to have_text "Call for Proposals"
 
       expect(page).to have_current_path("/")
 
@@ -50,7 +50,7 @@ describe "Authentication" do
         expect(page).not_to have_button "Sign out"
       end
 
-      expect(page).to have_link "Sign in with developer"
+      expect(page).to have_link "Sign in as developer"
     end
   end
 end
