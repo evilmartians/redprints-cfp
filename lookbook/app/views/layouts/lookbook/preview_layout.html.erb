@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="view-transition" content="same-origin" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..100,400..600;1,75..100,400..600&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= action_cable_meta_tag %>
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag 'application' %>
+  </head>
+
+  <body class="flex flex-col min-h-full scroll-smooth antialiased text-slate-950 dark:bg-black dark:text-slate-50 p-4">
+    <%= yield %>
+  </body>
+</html>

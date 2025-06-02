@@ -1,0 +1,4 @@
+# production:
+  # notify_deadline:
+  #   class: Proposal::DeadlineJob
+  #   schedule: at 12:05am every day

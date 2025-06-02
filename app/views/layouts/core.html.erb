@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title inertia><%= content_for(:title) || "SF Ruby 2025 CFP" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= yield :head %>
+
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag 'application' %>
+  </head>
+
+  <body>
+    <%= content_for?(:content) ? yield(:content) : yield %>
+  </body>
+</html>

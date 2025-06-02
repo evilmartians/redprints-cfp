@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+# Install the gem first, then create a binstub.
+#
+# Add to your Gemfile:
+#
+#   gem 'bundlebun'
+#
+# Then:
+#
+#   bundle install
+#   rake bun:install
+#
+# And then:
+#
+#   bin/bun ...
+#
+# If you're looking at this file in your `bin/` directory and you're
+# no longer using bundlebun, it should be safe to delete.
+begin
+  require 'bundler/setup'
+rescue LoadError
+  # Continue without bundler if not available
+end
+require 'bundlebun'
+
+Bundlebun::Runner.call(ARGV)

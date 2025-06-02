@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+# check for imgproxy and install if not present
+if ! command -v imgproxy >/dev/null 2>&1; then
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "Homebrew not found. Please install imgproxy manually on your system."
+        exit 1
+    fi
+    echo "imgproxy not found, installing via Homebrew..."
+    brew install imgproxy
+fi
+
+IMGPROXY_ALLOW_LOOPBACK_SOURCE_ADDRESSES=1 \
+IMGPROXY_ALLOW_ORIGIN=localhost:3000 \
+IMGPROXY_BIND=:3030 imgproxy

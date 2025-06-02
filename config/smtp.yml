@@ -1,0 +1,3 @@
+production: &production
+  address: "smtp.mandrillapp.com"
+  port: 587

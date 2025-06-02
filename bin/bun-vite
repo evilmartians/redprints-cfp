@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+# This file runs the Vite executable under Bun.
+
+ENV['RAILS_ENV'] ||= ENV['RACK_ENV']
+
+require 'bundler/setup'
+require 'vite_ruby'
+require 'bundlebun'
+
+Bundlebun::Integrations::ViteRuby.bun!
+
+Bundlebun.call(['x', '--bun', 'vite', *ARGV])

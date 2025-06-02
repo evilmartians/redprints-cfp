@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: true
+  commands:
+    rubocop:
+      tags: ruby style
+      glob: "*.{rb,rake}"
+      run: bin/rubocop --parallel --force-exclusion {staged_files}

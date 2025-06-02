@@ -1,0 +1,24 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+plugins:
+  - standard-custom
+  - standard-performance
+  - rubocop-performance
+  - rubocop-rails
+
+inherit_gem:
+  standard: config/base.yml
+  standard-performance: config/base.yml
+  standard-custom: config/base.yml
+  standard-rails: config/base.yml
+
+inherit_from:
+  - .rubocop/rspec.yml
+  - .rubocop/strict.yml
+
+AllCops:
+  NewCops: disable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.3

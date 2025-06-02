@@ -1,0 +1,13 @@
+default: &default
+  host: "localhost"
+  port: 3000
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production: &production
+  host: "cfp.sfruby.com"
+  port: 443

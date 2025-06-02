@@ -1,0 +1,13 @@
+default: &default
+  # TODO: Update to SF Ruby
+  from: "anycable@evilmartians.com"
+  reply_to: "anycable@evilmartians.com"
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

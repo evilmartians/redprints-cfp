@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "postcss-custom-properties": "^14.0.4",
+    "tailwindcss": "^4.1.2",
+    "vite": "^6.0.11",
+    "vite-plugin-ruby": "^5.1.1"
+  },
+  "dependencies": {
+    "@inertiajs/react": "^2.0",
+    "@nanostores/react": "^0.8.2",
+    "@rails/actiontext": "^8.0.0",
+    "@rails/activestorage": "^8.0.0",
+    "@rails/request.js": "^0.0.11",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.1.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.3",
+    "fslightbox": "^3.4.2",
+    "lucide-react": "^0.474.0",
+    "postcss-cli": "^11.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "trix": "^2.1.8",
+    "typescript": "^5.6.3"
+  },
+  "scripts": {
+    "build": "vite build --outDir public",
+    "build:css": "postcss app/frontend/styles/email.css --config ./app/views/mailers -o app/assets/builds/email.css"
+  }
+}
