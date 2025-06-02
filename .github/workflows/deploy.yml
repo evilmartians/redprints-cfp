@@ -8,6 +8,7 @@ on:
       - CI
     branches:
       - main
+      - master
     types:
       - completed
 
