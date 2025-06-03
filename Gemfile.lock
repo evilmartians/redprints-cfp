@@ -224,6 +224,31 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    litestream (0.13.0-aarch64-linux)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activejob (>= 7.0)
+      activesupport (>= 7.0)
+      logfmt (>= 0.0.10)
+      railties (>= 7.0)
+      sqlite3
+    litestream (0.13.0-arm64-darwin)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activejob (>= 7.0)
+      activesupport (>= 7.0)
+      logfmt (>= 0.0.10)
+      railties (>= 7.0)
+      sqlite3
+    litestream (0.13.0-x86_64-linux)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activejob (>= 7.0)
+      activesupport (>= 7.0)
+      logfmt (>= 0.0.10)
+      railties (>= 7.0)
+      sqlite3
+    logfmt (0.0.10)
     logger (1.7.0)
     loofah (2.24.1)
       crass (~> 1.0.2)
@@ -551,6 +576,7 @@ DEPENDENCIES
   lefthook
   letter_opener_web
   listen
+  litestream
   lookbook
   mission_control-jobs
   nanoid

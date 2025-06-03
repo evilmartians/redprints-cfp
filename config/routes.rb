@@ -26,6 +26,10 @@ Rails.application.routes.draw do
     end
 
     mount MissionControl::Jobs::Engine, at: "/jobs"
+
+    if LitestreamConfig.configured?
+      mount Litestream::Engine, at: "/litestream"
+    end
   end
 
   get "up" => "rails/health#show", :as => :rails_health_check

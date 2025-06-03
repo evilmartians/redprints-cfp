@@ -55,6 +55,9 @@ gem "avo", ">= 3.2"
 
 gem "mission_control-jobs"
 
+# https://github.com/fractaledmind/litestream-ruby
+gem "litestream", group: [:development, :production]
+
 # Freeze string literals automatically
 gem "freezolite"
 
