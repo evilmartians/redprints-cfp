@@ -1,6 +1,14 @@
 class Avo::Resources::Proposal < Avo::BaseResource
   self.includes = [:user]
 
+  self.find_record_method = -> {
+    if id.is_a?(Array)
+      (id.first.to_i == 0) ? query.where(external_id: id) : query.where(id:)
+    else
+      (id.to_i == 0) ? query.find_by!(external_id: id) : query.find(id)
+    end
+  }
+
   def fields
     field :id, as: :id
     field :user, as: :belongs_to

@@ -39,6 +39,10 @@ module SFRubyCFP
     config.time_zone = "UTC"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # Autoload SitePrism Page objects
+    # (It's not possible to add autoload_paths from env-specific configs)
+    config.autoload_paths << Rails.root.join("spec/system/pages") if Rails.env.test?
+
     # Rails generators configuration.
     config.generators do |g|
       g.helper = false

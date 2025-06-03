@@ -473,6 +473,11 @@ GEM
     sentry-ruby (5.23.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+    site_prism (5.1)
+      addressable (~> 2.8, >= 2.8.4)
+      capybara (~> 3.34)
+      site_prism-all_there (> 3, < 5)
+    site_prism-all_there (3.0.6)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -592,6 +597,7 @@ DEPENDENCIES
   rubocop-rspec
   sentry-rails (~> 5.15)
   sentry-ruby (~> 5.15)
+  site_prism
   solid_queue
   sqlite3 (>= 2.1)
   standard

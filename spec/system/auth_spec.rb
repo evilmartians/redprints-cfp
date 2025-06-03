@@ -3,29 +3,34 @@ require "system_helper"
 describe "Authentication" do
   let_it_be(:user) { create(:user, name: "Vova", email: "admin@evilmartians.com") }
 
+  let(:home_page) { prism.home }
+  let(:oauth_page) { prism.oauth_dev }
+
   describe "login" do
     it "via OAuth (developer)" do
-      visit root_url
+      home_page.load
 
-      expect(page).to have_text "Call for Proposals"
+      home_page.actions.within do |actions|
+        actions.click_on "Sign in as developer"
+      end
 
-      click_on "Sign in as developer"
+      expect(oauth_page).to be_displayed
 
-      # OmniAuth dev login page
-      expect(page).to have_text "User Info"
-      expect(page).to have_current_path "/auth/developer"
-
-      fill_in "Name", with: "Vova"
-      fill_in "Email", with: "admin@evilmartians.com"
+      oauth_page.form do |f|
+        f.fill_in "Name", with: "Vova"
+        f.fill_in "Email", with: "admin@evilmartians.com"
+      end
 
       click_on "Sign In"
 
-      expect(page).to have_link "Submit a Proposal"
+      expect(home_page).to be_displayed
 
-      expect(page).to have_current_path("/")
+      home_page.actions.within do |actions|
+        expect(actions).to have_link "Submit a Proposal"
+      end
 
-      within "header" do
-        expect(page).to have_button "Sign out"
+      home_page.nav.within do |nav|
+        expect(nav).to have_button "Sign out"
       end
     end
   end
@@ -34,23 +39,22 @@ describe "Authentication" do
     before { sign_in_as(user) }
 
     it "redirects to the sign in page" do
-      visit root_url
+      home_page.load
 
-      expect(page).to have_text "Call for Proposals"
+      expect(home_page).to be_displayed
 
-      expect(page).to have_current_path("/")
-
-      within "header" do
-        expect(page).to have_button "Sign out"
-
-        click_on "Sign out"
+      home_page.nav.within do |nav|
+        expect(nav).to have_button "Sign out"
+        nav.click_on "Sign out"
       end
 
-      within "header" do
-        expect(page).not_to have_button "Sign out"
+      home_page.nav.within do |nav|
+        expect(nav).not_to have_button "Sign out"
       end
 
-      expect(page).to have_link "Sign in as developer"
+      home_page.actions.within do |actions|
+        expect(actions).to have_link "Sign in as developer"
+      end
     end
   end
 end

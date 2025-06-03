@@ -125,7 +125,7 @@ function Index({}: IndexProps) {
         </div>
 
         <div className="lg:pl-8 space-y-8">
-          <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+          <div test-id="home-actions" className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
             <h3 className="text-xl font-bold mb-6">Ready to share your Ruby expertise?</h3>
             <p className="text-neutral-600 mb-8">
               We welcome proposals from speakers of all experience levels. Whether you're a seasoned presenter or a first-time speaker,

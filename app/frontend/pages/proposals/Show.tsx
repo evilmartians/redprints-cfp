@@ -24,6 +24,10 @@ function Show({ proposal, speaker }: ShowProps) {
     });
   };
 
+  const hasFeedback = (proposal.status === 'accepted') ||
+    (proposal.status === 'rejected') ||
+    (proposal.status === 'waitlisted');
+
   return (
   <Layout currentUser={user}>
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -58,7 +62,7 @@ function Show({ proposal, speaker }: ShowProps) {
 
         {/* Talk Information */}
         <div className="card border mb-8 animate-slide-up">
-          <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-700 text-sky-800">Talk Information</h2>
+          <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-700">Talk Information</h2>
 
           <div className="space-y-6">
             <div>
@@ -84,8 +88,8 @@ function Show({ proposal, speaker }: ShowProps) {
         </div>
 
         {/* Speaker Information */}
-        <div className="card border border-neutral-200 mb-8 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-          <h2 className="text-xl font-bold mb-6 pb-4 border-b border-neutral-200">Speaker Profile</h2>
+        <div className="card border border-sky-700 mb-8 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+          <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-700">Speaker Profile</h2>
 
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -120,7 +124,7 @@ function Show({ proposal, speaker }: ShowProps) {
         </div>
 
         {/* Status Information - Only shown for non-submitted proposals */}
-        {proposal.status !== 'submitted' && (
+        {hasFeedback && (
           <div className={`card border ${
             proposal.status === 'accepted'
               ? 'border-accent-200 bg-accent-50'
@@ -141,9 +145,6 @@ function Show({ proposal, speaker }: ShowProps) {
               <>
                 <p className="text-error-800 mb-4">
                   Thank you for your submission. After careful consideration, we've decided not to include your talk in this year's program.
-                </p>
-                <p className="text-error-800">
-                  The competition was extremely high this year, and we had to make difficult choices. We encourage you to submit again for future events.
                 </p>
               </>
             )}

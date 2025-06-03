@@ -6,7 +6,7 @@ FactoryBot.define do
     email { user.email }
     company { Faker::Company.name }
 
-    bio { Faker::Lorem.paragraph_by_chars(number: 500) }
-    socials { Faker::Lorem.paragraph_by_chars(number: 200) }
+    bio { Faker::Lorem.paragraph_by_chars(number: 100) }
+    socials { Faker::Lorem.paragraph_by_chars(number: 20) }
   end
 end

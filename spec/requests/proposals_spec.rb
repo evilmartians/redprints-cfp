@@ -2,6 +2,7 @@ require "rails_helper"
 
 describe "/proposals" do
   let_it_be(:user) { create(:user) }
+  let_it_be(:proposal) { create(:proposal, user:) }
 
   before { sign_in(user) }
 
@@ -17,7 +18,7 @@ describe "/proposals" do
 
       expect(inertia).to render_component "proposals/Index"
 
-      expect(inertia.props[:proposals].as_json.size).to eq 2
+      expect(inertia.props[:proposals].as_json.size).to eq user.proposals.count
     end
   end
 
@@ -58,8 +59,6 @@ describe "/proposals" do
   end
 
   describe "GET /:id", :inertia do
-    let_it_be(:proposal) { create(:proposal, user:) }
-
     subject { get "/proposals/#{proposal.external_id}" }
 
     specify do
@@ -73,6 +72,81 @@ describe "/proposals" do
 
       expect(proposal_prop["id"]).to eq proposal.external_id
       expect(proposal_prop["title"]).to eq proposal.title
+    end
+  end
+
+  describe "GET /new", :inertia do
+    subject { get "/proposals/new" }
+
+    specify do
+      subject
+
+      expect(response).to be_successful
+
+      expect(inertia).to render_component "proposals/Form"
+
+      expect(inertia.props[:proposal]).to be_present
+      expect(inertia.props[:speaker]).to be_present
+    end
+  end
+
+  describe "GET /:id/edit", :inertia do
+    let_it_be(:proposal) { create(:proposal, user:) }
+
+    subject { get "/proposals/#{proposal.external_id}/edit" }
+
+    specify do
+      subject
+
+      expect(response).to be_successful
+
+      expect(inertia).to render_component "proposals/Form"
+
+      proposal_prop = inertia.props[:proposal].as_json
+
+      expect(proposal_prop["id"]).to eq proposal.external_id
+      expect(proposal_prop["title"]).to eq proposal.title
+      expect(inertia.props[:speaker]).to be_present
+    end
+  end
+
+  describe "PATCH /:id", :inertia do
+    let(:form_params) do
+      {
+        title: "Updated Title",
+        details: "Updated details",
+        abstract: "Updated abstract",
+        speaker_name: "Updated Name",
+        speaker_email: "updated@sf.test"
+      }
+    end
+
+    before { create(:speaker_profile, email: "test@sf.test", user:) }
+
+    subject { patch "/proposals/#{proposal.external_id}", params: {proposal: form_params} }
+
+    it "updates the proposal" do
+      expect { subject }.to change { proposal.reload.title }.to("Updated Title")
+      expect(user.reload.speaker_profile.email).to eq("updated@sf.test")
+    end
+
+    context "when validation fails", :inertia do
+      let(:form_params) { {title: ""} }
+
+      it "renders the form with errors" do
+        subject
+
+        expect(response).to be_successful
+        expect(inertia).to render_component "proposals/Form"
+      end
+    end
+  end
+
+  describe "DELETE /:id" do
+    subject { delete "/proposals/#{proposal.external_id}" }
+
+    it "deletes the proposal" do
+      expect { subject }.to change(Proposal, :count).by(-1)
     end
   end
 end

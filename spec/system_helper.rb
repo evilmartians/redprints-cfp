@@ -22,6 +22,8 @@ end
 RSpec.configure do |config|
   config.include Capybara::Email::DSL, type: :system
   config.include AuthTestHelper::System, type: :system
+  # Adds #peform_enqueued_jobs and other helpers
+  config.include ActiveJob::TestHelper, type: :system
 
   config.prepend_before(:each, type: :system) do
     driven_by :cuprite,

@@ -92,4 +92,6 @@ group :test do
   gem "capybara"
   gem "capybara-email"
   gem "cuprite"
+  # See https://evilmartians.com/chronicles/system-of-a-test-2-robust-rails-browser-testing-with-siteprism
+  gem "site_prism"
 end
