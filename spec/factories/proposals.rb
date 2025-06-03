@@ -14,5 +14,9 @@ FactoryBot.define do
       status { "draft" }
       submitted_at { nil }
     end
+
+    after(:stub) do |proposal|
+      proposal.external_id ||= Nanoid.generate(size: 3)
+    end
   end
 end

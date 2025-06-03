@@ -1,6 +1,6 @@
 class AppConfig < ApplicationConfig
   attr_config :host, :port, :asset_host,
-    advent_year: 2024
+    :slack_notifications_url
 
   def ssl?
     port == 443

@@ -52,3 +52,5 @@ node_modules
 .rspec-local
 
 /config/credentials/production.key
+
+/config/credentials/local.key

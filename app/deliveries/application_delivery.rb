@@ -1,5 +1,5 @@
 class ApplicationDelivery < ActiveDelivery::Base
   self.abstract_class = true
 
-  # TODO: register Slack line
+  register_line :slack, notifier: true, resolver_pattern: "%{delivery_class}::SlackNotifier"
 end
