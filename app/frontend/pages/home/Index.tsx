@@ -38,8 +38,8 @@ function Index({}: IndexProps) {
           Call for Proposals
         </h1>
         <p className="text-cloud-50 text-lg max-w-3xl">
-          Share your Ruby knowledge and experience at SF Ruby Conference 2025. We're looking for talks
-          on Ruby, Rails, and related technologies that will inspire and educate our community.
+          Share your Ruby knowledge and experience at the <a href="https://sfruby.com" target="_blank">San Francisco Ruby Conference 2025</a>. We're looking for talks
+          to support and inspire the new generation of successful startups built on Ruby and Rails.
         </p>
         <div className="mt-8 flex flex-wrap gap-4 text-ruby-100">
           <div className="flex items-center">
@@ -63,21 +63,21 @@ function Index({}: IndexProps) {
             <h2 className="text-2xl font-bold mb-4 text-sky-800">Proposal Guidelines</h2>
             <div className="space-y-6">
               <p>
-                We're looking for talks in three tracks:
+               Thank you for your interest in speaking at our conference! We’re excited to invite proposals for talks in two tracks:
               </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><span className="font-medium">OSS tools</span> — Talks about Ruby gems, frameworks, and other open source tools</li>
-                <li><span className="font-medium">Scaling startups</span> — Experiences scaling Ruby applications in startups</li>
-                <li><span className="font-medium">General</span> — Everything Ruby that doesn't fit the other tracks</li>
+                <li><span className="font-medium">New Open Source and Tooling, Including AI</span> 
+                <p>Talks about new tooling built for ambitious Ruby and Rails products.</p></li>
+                <li><span className="font-medium">Scaling Ruby</span> 
+                <p>Experiences and best practices scaling Ruby and Rails applications from scaleups and enterprises.</p></li>
               </ul>
               <p>
-                Each talk should be 30 minutes long, including Q&A. We're looking for talks that are:
+                Each talk should be 30 minutes in total, including time for Q&A. We’re especially interested in talks that are:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Educational and informative</li>
-                <li>Based on real-world experience</li>
+                <li>Grounded in real-world experience</li>
                 <li>Accessible to Ruby developers of all levels</li>
-                <li>Original and not previously presented</li>
               </ul>
             </div>
           </div>
@@ -86,10 +86,10 @@ function Index({}: IndexProps) {
             <h2 className="text-2xl font-bold mb-4 text-sky-800">Selection Process</h2>
             <div className="space-y-4">
               <p>
-                All proposals will be reviewed by our program committee. We'll select talks based on:
+                All proposals will be thoughtfully reviewed by our program committee. Talks will be selected based on the following criteria:
               </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Relevance to the Ruby community</li>
+                <li>Relevance to the specified tracks</li>
                 <li>Originality and freshness of the topic</li>
                 <li>Speaker's experience and expertise</li>
                 <li>Overall balance of the conference program</li>
@@ -100,7 +100,7 @@ function Index({}: IndexProps) {
               <ul className="list-disc pl-6 space-y-1">
                 <li>CFP opens: June 4, 2025</li>
                 <li>CFP closes: July 15, 2025</li>
-                <li>Notifications: July 31, 2025</li>
+                <li>Notifications: July 21, 2025</li>
               </ul>
             </div>
           </div>
@@ -112,10 +112,14 @@ function Index({}: IndexProps) {
                 Selected speakers will receive:
               </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Free conference ticket</li>
-                <li>Travel stipend (up to $500 for domestic, $1000 for international)</li>
-                <li>Speaker dinner and exclusive networking opportunities</li>
+                <li>A complimentary conference ticket</li>
+                <li>A travel stipend (up to $500 for domestic travel, $1,000 for international travel)</li>
+                <li>Invitation to the speaker dinner</li>
               </ul>
+              <p>
+                To help keep our conference affordable, we kindly ask that you check if your employer is able to support your travel. If so, we’d be happy to recognize them as a travel sponsor.
+              </p>
+              <p>We look forward to your proposals!</p>
             </div>
           </div>
         </div>
