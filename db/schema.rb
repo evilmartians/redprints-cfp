@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_03_001509) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_03_182040) do
   create_table "proposals", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
@@ -22,6 +22,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_03_001509) do
     t.datetime "submitted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "external_id", null: false
+    t.index ["external_id"], name: "index_proposals_on_external_id", unique: true
     t.index ["status"], name: "index_proposals_on_status"
     t.index ["user_id"], name: "index_proposals_on_user_id"
   end

@@ -11,25 +11,30 @@ class ProposalForm < ApplicationForm
   attribute :speaker_bio
   attribute :speaker_socials
 
+  attribute :drafting, :boolean, default: false
+
   validates :title, length: {maximum: 256}
   validates :abstract, length: {maximum: 400}
   validates :details, length: {maximum: 800}
   validates :pitch, length: {maximum: 600}
+  validates :speaker_bio, length: {maximum: 300}
 
   validates :title, :abstract, :details, :pitch,
     :speaker_name, :speaker_email, :speaker_bio,
-    presence: true
-
-  validates :speaker_bio, length: {maximum: 300}
+    presence: true, unless: :drafting
 
   attr_reader :proposal, :user, :speaker_profile
 
   delegate :id, :persisted?, to: :proposal, allow_nil: true
 
   def submit!
-    # TODO: Add draft/update ;logic
-    proposal.status = :submitted
-    proposal.submitted_at = Time.current
+    if drafting
+      # make sure it has at least a title
+      proposal.title = "Untitled draft" if proposal.title.blank?
+    else
+      proposal.status = :submitted
+      proposal.submitted_at = Time.current
+    end
     proposal.save!
     speaker_profile.save!
   end

@@ -5,7 +5,7 @@ describe "/proposals" do
 
   before { sign_in(user) }
 
-  describe "GET /index", :inertia do
+  describe "GET /", :inertia do
     before_all { create_pair(:proposal, user:) }
 
     subject { get "/proposals" }
@@ -21,7 +21,7 @@ describe "/proposals" do
     end
   end
 
-  describe "POST /create" do
+  describe "POST /" do
     let(:form_params) do
       attributes_for(:proposal).slice(:title, :details, :abstract, :pitch, :track).merge(
         speaker_name: "Vova",
@@ -40,7 +40,33 @@ describe "/proposals" do
     it "notifies the author"
 
     context "when saving draft" do
+      let(:form_params) { {drafting: "1", title: "My draft", speaker_email: "palkan@sf.test"} }
+
+      it "creates a draft" do
+        expect { subject }.to change(Proposal.draft.where(user:), :count).by(1)
+          .and change(SpeakerProfile.where(email: "palkan@sf.test"), :count).by(1)
+      end
+
       it "does not notify the author"
+    end
+  end
+
+  describe "GET /:id", :inertia do
+    let_it_be(:proposal) { create(:proposal, user:) }
+
+    subject { get "/proposals/#{proposal.external_id}" }
+
+    specify do
+      subject
+
+      expect(response).to be_successful
+
+      expect(inertia).to render_component "proposals/Show"
+
+      proposal_prop = inertia.props[:proposal].as_json
+
+      expect(proposal_prop["id"]).to eq proposal.external_id
+      expect(proposal_prop["title"]).to eq proposal.title
     end
   end
 end

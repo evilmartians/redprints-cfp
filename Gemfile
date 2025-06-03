@@ -15,6 +15,8 @@ gem "solid_queue"
 # Active Record extensions
 gem "store_model"
 
+gem "nanoid"
+
 # Authentication
 gem "omniauth"
 gem "omniauth-google-oauth2"

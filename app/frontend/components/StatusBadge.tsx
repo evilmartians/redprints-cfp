@@ -11,9 +11,9 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
   let statusText = '';
 
   switch (status) {
-    case 'submitted':
-      badgeClasses += 'badge-submitted';
-      statusText = 'Submitted';
+    case 'draft':
+      badgeClasses += 'badge-draft';
+      statusText = 'Draft';
       break;
     case 'submitted':
       badgeClasses += 'badge-submitted';

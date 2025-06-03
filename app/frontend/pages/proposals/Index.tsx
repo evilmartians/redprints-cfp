@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import { ArrowLeftIcon, PlusIcon } from 'lucide-react';
 import StatusBadge from "../../components/StatusBadge";
-import { usePage, Link } from "@inertiajs/react";
+import { usePage, Link, router } from "@inertiajs/react";
 import { Proposal } from "../../serializers";
 
 interface IndexProps {
@@ -32,7 +32,7 @@ function Index({ proposals }: IndexProps) {
           className="flex items-center text-cloud-600 hover:text-cloud-700 transition-colors mb-6"
         >
           <ArrowLeftIcon className="h-4 w-4 mr-1" />
-          Back to Home
+          Back home
         </Link>
 
         <div className="max-w-4xl mx-auto">
@@ -63,18 +63,18 @@ function Index({ proposals }: IndexProps) {
             <div className="card border border-sky-800 overflow-hidden animate-slide-up">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-sky-800">
-                  <thead className="bg-neutral-50">
+                  <thead>
                     <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
                         Title
                       </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
                         Track
                       </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
                         Submitted On
                       </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
                         Status
                       </th>
                     </tr>
@@ -84,18 +84,18 @@ function Index({ proposals }: IndexProps) {
                       <tr
                         key={proposal.id}
                         className="hover:bg-sky-50 transition-colors cursor-pointer"
-                        // onClick={() => viewProposal(proposal.id)}
+                        onClick={() => router.get(`/proposals/${proposal.id}`)}
                       >
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                           <div className="text-sm font-medium">{proposal.title}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                           <div className="text-sm text-sky-800">{proposal.track}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                           <div className="text-sm">{formatDate(proposal.submitted_at)}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                           <StatusBadge status={proposal.status} />
                         </td>
                       </tr>

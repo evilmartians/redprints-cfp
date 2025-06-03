@@ -94,7 +94,7 @@
   }
 
   .card {
-    @apply bg-cloud-50 rounded-lg shadow-soft p-6;
+    @apply bg-cloud-50 rounded-lg shadow-soft p-3 sm:p-6;
   }
 
   .badge {
@@ -115,5 +115,9 @@
 
   .badge-waitlist {
     @apply bg-orange-200 text-orange-700;
+  }
+
+  .badge-draft {
+    @apply bg-cloud-100 text-cloud-700;
   }
 }

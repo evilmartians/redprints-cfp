@@ -264,6 +264,7 @@ GEM
     multi_xml (0.7.2)
       bigdecimal (~> 3.1)
     mutex_m (0.3.0)
+    nanoid (2.0.0)
     net-http (0.6.0)
       uri
     net-imap (0.5.8)
@@ -549,6 +550,7 @@ DEPENDENCIES
   listen
   lookbook
   mission_control-jobs
+  nanoid
   omniauth
   omniauth-github
   omniauth-google-oauth2
