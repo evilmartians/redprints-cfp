@@ -1,0 +1,16 @@
+<% content_for :title do %>
+  Thank You for Your Proposal
+<% end %>
+
+<% content_for :body do %>
+  <p>
+    We've received your proposal for SF Ruby Conference 2025: <strong><%= @proposal.title %></strong>. Our program committee will review it carefully, and we'll notify you of the decision by July 15, 2025.
+  </p>
+
+  <p>
+    You can view or edit your proposal at any time by visiting your dashboard.
+  </p>
+<% end %>
+
+<% content_for(:link) { proposal_url(@proposal) } %>
+<% content_for(:link_label) { "Go to proposal" } %>

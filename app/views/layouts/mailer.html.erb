@@ -1,13 +1,83 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <style>
-      /* Email styles need to be inline */
-    </style>
-  </head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal Confirmation - SF Ruby Conference</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: #2A3040; line-height: 1.5;">
+  <!-- Header -->
+  <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #D51F06;">
+    <tr>
+      <td align="center" style="padding: 24px;">
+        <table cellpadding="0" cellspacing="0" border="0" width="600" style="max-width: 600px;">
+          <tr>
+            <td align="left" style="color: #FFFFFF; font-size: 24px; font-weight: bold;">
+              SF Ruby Conference
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- Content -->
+  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+      <td align="center" style="padding: 32px 20px;">
+        <table cellpadding="0" cellspacing="0" border="0" width="600" style="max-width: 600px;">
+          <tr>
+            <td style="padding-bottom: 24px;">
+              <h1 style="margin: 0 0 16px; font-size: 24px; color: #2A3040;"><%= yield :title %></h1>
+              <p style="margin: 0 0 16px; color: #566076;">
+                <%= yield :body %>
+              </p>
+              <% if content_for?(:link) %>
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="background-color: #D51F06; border-radius: 6px;">
+                    <a href="<%= yield :link %>" style="display: inline-block; padding: 12px 24px; color: #FFFFFF; text-decoration: none; font-weight: 500;"><%= yield :link_label %></a>
+                  </td>
+                </tr>
+              </table>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td style="border-top: 1px solid #E2E5ED; padding-top: 24px; color: #566076; font-size: 14px;">
+              <p style="margin: 0 0 8px;">
+                If you have any questions, feel free to reply to this email.
+              </p>
+              <p style="margin: 0;">
+                Best regards,<br>
+                The SF Ruby Conference Team
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Footer -->
+  <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #F8F9FB;">
+    <tr>
+      <td align="center" style="padding: 24px;">
+        <table cellpadding="0" cellspacing="0" border="0" width="600" style="max-width: 600px;">
+          <tr>
+            <td align="center" style="color: #6E7890; font-size: 12px;">
+              <p style="margin: 0 0 8px;">
+                SF Ruby Conference 2025<br>
+                Fort Mason, San Francisco
+              </p>
+              <p style="margin: 0;">
+                <a href="https://sfruby.com" style="color: #D51F06; text-decoration: underline;">Visit Website</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
 </html>

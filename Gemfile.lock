@@ -44,6 +44,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_delivery (1.2.0)
+      ruby-next-core (~> 1.0)
     active_link_to (1.0.5)
       actionpack
       addressable
@@ -529,6 +531,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_delivery
   after_commit_everywhere
   alba
   anyway_config

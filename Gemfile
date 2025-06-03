@@ -17,6 +17,9 @@ gem "store_model"
 
 gem "nanoid"
 
+# Notifications
+gem "active_delivery"
+
 # Authentication
 gem "omniauth"
 gem "omniauth-google-oauth2"

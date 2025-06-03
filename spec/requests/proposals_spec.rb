@@ -37,7 +37,10 @@ describe "/proposals" do
         .and change(SpeakerProfile.where(email: "palkan@sf.test"), :count).by(1)
     end
 
-    it "notifies the author"
+    it "notifies the author" do
+      expect { subject }
+        .to have_delivered_to(ProposalDelivery, :proposal_submitted)
+    end
 
     context "when saving draft" do
       let(:form_params) { {drafting: "1", title: "My draft", speaker_email: "palkan@sf.test"} }
@@ -47,7 +50,10 @@ describe "/proposals" do
           .and change(SpeakerProfile.where(email: "palkan@sf.test"), :count).by(1)
       end
 
-      it "does not notify the author"
+      it "does not notify the author" do
+        expect { subject }
+          .to have_not_delivered_to(ProposalDelivery, :proposal_submitted)
+      end
     end
   end
 

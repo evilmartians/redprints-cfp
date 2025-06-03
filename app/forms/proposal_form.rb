@@ -27,6 +27,10 @@ class ProposalForm < ApplicationForm
 
   delegate :id, :persisted?, to: :proposal, allow_nil: true
 
+  after_commit :notify_author, if: :proposal_submitted
+
+  attr_accessor :proposal_submitted
+
   def submit!
     if drafting
       # make sure it has at least a title
@@ -34,6 +38,8 @@ class ProposalForm < ApplicationForm
     else
       proposal.status = :submitted
       proposal.submitted_at = Time.current
+
+      self.proposal_submitted = true
     end
     proposal.save!
     speaker_profile.save!
@@ -58,6 +64,10 @@ class ProposalForm < ApplicationForm
   end
 
   private
+
+  def notify_author
+    ProposalDelivery.with(proposal:, speaker: speaker_profile).proposal_submitted.deliver_later
+  end
 
   def build_proposal_attributes
     {

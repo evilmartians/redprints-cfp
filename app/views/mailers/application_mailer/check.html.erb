@@ -1,7 +1,10 @@
-<h1>Service check email</h1>
+<% content_for :title do %>
+  Service check email
+<% end %>
 
-<%= @body %>
+<% content_for :body do %>
+  <%= @body %>
+<% end %>
 
-<br/>
-
-<%= link_to "Go to website", root_url %>
+<% content_for(:link) { root_url } %>
+<% content_for(:link_label) { "Go to website" } %>
