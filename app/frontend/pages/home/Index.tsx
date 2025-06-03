@@ -38,7 +38,7 @@ function Index({}: IndexProps) {
           Call for Proposals
         </h1>
         <p className="text-cloud-50 text-lg max-w-3xl">
-          Share your Ruby knowledge and experience at the <a href="https://sfruby.com" target="_blank">San Francisco Ruby Conference 2025</a>. We're looking for talks
+          Share your Ruby knowledge and experience at the <a className="underline" href="https://sfruby.com" target="_blank">San Francisco Ruby Conference 2025</a>. We're looking for talks
           to support and inspire the new generation of successful startups built on Ruby and Rails.
         </p>
         <div className="mt-8 flex flex-wrap gap-4 text-ruby-100">
