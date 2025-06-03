@@ -27,7 +27,9 @@ class ProposalForm < ApplicationForm
   delegate :id, :persisted?, to: :proposal, allow_nil: true
 
   def submit!
+    # TODO: Add draft/update ;logic
     proposal.status = :submitted
+    proposal.submitted_at = Time.current
     proposal.save!
     speaker_profile.save!
   end

@@ -33,24 +33,24 @@ function Index({}: IndexProps) {
 
   return (
     <Layout currentUser={user}>
-      <div className="bg-ruby-700 text-white rounded-xl p-8 mb-12 shadow-medium animate-fade-in">
+      <div className="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white rounded-xl p-8 mb-12 shadow-medium animate-fade-in">
         <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
           Call for Proposals
         </h1>
-        <p className="text-cloud-100 text-lg max-w-3xl">
+        <p className="text-cloud-50 text-lg max-w-3xl">
           Share your Ruby knowledge and experience at SF Ruby Conference 2025. We're looking for talks
           on Ruby, Rails, and related technologies that will inspire and educate our community.
         </p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <div className="flex items-center text-ruby-200">
+        <div className="mt-8 flex flex-wrap gap-4 text-ruby-100">
+          <div className="flex items-center">
             <CalendarIcon className="h-5 w-5 mr-2" />
             <span>November 19-20, 2025</span>
           </div>
-          <div className="flex items-center text-ruby-200">
+          <div className="flex items-center">
             <MapPinIcon className="h-5 w-5 mr-2" />
             <span>Fort Mason, San Francisco</span>
           </div>
-          <div className="flex items-center text-ruby-200">
+          <div className="flex items-center">
             <UsersIcon className="h-5 w-5 mr-2" />
             <span>400+ Attendees</span>
           </div>

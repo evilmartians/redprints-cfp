@@ -12,6 +12,6 @@ class Avo::Resources::Proposal < Avo::BaseResource
     field :details, as: :textarea, hide_on: :index
     field :pitch, as: :textarea, hide_on: :index
 
-    field :submitted_at
+    field :submitted_at, as: :date
   end
 end

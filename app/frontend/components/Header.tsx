@@ -41,7 +41,7 @@ export function Header({ currentUser }: HeaderProps) {
                 href="/proposals"
                 className={`text-sm font-medium transition-colors ${
                   url === '/proposals'
-                    ? "text-ruby-600"
+                    ? "text-sky-800 border-b border-sky-800"
                     : "text-ruby hover:text-ruby-300"
                 }`}
               >

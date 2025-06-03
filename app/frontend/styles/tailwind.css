@@ -98,11 +98,11 @@
   }
 
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
   }
 
   .badge-submitted {
-    @apply bg-sky-100 text-sky-700;
+    @apply bg-sky-800 text-cloud-50;
   }
 
   .badge-accepted {
