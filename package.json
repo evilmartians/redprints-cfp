@@ -29,7 +29,6 @@
     "typescript": "^5.6.3"
   },
   "scripts": {
-    "build": "vite build --outDir public",
-    "build:css": "postcss app/frontend/styles/email.css --config ./app/views/mailers -o app/assets/builds/email.css"
+    "build": "bin/bun-vite build --outDir public"
   }
 }
