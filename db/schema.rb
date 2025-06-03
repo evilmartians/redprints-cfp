@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_20_165709) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_03_001509) do
+  create_table "proposals", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "abstract"
+    t.text "details"
+    t.text "pitch"
+    t.string "track"
+    t.string "status", default: "draft", null: false
+    t.datetime "submitted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_proposals_on_status"
+    t.index ["user_id"], name: "index_proposals_on_user_id"
+  end
+
+  create_table "speaker_profiles", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "company"
+    t.text "bio", limit: 1000
+    t.text "socials", limit: 400
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_speaker_profiles_on_user_id"
+  end
+
   create_table "user_oauth_providers", force: :cascade do |t|
     t.string "provider", null: false
     t.string "uid", null: false

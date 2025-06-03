@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get "/:provider", to: ->(_env) { [418, {}, ["Earl Grey or English Breakfast?"]] }, as: :oauth
   end
 
+  resources :proposals, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+
   mount Avo::Engine, at: Avo.configuration.root_path
 
   namespace :dev do

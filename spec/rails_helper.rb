@@ -21,6 +21,8 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 
+require "inertia_rails/rspec"
+
 require "test_prof/recipes/logging"
 require "test_prof/recipes/rspec/let_it_be"
 

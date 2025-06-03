@@ -11,7 +11,7 @@ Avo.configure do |config|
   # config.mount_avo_engines = true
 
   # Where should the user be redirected when visiting the `/avo` url
-  config.home_path = "/admin/resources/users"
+  config.home_path = "/admin/resources/proposals"
 
   ## == Licensing ==
   # config.license_key = ENV['AVO_LICENSE_KEY']

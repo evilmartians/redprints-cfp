@@ -1,8 +1,29 @@
+# frozen_string_literal: true
+
+# Base form object class that provides an ActiveRecord-compatible interface for complex
+# forms.
+# Based on https://github.com/PacktPublishing/Layered-Design-for-Ruby-on-Rails-Applications/blob/main/Chapter07/03-invitation-active-model-form.rb
 class ApplicationForm
   include ActiveModel::API
   include ActiveModel::Attributes
 
   include AfterCommitEverywhere
+
+  class ContextProxy
+    def initialize(cls, ctx)
+      @class, @context = cls, ctx
+    end
+
+    def new(...) = form_with_context.tap { _1.send(:initialize, ...) }
+
+    def from(...) = form_with_context.tap { _1.send(:initialize_from_params, ...) }
+
+    private
+
+    def form_with_context
+      @class.allocate.tap { _1.assign_context(**@context) }
+    end
+  end
 
   define_callbacks :save, only: :after
   define_callbacks :commit, only: :after
@@ -29,8 +50,10 @@ class ApplicationForm
     end
 
     def from(params)
-      new(params.permit(attribute_names.map(&:to_sym)))
+      allocate.tap { _1.initialize_from_params(params) }
     end
+
+    def with(**context) = ContextProxy.new(self, context)
   end
 
   def save
@@ -42,7 +65,27 @@ class ApplicationForm
     end
   end
 
+  def initialize_from_params(params)
+    initialize(params.permit(permitted_attributes))
+  end
+
+  def assign_context(**context)
+    @context = context.freeze
+  end
+
+  def assign_attributes(attrs)
+    super(attrs.reverse_merge(attributes_from_context))
+  end
+
+  def attributes_from_context
+    {}
+  end
+
   private
+
+  def permitted_attributes = self.class.attribute_names.map(&:to_sym)
+
+  def context = @context ||= {}.freeze
 
   def with_transaction(&) = ApplicationRecord.transaction(&)
 
