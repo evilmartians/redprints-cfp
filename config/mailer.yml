@@ -1,7 +1,6 @@
 default: &default
-  # TODO: Update to SF Ruby
-  from: "anycable@evilmartians.com"
-  reply_to: "anycable@evilmartians.com"
+  from: "conference@sfruby.com"
+  reply_to: "conference@sfruby.com"
 
 development:
   <<: *default
