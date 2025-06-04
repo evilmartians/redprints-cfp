@@ -48,7 +48,7 @@ export default function Index({ oauth_providers }: IndexProps) {
               <ul className="list-disc pl-6 space-y-2">
                 <li><span className="font-medium">New Open Source and Tooling, Including AI</span>
                 <p>Talks about new tooling built for ambitious Ruby and Rails products.</p></li>
-                <li><span className="font-medium">Scaling Ruby</span>
+                <li><span className="font-medium">Scaling Ruby and Rails</span>
                 <p>Experiences and best practices scaling Ruby and Rails applications from scaleups and enterprises.</p></li>
               </ul>
               <p>

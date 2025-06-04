@@ -127,9 +127,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                       required={!canSaveDraft}
                       options={[
                         { value: '', label: 'Select a track' },
-                        { value: 'oss', label: 'Modern OSS tools' },
-                        { value: 'scale', label: 'Scaling startups' },
-                        { value: 'general', label: 'General' },
+                        { value: 'oss', label: 'New Open Source and Tooling' },
+                        { value: 'scale', label: 'Scaling Ruby and Rails' },
+                      
                       ]}
                     />
                   </div>
