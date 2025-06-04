@@ -99,5 +99,23 @@ describe "Proposals" do
 
       expect(proposal_page).to be_displayed(id: proposal.external_id)
     end
+
+    specify "user can retract a draft proposal" do
+      proposals_page.load
+
+      expect(proposals_page.proposals).to have_rows(count: 1)
+      expect(proposals_page.proposals.first_row).to have_text "My draft proposal"
+
+      proposals_page.proposals.first_row.click
+
+      expect(proposal_page).to be_displayed(id: proposal.external_id)
+
+      accept_confirm do
+        click_on "Retract Proposal"
+      end
+
+      expect(proposals_page).to be_displayed
+      expect(page).to have_text "You haven't submitted any proposals yet"
+    end
   end
 end

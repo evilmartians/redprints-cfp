@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
-import { Link, usePage } from "@inertiajs/react";
-import { ArrowLeftIcon, PencilIcon } from 'lucide-react';
+import { Link, usePage, router } from "@inertiajs/react";
+import { ArrowLeftIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import StatusBadge from "../../components/StatusBadge";
 import { Proposal, SpeakerProfile } from "../../serializers";
 
@@ -27,6 +27,12 @@ function Show({ proposal, speaker }: ShowProps) {
   const hasFeedback = (proposal.status === 'accepted') ||
     (proposal.status === 'rejected') ||
     (proposal.status === 'waitlisted');
+
+  const handleRetractProposal = () => {
+    if (confirm('Are you sure you want to retract this proposal? This action is irreversible and will permanently delete your proposal.')) {
+      router.delete(`/proposals/${proposal.id}`);
+    }
+  };
 
   return (
   <Layout currentUser={user}>
@@ -57,6 +63,13 @@ function Show({ proposal, speaker }: ShowProps) {
               <PencilIcon className="h-5 w-5 mr-2" />
               Edit Proposal
             </Link>
+            <button
+              onClick={handleRetractProposal}
+              className="btn btn-outline mt-4 sm:mt-0 flex items-center text-nowrap border-red-300 text-red-700 hover:bg-red-50 focus:ring-red-500 cursor-pointer"
+            >
+              <TrashIcon className="h-5 w-5 mr-2" />
+              Retract Proposal
+            </button>
           </div>
         </div>
 
