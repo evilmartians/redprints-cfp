@@ -36,10 +36,10 @@ class ProposalForm < ApplicationForm
       # make sure it has at least a title
       proposal.title = "Untitled draft" if proposal.title.blank?
     else
+      self.proposal_submitted = true if proposal.draft?
+
       proposal.status = :submitted
       proposal.submitted_at = Time.current
-
-      self.proposal_submitted = true
     end
     proposal.save!
     speaker_profile.save!

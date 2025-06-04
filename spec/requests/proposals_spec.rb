@@ -130,11 +130,25 @@ describe "/proposals" do
       expect(user.reload.speaker_profile.email).to eq("updated@sf.test")
     end
 
+    it "does not notify the author" do
+      expect { subject }
+        .to have_not_delivered_to(ProposalDelivery, :proposal_submitted)
+    end
+
+    context "when proposal is draft" do
+      before { proposal.update!(status: :draft) }
+
+      it "notifies the author" do
+        expect { subject }
+          .to have_delivered_to(ProposalDelivery, :proposal_submitted)
+      end
+    end
+
     context "when validation fails", :inertia do
       let(:form_params) { {title: ""} }
 
       it "renders the form with errors" do
-        subject
+        expect { subject }.not_to change { proposal.reload.title }
 
         expect(response).to be_successful
         expect(inertia).to render_component "proposals/Form"
