@@ -129,7 +129,7 @@ export default function Form({ proposal, speaker }: FormProps) {
                         { value: '', label: 'Select a track' },
                         { value: 'oss', label: 'New Open Source and Tooling' },
                         { value: 'scale', label: 'Scaling Ruby and Rails' },
-                        { value: 'general', label: 'General' },
+                        { value: 'general', label: 'Other' },
                       ]}
                     />
                   </div>
