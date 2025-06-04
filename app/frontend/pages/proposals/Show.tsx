@@ -57,7 +57,7 @@ export default function Show({ proposal, speaker }: ShowProps) {
               <StatusBadge status={proposal.status} />
             </div>
           </div>
-          <div className="flex flex-row items-center space-x-2">
+          <div className="flex flex-col items-start sm:flex-row sm:items-center space-y-2 sm:space-x-2 sm:space-y-0">
             <Link
               href={`/proposals/${proposal.id}/edit`}
               className="btn btn-outline mt-4 sm:mt-0 flex items-center text-nowrap"
