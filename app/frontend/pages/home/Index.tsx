@@ -138,7 +138,7 @@ export default function Index({ oauth_providers }: IndexProps) {
           <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
             <h3 className="text-xl font-bold mb-4">Building a startup with Ruby?</h3>
             <p className="text-neutral-600 mb-6">
-              We'll have a demo session at the conference and invite you to share your story and project!
+             Demo your startup at the conference! Share your story to inspire others, and connect with some of the best Ruby minds! All startup demos will be 10 minutes.
             </p>
             <Link href={`/startups`} className="btn btn-sky flex items-center justify-center">
               Call for Startups

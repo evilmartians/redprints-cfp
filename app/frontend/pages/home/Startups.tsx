@@ -18,9 +18,9 @@ export default function Startups({oauth_providers}: StartupsProps) {
           Call for Startups
         </h1>
         <p className="text-cloud-50 text-lg max-w-3xl">
-          The <a className="underline" href="https://sfruby.com" target="_blank">San Francisco Ruby Conference</a> is excited to open our Call for Startups for Ruby demo sessions on November 19–20, 2025.
-
-          Share your story among the rising stars of the Ruby community and help inspire the next generation of Rubyists—while bringing your product into the spotlight.
+          The <a className="underline" href="https://sfruby.com" target="_blank">San Francisco Ruby Conference</a> is excited to open our Call for Ruby Startups! 
+          </p>
+          <p className="text-cloud-50 text-lg max-w-3xl"> Let's bring your ambitious story into the spotlight: demo your product among the other rising stars, inspire the next generation of Rubyists and connect with the brightest Ruby minds.
         </p>
         <div className="mt-8 flex flex-wrap gap-4 text-cloud-100">
           <div className="flex items-center">
@@ -65,8 +65,8 @@ export default function Startups({oauth_providers}: StartupsProps) {
               </p>
               <ul className="list-disc pl-6 space-y-1">
                 <li>CFP opens: June 4, 2025</li>
-                <li>CFP closes: July 15, 2025</li>
-                <li>Notifications: July 21, 2025</li>
+                {/*<li>CFP closes: July 15, 2025</li>
+                <li>Notifications: July 21, 2025</li>*/}
               </ul>
             </div>
           </div>
