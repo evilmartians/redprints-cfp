@@ -44,10 +44,10 @@ export default function Startups({oauth_providers}: StartupsProps) {
             <h2 className="text-2xl font-bold mb-4 text-sky-800">Proposal Guidelines</h2>
             <div className="space-y-6">
               <p>
-                We’re looking for innovative Ruby startups to showcase their products in 10-minute demo sessions.
+                We're looking for innovative Ruby startups to showcase their products in 10-minute demo sessions.
               </p>
               <p>
-                If you’re building something exciting with Ruby or Rails, we want to hear from you.
+                If you're building something exciting with Ruby or Rails, we want to hear from you.
               </p>
             </div>
           </div>
@@ -65,8 +65,6 @@ export default function Startups({oauth_providers}: StartupsProps) {
               </p>
               <ul className="list-disc pl-6 space-y-1">
                 <li>CFP opens: June 4, 2025</li>
-                {/*<li>CFP closes: July 15, 2025</li>
-                <li>Notifications: July 21, 2025</li>*/}
               </ul>
             </div>
           </div>

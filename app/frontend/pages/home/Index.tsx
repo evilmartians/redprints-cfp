@@ -43,7 +43,7 @@ export default function Index({ oauth_providers }: IndexProps) {
             <h2 className="text-2xl font-bold mb-4 text-sky-800">Proposal Guidelines</h2>
             <div className="space-y-6">
               <p>
-               Thank you for your interest in speaking at our conference! We’re excited to invite proposals for talks in two tracks:
+               Thank you for your interest in speaking at our conference! We're excited to invite proposals for talks in two tracks:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><span className="font-medium">New Open Source and Tooling, Including AI</span>
@@ -52,7 +52,7 @@ export default function Index({ oauth_providers }: IndexProps) {
                 <p>Experiences and best practices scaling Ruby and Rails applications from scaleups and enterprises.</p></li>
               </ul>
               <p>
-                Each talk should be 30 minutes in total, including time for Q&A. We’re especially interested in talks that are:
+                Each talk should be 30 minutes in total, including time for Q&A. We're especially interested in talks that are:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Educational and informative</li>
