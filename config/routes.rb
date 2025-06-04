@@ -12,7 +12,13 @@ Rails.application.routes.draw do
     get "/:provider", to: ->(_env) { [418, {}, ["Earl Grey or English Breakfast?"]] }, as: :oauth
   end
 
-  resources :proposals, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  resources :proposals, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+    collection do
+      get "/startup" => "proposals#new", :defaults => {proposal_track: "startup"}, :as => :new_startup_proposal
+    end
+  end
+
+  get "/startups" => "home#startups", :as => :startups
 
   mount Avo::Engine, at: Avo.configuration.root_path
 

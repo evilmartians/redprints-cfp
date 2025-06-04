@@ -8,7 +8,7 @@ interface IndexProps {
   proposals: Proposal[]
 }
 
-function Index({ proposals }: IndexProps) {
+export default function Index({ proposals }: IndexProps) {
   const { user } = usePage().props;
 
   // Helper function to format the date
@@ -110,5 +110,3 @@ function Index({ proposals }: IndexProps) {
     </Layout>
   );
 }
-
-export default Index;

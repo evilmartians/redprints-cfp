@@ -11,7 +11,7 @@ interface FormProps {
   speaker: SpeakerProfile | null
 }
 
-function Form({ proposal, speaker }: FormProps) {
+export default function Form({ proposal, speaker }: FormProps) {
   const { user } = usePage().props;
 
   const { data, setData, post, patch, processing, errors } = useForm({
@@ -42,6 +42,7 @@ function Form({ proposal, speaker }: FormProps) {
 
   const isEditing = !!proposal.id;
   const canSaveDraft = proposal.status === 'draft';
+  const isStartupDemo = proposal.track === 'startup';
 
   function submit(e: FormEvent) {
     e.preventDefault()
@@ -56,7 +57,7 @@ function Form({ proposal, speaker }: FormProps) {
     <Layout currentUser={user}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link
-          href={isEditing ? `/proposals/${proposal.id}` : '/'}
+          href={isEditing ? `/proposals/${proposal.id}` : (isStartupDemo ? '/startups' : '/')}
           className="flex items-center text-cloud-600 hover:text-cloud-700 transition-colors mb-6"
         >
           <ArrowLeftIcon className="h-4 w-4 mr-1" />
@@ -65,20 +66,29 @@ function Form({ proposal, speaker }: FormProps) {
 
         <div className="max-w-4xl mx-auto">
           <div className="mb-8 animate-fade-in">
-            <h1 className="text-3xl font-bold mb-2">Submit Your Proposal</h1>
-            <p className="text-cloud-600">
-              Share your knowledge with the Ruby community. All fields marked with * are required.
-            </p>
+            <h1 className="text-3xl font-bold mb-2">{isStartupDemo ? "Submit Your Demo Proposal" : "Submit Your Proposal"}</h1>
+            {!isStartupDemo && (
+              <p className="text-cloud-600">
+                Share your knowledge with the Ruby community. All fields marked with * are required.
+              </p>
+            )}
+            {isStartupDemo && (
+              <p className="text-cloud-600">
+                Share your story among the rising stars of the Ruby community and help inspire the next generation of Rubyists—while bringing your product into the spotlight.
+                <br/>
+                All fields marked with * are required.
+              </p>
+            )}
           </div>
 
           <form onSubmit={submit} className="space-y-8">
             <div className="card border border-sky-800 animate-slide-up">
-              <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-800">Talk Information</h2>
+              <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-800">{isStartupDemo ? "Demo Information" : "Talk Information"}</h2>
 
               <div className="space-y-6">
                 <div>
                   <label htmlFor="title" className="label">
-                    Title *
+                    {isStartupDemo ? "Startup Name" : "Title"} *
                   </label>
                   <input
                     id="title"
@@ -86,70 +96,79 @@ function Form({ proposal, speaker }: FormProps) {
                     value={data.proposal.title}
                     onChange={(e) => setData('proposal.title', e.target.value)}
                     className="input-field"
-                    placeholder="A clear, concise title for your talk"
+                    placeholder={isStartupDemo ? "" : "A clear, concise title for your talk"}
                     required={submitting}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="abstract" className="label">
-                    Abstract *
+                    {isStartupDemo ? "How far along are you?" : "Abstract"} *
                   </label>
                   <TextAreaWithCounter
                     id="abstract"
                     value={data.proposal.abstract}
                     onChange={(val) => setData('proposal.abstract', val)}
                     maxLength={limits.abstract}
-                    placeholder="A brief overview of your talk (will be published in the program)"
+                    placeholder={isStartupDemo ? "Tell us a bit about your stage and progress" : "A brief overview of your talk (will be published in the program)"}
                     required={submitting}
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="track" className="label">
-                    Track *
-                  </label>
-                  <Select
-                    id="track"
-                    value={data.proposal.track}
-                    onChange={(e) => setData('proposal.track', e.target.value)}
-                    required={!canSaveDraft}
-                    options={[
-                      { value: '', label: 'Select a track' },
-                      { value: 'oss', label: 'Modern OSS tools' },
-                      { value: 'scale', label: 'Scaling startups' },
-                      { value: 'general', label: 'General' },
-                    ]}
-                  />
-                </div>
+                {!isStartupDemo && (
+                  <div>
+                    <label htmlFor="track" className="label">
+                      Track *
+                    </label>
+                    <Select
+                      id="track"
+                      value={data.proposal.track}
+                      onChange={(e) => setData('proposal.track', e.target.value)}
+                      required={!canSaveDraft}
+                      options={[
+                        { value: '', label: 'Select a track' },
+                        { value: 'oss', label: 'Modern OSS tools' },
+                        { value: 'scale', label: 'Scaling startups' },
+                        { value: 'general', label: 'General' },
+                      ]}
+                    />
+                  </div>
+                )}
 
                 <div>
                   <label htmlFor="details" className="label">
-                    Detailed Description *
+                    {isStartupDemo ? "Demo Details" : "Detailed Description"} *
                   </label>
                   <TextAreaWithCounter
                     id="details"
                     value={data.proposal.details}
                     onChange={(val) => setData('proposal.details', val)}
                     maxLength={limits.details}
-                    placeholder="A detailed description of your talk, including outline, key points, and what attendees will learn"
+                    placeholder={isStartupDemo ? "Tell us a bit about the problem the product is solving, and the target audience. What can you demo?" : "A detailed description of your talk, including outline, key points, and what attendees will learn"}
                     required={submitting}
                   />
-                  <p className="mt-1 text-sm text-neutral-500">
-                    This is for the review committee only and won't be published.
-                  </p>
+                  {!isStartupDemo && (
+                    <p className="mt-1 text-sm text-cloud-700">
+                      This is for the review committee only and won't be published.
+                    </p>
+                  )}
+                  {isStartupDemo && (
+                    <p className="mt-1 text-sm text-cloud-700">
+                      Don't forget to add links to your website and such.
+                    </p>
+                  )}
                 </div>
 
                 <div>
                   <label htmlFor="pitch" className="label">
-                    Why this talk matters *
+                    {isStartupDemo ? "How does Ruby power your product?" : "Why this talk matters"} *
                   </label>
                   <TextAreaWithCounter
                     id="pitch"
                     value={data.proposal.pitch}
                     onChange={(val) => setData('proposal.pitch', val)}
                     maxLength={limits.pitch}
-                    placeholder="Why is this talk important for the Ruby community? What makes you the right person to give it?"
+                    placeholder={isStartupDemo ? "" : "Why is this talk important for the Ruby community? What makes you the right person to give it?"}
                     required={submitting}
                   />
                 </div>
@@ -273,5 +292,3 @@ function Form({ proposal, speaker }: FormProps) {
     </Layout>
   )
 }
-
-export default Form;

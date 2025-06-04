@@ -8,7 +8,7 @@ class ProposalsController < ApplicationController
   end
 
   def new
-    form = ProposalForm.with(user: current_user).new
+    form = ProposalForm.with(user: current_user).new(track: params[:proposal_track])
 
     render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), speaker: serialize(form.speaker_profile)}
   end

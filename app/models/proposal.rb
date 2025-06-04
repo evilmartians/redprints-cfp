@@ -3,7 +3,7 @@ class Proposal < ApplicationRecord
 
   has_one :speaker_profile, through: :user
 
-  enum :track, %w[oss scale general].index_by(&:itself)
+  enum :track, %w[oss scale general startup].index_by(&:itself)
 
   enum :status, %w[draft submitted accepted rejected waitlisted].index_by(&:itself)
 

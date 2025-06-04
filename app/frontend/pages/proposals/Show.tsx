@@ -9,7 +9,7 @@ interface ShowProps {
   speaker: SpeakerProfile
 }
 
-function Show({ proposal, speaker }: ShowProps) {
+export default function Show({ proposal, speaker }: ShowProps) {
   const { user } = usePage().props;
 
   const formatDate = (dateString: string | null) => {
@@ -33,6 +33,8 @@ function Show({ proposal, speaker }: ShowProps) {
       router.delete(`/proposals/${proposal.id}`);
     }
   };
+
+  const isStartupDemo = proposal.track === 'startup';
 
   return (
   <Layout currentUser={user}>
@@ -75,26 +77,28 @@ function Show({ proposal, speaker }: ShowProps) {
 
         {/* Talk Information */}
         <div className="card border mb-8 animate-slide-up">
-          <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-700">Talk Information</h2>
+            <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-700">{isStartupDemo ? "Demo Information" : "Talk Information"}</h2>
 
           <div className="space-y-6">
-            <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Track</h3>
-              <p className="text-cloud-700">{proposal.track}</p>
-            </div>
+            {!isStartupDemo && (
+              <div>
+                <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Track</h3>
+                <p className="text-cloud-700">{proposal.track}</p>
+              </div>
+            )}
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Abstract</h3>
+              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2"> {isStartupDemo ? "How far along are you?" : "Abstract"}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.abstract}</p>
             </div>
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Detailed Description</h3>
+              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">{isStartupDemo ? "Demo Details" : "Detailed Description"}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.details}</p>
             </div>
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Why this talk matters</h3>
+              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">{isStartupDemo ? "How does Ruby power your product?" : "Why this talk matters"}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.pitch}</p>
             </div>
           </div>
@@ -175,5 +179,3 @@ function Show({ proposal, speaker }: ShowProps) {
   </Layout>
   )
 }
-
-export default Show;

@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
 
   inertia_share do
     {
-      user: -> { serialize(current_user) if current_user },
-      oauth_providers: -> { OmniAuth.providers }
+      user: -> { serialize(current_user) if current_user }
     }
   end
 

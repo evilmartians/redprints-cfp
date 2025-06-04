@@ -1,35 +1,15 @@
 import Layout from "../../components/Layout";
-import { JSX } from "react";
-import { FileTextIcon, UsersIcon, CalendarIcon, MapPinIcon, GithubIcon } from 'lucide-react';
-import GoogleIcon from "../../icons/Google";
+import { FileTextIcon, UsersIcon, CalendarIcon, MapPinIcon } from 'lucide-react';
+import { OAuthButtons } from "../../components/OAuthButtons";
 
 import { usePage, Link } from "@inertiajs/react";
 
 interface IndexProps {
+  oauth_providers: string[]
 }
 
-const OAuthButtons: Record<string, () => JSX.Element | null> = {
-  github: () => {
-    return (<a href="/auth/github" className="btn btn-outline flex items-center justify-center bg-[#24292F] text-white hover:bg-[#24292F]/90">
-      <GithubIcon className="h-5 w-5 mr-2" />
-      Sign in with GitHub
-    </a>);
-  },
-  developer: () => {
-    return (<a href="/auth/developer" className="btn btn-outline flex items-center justify-center">
-      Sign in as developer
-    </a>);
-  },
-  google_oauth2: () => {
-    return (<a href="/auth/google_oauth2" className="btn btn-outline flex items-center justify-center">
-      <GoogleIcon className="h-5 w-5 mr-2" />
-      Sign in with Google
-    </a>);
-  }
-}
-
-function Index({}: IndexProps) {
-  const { user, oauth_providers } = usePage().props;
+export default function Index({ oauth_providers }: IndexProps) {
+  const { user } = usePage().props;
 
   return (
     <Layout currentUser={user}>
@@ -66,9 +46,9 @@ function Index({}: IndexProps) {
                Thank you for your interest in speaking at our conference! We’re excited to invite proposals for talks in two tracks:
               </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><span className="font-medium">New Open Source and Tooling, Including AI</span> 
+                <li><span className="font-medium">New Open Source and Tooling, Including AI</span>
                 <p>Talks about new tooling built for ambitious Ruby and Rails products.</p></li>
-                <li><span className="font-medium">Scaling Ruby</span> 
+                <li><span className="font-medium">Scaling Ruby</span>
                 <p>Experiences and best practices scaling Ruby and Rails applications from scaleups and enterprises.</p></li>
               </ul>
               <p>
@@ -156,14 +136,24 @@ function Index({}: IndexProps) {
           </div>
 
           <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            <h3 className="text-xl font-bold mb-4">Have questions?</h3>
+            <h3 className="text-xl font-bold mb-4">Building a startup with Ruby?</h3>
             <p className="text-neutral-600 mb-6">
+              We'll have a demo session at the conference and invite you to share your story and project!
+            </p>
+            <Link href={`/startups`} className="btn btn-sky flex items-center justify-center">
+              Call for Startups
+            </Link>
+          </div>
+
+          <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            <h3 className="text-xl font-bold mb-4">Have questions?</h3>
+            <p className="mb-6">
               If you have any questions about the CFP process or need help with your proposal,
               feel free to reach out to our team.
             </p>
             <a
               href="mailto:conference@sfruby.com"
-              className="text-ruby-700 font-medium hover:text-ruby-800 transition-colors inline-flex items-center"
+              className="text-ruby-600 font-medium hover:text-ruby-800 transition-colors inline-flex items-center"
             >
               Contact the CFP team
               <span className="ml-1">→</span>
@@ -174,5 +164,3 @@ function Index({}: IndexProps) {
     </Layout>
   );
 }
-
-export default Index;
