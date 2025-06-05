@@ -79,7 +79,7 @@ export default function Index({ oauth_providers }: IndexProps) {
               </p>
               <ul className="list-disc pl-6 space-y-1">
                 <li>CFP opens: June 4, 2025</li>
-                <li>CFP closes: July 15, 2025</li>
+                <li>CFP closes: July 13, 2025</li>
                 <li>Notifications: July 21, 2025</li>
               </ul>
             </div>
