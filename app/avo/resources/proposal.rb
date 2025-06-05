@@ -3,9 +3,9 @@ class Avo::Resources::Proposal < Avo::BaseResource
 
   self.find_record_method = -> {
     if id.is_a?(Array)
-      (id.first.to_i == 0) ? query.where(external_id: id) : query.where(id:)
+      Integer(id.first, exception: false) ? query.where(id:) : query.where(external_id: id)
     else
-      (id.to_i == 0) ? query.find_by!(external_id: id) : query.find(id)
+      Integer(id, exception: false) ? query.find(id) : query.find_by!(external_id: id)
     end
   }
 
