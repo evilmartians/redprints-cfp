@@ -165,7 +165,4 @@ end
 
 Rails.configuration.to_prepare do
   Avo::ApplicationController.include Authenticated
-  Avo::ApplicationController.class_eval do
-    delegate :auth_sign_in_path, to: :main_app
-  end
 end

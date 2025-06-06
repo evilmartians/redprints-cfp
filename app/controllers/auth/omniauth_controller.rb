@@ -10,12 +10,12 @@ module Auth
         login_user!(user)
         redirect_to after_authentication_path, notice: "Signed in successfully"
       else
-        redirect_to auth_sign_in_path, alert: "Authentication failed: #{form.errors.full_messages.to_sentence}"
+        redirect_to after_authentication_path, alert: "Authentication failed: #{form.errors.full_messages.to_sentence}"
       end
     end
 
     def failure
-      redirect_to auth_sign_in_path, alert: params[:message]
+      redirect_to after_authentication_path, alert: params[:message]
     end
 
     private
