@@ -6,7 +6,7 @@ FactoryBot.define do
     abstract { Faker::Lorem.paragraph }
     details { Faker::Lorem.paragraphs(number: 3).join("\n\n") }
     pitch { Faker::Lorem.paragraph }
-    track { (Proposal.tracks.values - ["startup"]).sample }
+    track { "general" }
     status { "submitted" }
     submitted_at { Time.current }
 

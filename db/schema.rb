@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_004217) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_011415) do
+  create_table "evaluation_reviewers", force: :cascade do |t|
+    t.integer "evaluation_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluation_id"], name: "index_evaluation_reviewers_on_evaluation_id"
+    t.index ["user_id"], name: "index_evaluation_reviewers_on_user_id"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.string "name", null: false
+    t.json "tracks"
+    t.json "criteria"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "proposals", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
@@ -26,6 +43,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_004217) do
     t.index ["external_id"], name: "index_proposals_on_external_id", unique: true
     t.index ["status"], name: "index_proposals_on_status"
     t.index ["user_id"], name: "index_proposals_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "evaluation_id"
+    t.integer "proposal_id"
+    t.string "status", default: "pending", null: false
+    t.json "scores"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluation_id", "proposal_id", "user_id"], name: "index_reviews_on_evaluation_id_and_proposal_id_and_user_id", unique: true
+    t.index ["evaluation_id"], name: "index_reviews_on_evaluation_id"
+    t.index ["proposal_id"], name: "index_reviews_on_proposal_id"
+    t.index ["status"], name: "index_reviews_on_status"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "speaker_profiles", force: :cascade do |t|
