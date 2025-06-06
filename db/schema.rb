@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_03_182040) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_004217) do
   create_table "proposals", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
@@ -57,6 +57,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_03_182040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "auth_token"
+    t.string "role", default: "regular", null: false
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, where: "auth_token is not null"
     t.index ["email"], name: "index_users_on_email", unique: true
   end

@@ -74,6 +74,15 @@ export function Header({ currentUser }: HeaderProps) {
               >
                 My proposals
               </Link>
+              {currentUser.is_reviewer && (
+                <Link
+                  href="/review"
+                  className="btn btn-ruby py-1 px-2 text-sm"
+                  title="Review"
+                >
+                  Review
+                </Link>
+              )}
               <Link
                 href="/auth/sign_out"
                 method="delete"
