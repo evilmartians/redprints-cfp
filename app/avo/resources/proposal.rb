@@ -9,6 +9,26 @@ class Avo::Resources::Proposal < Avo::BaseResource
     end
   }
 
+  class TrackFilter < Avo::Filters::MultipleSelectFilter
+    self.name = "Track"
+
+    def apply(request, query, value)
+      query.where(track: value)
+    end
+
+    def options = ::Proposal.tracks
+  end
+
+  class StatusFilter < Avo::Filters::MultipleSelectFilter
+    self.name = "Status"
+
+    def apply(request, query, value)
+      query.where(status: value)
+    end
+
+    def options = ::Proposal.statuses
+  end
+
   class InvalidateScore < Avo::BaseAction
     self.name = "Invalidate Score"
     self.no_confirmation = true
@@ -41,5 +61,10 @@ class Avo::Resources::Proposal < Avo::BaseResource
 
   def actions
     action InvalidateScore
+  end
+
+  def filters
+    filter TrackFilter
+    filter StatusFilter
   end
 end
