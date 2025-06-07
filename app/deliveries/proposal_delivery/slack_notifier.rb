@@ -7,7 +7,7 @@ class ProposalDelivery
       notification(
         color: "good",
         title: "New Proposal Submitted",
-        body: "Proposal <#{resources_proposal_url(id: proposal.id)}|#{proposal.title}> has been submitted by #{speaker.name}"
+        body: "Proposal <#{resources_proposal_url(id: proposal.id)}|#{proposal.title}> (#{proposal.track}) has been submitted by #{speaker.name}"
       )
     end
   end
