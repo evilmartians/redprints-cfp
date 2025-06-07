@@ -26,6 +26,10 @@ class ApplicationPrism
 
   def proposal = ProposalPage.new
 
+  def reviews = ReviewsPage.new
+
+  def review = ReviewPage.new
+
   private
 
   attr_reader :root_namespace

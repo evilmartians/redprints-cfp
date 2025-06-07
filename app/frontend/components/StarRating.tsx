@@ -3,13 +3,14 @@ import { Star } from 'lucide-react';
 
 interface StarRatingProps {
   value: number;
+  name?: string;
   onChange?: (rating: number) => void;
   label?: string;
   required?: boolean;
   readonly?: boolean;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({ value, onChange, label, required, readonly }) => {
+const StarRating: React.FC<StarRatingProps> = ({ value, name, onChange, label, required, readonly }) => {
   const [hoverRating, setHoverRating] = useState(0);
 
   const handleStarClick = (rating: number) => {
@@ -59,6 +60,7 @@ const StarRating: React.FC<StarRatingProps> = ({ value, onChange, label, require
           <button
             key={starIndex}
             type="button"
+            name={`${name}[${starIndex}]`}
             onClick={() => handleStarClick(starIndex)}
             onMouseEnter={() => handleStarHover(starIndex)}
             className={`transition-all duration-150 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 rounded ${getStarColor(starIndex)}`}

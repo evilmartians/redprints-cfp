@@ -82,6 +82,7 @@ export default function Show({ review }: ShowProps) {
                 {review.evaluation?.criteria?.map((category) => (
                   <div key={category} className="w-[30%]">
                     <StarRating
+                      name={category}
                       label={category}
                       value={data.review.scores[category]}
                       onChange={(value) => setData(`review.scores.${category}`, value)}
@@ -92,7 +93,7 @@ export default function Show({ review }: ShowProps) {
               </div>
 
               <div>
-                <label className="label">Review Comment</label>
+                <label className="label" htmlFor="comment">Review Comment</label>
                 <TextAreaWithCounter
                   id="comment"
                   value={data.review.comment}
