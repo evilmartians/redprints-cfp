@@ -8,6 +8,8 @@ class Avo::Resources::Review < Avo::BaseResource
   def fields
     field :id, as: :id
     field :status, as: :select, enum: ::Review.statuses
+    field :scores, as: :key_value
+    field :comment, as: :textarea
     field :user, as: :belongs_to
     field :proposal, as: :belongs_to
     field :evaluation, as: :belongs_to

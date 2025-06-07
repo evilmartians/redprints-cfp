@@ -76,7 +76,7 @@ export function Header({ currentUser }: HeaderProps) {
               </Link>
               {currentUser.is_reviewer && (
                 <Link
-                  href="/review"
+                  href="/evaluations"
                   className="btn btn-ruby py-1 px-2 text-sm"
                   title="Review"
                 >

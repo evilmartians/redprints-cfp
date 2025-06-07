@@ -11,6 +11,16 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def authenticate_reviewer!
+    return if current_user&.admin? || current_user&.reviewer?
+
+    if inertia_request?
+      inertia_location root_path
+    else
+      redirect_to root_path
+    end
+  end
+
   def inertia_request? = request.headers["HTTP_X_INERTIA"] == "true"
 
   def serialize(obj, with: nil, **params)

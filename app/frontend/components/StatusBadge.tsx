@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ProposalStatus = 'draft' | 'submitted' | 'accepted' | 'rejected' | 'waitlisted';
+type ProposalStatus = 'draft' | 'submitted' | 'accepted' | 'rejected' | 'waitlisted' | 'pending';
 
 interface StatusBadgeProps {
   status: ProposalStatus;
@@ -14,6 +14,10 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
     case 'draft':
       badgeClasses += 'badge-draft';
       statusText = 'Draft';
+      break;
+    case 'pending':
+      badgeClasses += 'badge-draft';
+      statusText = 'Pending';
       break;
     case 'submitted':
       badgeClasses += 'badge-submitted';

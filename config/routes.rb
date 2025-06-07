@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :evaluations, only: [:index] do
+    resources :reviews, only: [:index, :show, :update], shallow: true
+  end
+
   get "/startups" => "home#startups", :as => :startups
 
   mount Avo::Engine, at: Avo.configuration.root_path

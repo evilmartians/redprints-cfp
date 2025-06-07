@@ -5,12 +5,12 @@ class ApplicationSerializer
 
   class << self
     def one(name, serializer: nil, **options)
-      options[:resource] ||= serializer || proc { |_obj| "#{name}Serializer".classify.constantize }
+      options[:resource] ||= serializer || "#{name}Serializer".classify.constantize
       super(name, **options)
     end
 
     def many(name, serializer: nil, **options)
-      options[:resource] ||= serializer || proc { |_obj| "#{name.to_s.singularize}Serializer".classify.constantize }
+      options[:resource] ||= serializer || "#{name.to_s.singularize}Serializer".classify.constantize
       super(name, **options)
     end
   end
