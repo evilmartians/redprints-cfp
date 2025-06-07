@@ -25,6 +25,7 @@ require "inertia_rails/rspec"
 
 require "test_prof/recipes/logging"
 require "test_prof/recipes/rspec/let_it_be"
+require "test_prof/recipes/rspec/factory_default"
 
 TestProf::LetItBe.configure do |config|
   config.default_modifiers[:refind] = true

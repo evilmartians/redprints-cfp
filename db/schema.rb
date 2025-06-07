@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_011415) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_07_003036) do
   create_table "evaluation_reviewers", force: :cascade do |t|
     t.integer "evaluation_id"
     t.integer "user_id"
@@ -40,6 +40,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_011415) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "external_id", null: false
+    t.integer "score", default: 0, null: false
+    t.integer "reviews_count", default: 0, null: false
     t.index ["external_id"], name: "index_proposals_on_external_id", unique: true
     t.index ["status"], name: "index_proposals_on_status"
     t.index ["user_id"], name: "index_proposals_on_user_id"
@@ -54,6 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_011415) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "score"
     t.index ["evaluation_id", "proposal_id", "user_id"], name: "index_reviews_on_evaluation_id_and_proposal_id_and_user_id", unique: true
     t.index ["evaluation_id"], name: "index_reviews_on_evaluation_id"
     t.index ["proposal_id"], name: "index_reviews_on_proposal_id"
