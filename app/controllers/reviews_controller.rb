@@ -4,9 +4,9 @@ class ReviewsController < ApplicationController
 
   def index
     evaluation = current_user.evaluations.find(params[:evaluation_id])
-    reviews = evaluation.reviews.where(user: current_user).joins(:proposal).order(proposals: {created_at: :desc})
+    reviews = evaluation.reviews.where(user: current_user).joins(:proposal).order(score: :desc).order(proposals: {created_at: :desc})
 
-    render inertia: "reviews/Index", props: {reviews: serialize(reviews)}
+    render inertia: "reviews/Index", props: {reviews: serialize(reviews), evaluation: serialize(evaluation)}
   end
 
   def show
@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
     if form.save
       inertia_location review_path(@review)
     else
-      render inertia: "reviews/Show", props: {review: serialize(@review)}
+      redirect_to review_path(@review), inertia: {errors: form.errors}
     end
   end
 

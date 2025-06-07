@@ -1,17 +1,34 @@
 import Layout from "../../components/Layout";
 import StatusBadge from "../../components/StatusBadge";
 import { usePage, router } from "@inertiajs/react";
-import { Review } from "../../serializers";
+import { Evaluation, Review } from "../../serializers";
 
 interface IndexProps {
+  evaluation: Evaluation
   reviews: Review[]
 }
 
-export default function Index({ reviews }: IndexProps) {
+export default function Index({ reviews, evaluation }: IndexProps) {
   const { user } = usePage().props;
 
   const pendingReviews = reviews.filter(review => review.status === 'pending');
   const completedReviews = reviews.filter(review => review.status === 'submitted');
+
+  const scoreClass = (value: number) => {
+    const maxScore = 5 * evaluation.criteria.length;
+
+    const percentage = value / maxScore;
+
+    if (percentage >= 0.8) {
+      return 'badge-accepted';
+    }
+
+    if (percentage >= 0.6) {
+      return 'badge-waitlist';
+    }
+
+    return 'badge-draft';
+  }
 
   const renderReviews = (title: string, reviews: Review[], test_id: string) => {
     if (reviews.length === 0) return null;
@@ -48,7 +65,12 @@ export default function Index({ reviews }: IndexProps) {
                     <div className="text-sm text-sky-800">{review.proposal!.track}</div>
                   </td>
                   <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                    <StatusBadge status={review.status} />
+                    {review.status !== 'submitted' && (
+                      <StatusBadge status={review.status} />
+                    )}
+                    {review.status === 'submitted' && (
+                      <span className={`badge ${scoreClass(review.score!)}`}>Score: {review.score}</span>
+                    )}
                   </td>
                 </tr>
               ))}
