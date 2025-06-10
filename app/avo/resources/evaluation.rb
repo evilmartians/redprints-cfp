@@ -24,6 +24,8 @@ class Avo::Resources::Evaluation < Avo::BaseResource
     field :tracks, as: :select, enum: ::Proposal.tracks, multiple: true
     field :criteria, as: :tags
 
+    field :deadline, as: :date_time
+
     field :reviewers, as: :has_many, attach_scope: -> { query.reviewer }
     field :reviewed_proposals, as: :has_many
     field :reviews, as: :has_many

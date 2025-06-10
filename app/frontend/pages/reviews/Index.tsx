@@ -2,6 +2,8 @@ import Layout from "../../components/Layout";
 import StatusBadge from "../../components/StatusBadge";
 import { usePage, router } from "@inertiajs/react";
 import { Evaluation, Review } from "../../serializers";
+import { formatDeadline } from "../../utils/dateHelpers";
+import { AlertCircleIcon } from 'lucide-react';
 
 interface IndexProps {
   evaluation: Evaluation
@@ -85,12 +87,33 @@ export default function Index({ reviews, evaluation }: IndexProps) {
     <Layout currentUser={user}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-4xl mx-auto">
+          {/* Show warning banner when submissions are not allowed */}
+          {!evaluation.submissions_allowed && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 animate-slide-up">
+              <div className="flex items-center">
+                <AlertCircleIcon className="h-5 w-5 text-red-600 mr-2 flex-shrink-0" />
+                <div>
+                  <p className="text-red-800 font-medium">
+                    The evaluation deadline has passed
+                  </p>
+                  <p className="text-red-700 text-sm mt-1">
+                    You can view your submitted reviews, but you cannot submit new reviews or edit existing ones.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 animate-fade-in">
             <div>
               <h1 className="text-3xl font-bold mb-2">Proposals Evaluation</h1>
               <p className="text-cloud-700">
                 Review conference talk proposals
               </p>
+              {evaluation.deadline && (
+                <p className={`mt-2 text-sm font-medium ${formatDeadline(evaluation.deadline).className}`}>
+                  Deadline: {formatDeadline(evaluation.deadline).text}
+                </p>
+              )}
             </div>
           </div>
 

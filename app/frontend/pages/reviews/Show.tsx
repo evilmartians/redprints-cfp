@@ -29,8 +29,8 @@ export default function Show({ review }: ShowProps) {
 
   const hasReviewed = review.status === 'submitted';
 
-  // Check if deadline has passed
-  const deadlinePassed = review.evaluation?.deadline ? new Date(review.evaluation.deadline) < new Date() : false;
+  // Check if submissions are allowed
+  const submissionsAllowed = review.evaluation?.submissions_allowed ?? true;
 
   function submitReview(e: FormEvent) {
     e.preventDefault()
@@ -82,8 +82,8 @@ export default function Show({ review }: ShowProps) {
 
         {/* Review Information */}
         <div className="card border border-sky-700 mb-8 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-          {/* Show deadline message if deadline passed and review not submitted */}
-          {deadlinePassed && !hasReviewed && (
+          {/* Show deadline message if submissions not allowed and review not submitted */}
+          {!submissionsAllowed && !hasReviewed && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
               <div className="flex items-center">
                 <AlertCircleIcon className="h-5 w-5 text-red-600 mr-2" />
@@ -94,7 +94,7 @@ export default function Show({ review }: ShowProps) {
             </div>
           )}
 
-          {(!hasReviewed || editing) && !deadlinePassed && (
+          {(!hasReviewed || editing) && submissionsAllowed && (
             <>
               <h2 className="text-xl font-bold mb-6 pb-4 border-b border-neutral-200">Submit Review</h2>
               <form onSubmit={submitReview} className="space-y-6">
@@ -166,7 +166,7 @@ export default function Show({ review }: ShowProps) {
                 <hr className="my-4" />
                 <p className="text-neutral-700 whitespace-pre-line">{review.comment}</p>
                 <div className="flex flex-col sm:flex-row-reverse justify-start space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse animate-slide-up" style={{ animationDelay: "0.2s" }}>
-                  {!deadlinePassed && (
+                  {submissionsAllowed && (
                     <button
                       className="btn btn-outline flex items-center justify-center cursor-pointer"
                       onClick={() => setEditting(true)}

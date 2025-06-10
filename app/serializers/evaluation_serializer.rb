@@ -8,4 +8,10 @@ class EvaluationSerializer < ApplicationSerializer
 
   attributes :deadline
   typelize deadline: "string | null"
+
+  attribute :submissions_allowed do |ev|
+    ev.deadline.nil? || ev.deadline.future?
+  end
+
+  typelize submissions_allowed: "boolean"
 end
