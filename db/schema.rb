@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_07_003036) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_10_205350) do
   create_table "evaluation_reviewers", force: :cascade do |t|
     t.integer "evaluation_id"
     t.integer "user_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_07_003036) do
     t.json "criteria"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deadline"
   end
 
   create_table "proposals", force: :cascade do |t|

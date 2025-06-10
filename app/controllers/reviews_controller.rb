@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_reviewer!
   before_action :set_review, only: [:show, :update]
+  before_action :check_deadline, only: [:update]
 
   def index
     evaluation = current_user.evaluations.find(params[:evaluation_id])
@@ -27,5 +28,11 @@ class ReviewsController < ApplicationController
 
   def set_review
     @review = current_user.reviews.find(params[:id])
+  end
+
+  def check_deadline
+    return unless @review.evaluation.deadline&.past?
+
+    redirect_to review_path(@review), alert: "The evaluation deadline has passed. You can no longer submit or edit reviews."
   end
 end

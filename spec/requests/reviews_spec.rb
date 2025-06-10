@@ -58,5 +58,36 @@ describe "/evaluations/:id/reviews" do
         expect(review.reload).to be_pending
       end
     end
+
+    context "when evaluation deadline has passed" do
+      let!(:past_evaluation) { create(:evaluation, reviewers: [reviewer], tracks: ["general"], criteria: %w[Clarity Novelty], deadline: 1.day.ago) }
+      let!(:past_review) { create(:review, user: reviewer, evaluation: past_evaluation, proposal: proposal) }
+
+      subject { patch "/reviews/#{past_review.id}", params: {review: form_params} }
+
+      it "redirects back with an alert message" do
+        subject
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(review_path(past_review))
+        expect(flash[:alert]).to eq("The evaluation deadline has passed. You can no longer submit or edit reviews.")
+      end
+
+      it "doesn't update the review" do
+        expect { subject }.not_to change { past_review.reload.comment }
+        expect(past_review.reload).to be_pending
+      end
+    end
+
+    context "when evaluation has no deadline" do
+      let!(:no_deadline_evaluation) { create(:evaluation, reviewers: [reviewer], tracks: ["general"], criteria: %w[Clarity Novelty], deadline: nil) }
+      let!(:no_deadline_review) { create(:review, user: reviewer, evaluation: no_deadline_evaluation, proposal: proposal) }
+
+      subject { patch "/reviews/#{no_deadline_review.id}", params: {review: form_params} }
+
+      it "updates the review normally" do
+        expect { subject }.to change { no_deadline_review.reload.comment }.to("Good vibes")
+          .and change { no_deadline_review.status }.to("submitted")
+      end
+    end
   end
 end

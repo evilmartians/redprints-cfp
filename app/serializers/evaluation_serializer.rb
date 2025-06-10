@@ -5,4 +5,7 @@ class EvaluationSerializer < ApplicationSerializer
 
   typelize tracks: "Array<#{Proposal.tracks.values.map { %('#{_1}') }.join(" | ")}>"
   typelize criteria: "string[]"
+
+  attributes :deadline
+  typelize deadline: "string | null"
 end
