@@ -4,6 +4,9 @@ describe Evaluation do
   let_it_be(:proposal_a) { create(:proposal, track: "general") }
   let_it_be(:proposal_b) { create(:proposal, track: "startup") }
   let_it_be(:proposal_c) { create(:proposal, track: "oss") }
+  let_it_be(:proposal_draft) { create(:proposal, :draft, track: "general") }
+  let_it_be(:proposal_accepted) { create(:proposal, track: "general", status: "accepted") }
+  let_it_be(:proposal_rejected) { create(:proposal, track: "oss", status: "rejected") }
 
   let_it_be(:reviewer_a) { create(:reviewer) }
   let_it_be(:reviewer_b) { create(:reviewer) }
@@ -13,16 +16,17 @@ describe Evaluation do
   describe "#proposals" do
     subject(:proposals) { evaluation.proposals.to_a }
 
-    it "returns matching proposals" do
+    it "returns matching submitted proposals only" do
       expect(proposals).to include(proposal_a, proposal_c)
-      expect(proposals).not_to include(proposal_b)
+      expect(proposals).not_to include(proposal_b, proposal_draft, proposal_accepted, proposal_rejected)
     end
 
     context "when tracks are blank" do
       before { evaluation.update!(tracks: nil) }
 
-      it "returns all proposals" do
+      it "returns all submitted proposals" do
         expect(proposals).to include(proposal_a, proposal_b, proposal_c)
+        expect(proposals).not_to include(proposal_draft, proposal_accepted, proposal_rejected)
       end
     end
   end
@@ -33,7 +37,7 @@ describe Evaluation do
       expect { evaluation.invalidate! }.not_to change(Review, :count)
 
       # add new proposal
-      create(:proposal, track: "general")
+      create(:proposal, track: "general", status: "submitted")
       expect { evaluation.invalidate! }.to change(evaluation.reviews.pending.where(user: reviewer_a), :count).by(1)
 
       # add new reviewer

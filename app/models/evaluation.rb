@@ -6,9 +6,9 @@ class Evaluation < ApplicationRecord
   has_many :reviewed_proposals, -> { distinct }, through: :reviews, source: :proposal
 
   def proposals
-    return Proposal.all if tracks.blank?
+    return Proposal.submitted if tracks.blank?
 
-    Proposal.where(track: tracks)
+    Proposal.submitted.where(track: tracks)
   end
 
   def invalidate!
