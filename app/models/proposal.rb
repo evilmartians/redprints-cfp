@@ -4,7 +4,7 @@ class Proposal < ApplicationRecord
   has_one :speaker_profile, through: :user
   has_many :reviews, dependent: :destroy
 
-  enum :track, %w[oss scale general startup].index_by(&:itself)
+  enum :track, %w[oss scale general startup workshop].index_by(&:itself)
 
   enum :status, %w[draft submitted accepted rejected waitlisted].index_by(&:itself)
 
