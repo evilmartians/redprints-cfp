@@ -1,10 +1,10 @@
 import Layout from "../../components/Layout";
 import { useForm, Link, usePage } from "@inertiajs/react";
-import { AlertCircle, ArrowLeftIcon, Save, SendIcon } from 'lucide-react';
+import { AlertCircle, ArrowLeftIcon, Save, SendIcon, Upload } from 'lucide-react';
 import TextAreaWithCounter from "../../components/TextAreaWithCounter";
 import Select from "../../components/Select";
 import { Proposal, SpeakerProfile } from "../../serializers";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useRef } from "react";
 
 interface FormProps {
   proposal: Proposal
@@ -13,6 +13,7 @@ interface FormProps {
 
 export default function Form({ proposal, speaker }: FormProps) {
   const { user } = usePage().props;
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { data, setData, post, patch, processing, errors } = useForm({
     proposal: {
@@ -26,6 +27,8 @@ export default function Form({ proposal, speaker }: FormProps) {
       speaker_bio: speaker?.bio || '',
       speaker_company: speaker?.company || '',
       speaker_socials: speaker?.socials || '',
+      speaker_photo: null as File | null,
+      speaker_photo_url: speaker?.photo_url || '',
       drafting: '0'
     }
   })
@@ -47,9 +50,13 @@ export default function Form({ proposal, speaker }: FormProps) {
   function submit(e: FormEvent) {
     e.preventDefault()
     if (isEditing) {
-      patch(`/proposals/${proposal.id}`)
+      patch(`/proposals/${proposal.id}`, {
+        forceFormData: true,
+      })
     } else {
-      post('/proposals')
+      post('/proposals', {
+        forceFormData: true,
+      })
     }
   }
 
@@ -255,6 +262,50 @@ export default function Form({ proposal, speaker }: FormProps) {
                       onChange={(e) => setData('proposal.speaker_socials', e.target.value)}
                       className="input-field"
                     />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="profile_photo" className="label">
+                    Profile Photo
+                  </label>
+                  <div className="space-y-2">
+                    {data.proposal.speaker_photo_url && (
+                      <div className="mb-2">
+                        <img
+                          src={data.proposal.speaker_photo_url}
+                          alt="Current profile photo"
+                          className="w-24 h-24 object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                    <input
+                      ref={fileInputRef}
+                      id="profile_photo"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0] || null;
+                        if (file) {
+                          setData('proposal.speaker_photo_url', URL.createObjectURL(file));
+                          setData('proposal.speaker_photo', file);
+                        }
+                      }}
+                      className="hidden"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="btn btn-outline flex items-center"
+                    >
+                      <Upload className="h-4 w-4 mr-2" />
+                      {data.proposal.speaker_photo_url ? 'Change Photo' : 'Upload Photo'}
+                    </button>
+                    {data.proposal.speaker_photo && (
+                      <p className="text-sm text-cloud-700">
+                        Selected: {data.proposal.speaker_photo.name}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

@@ -10,6 +10,7 @@ class ProposalForm < ApplicationForm
   attribute :speaker_company
   attribute :speaker_bio
   attribute :speaker_socials
+  attribute :speaker_photo
 
   attribute :drafting, :boolean, default: false
 
@@ -61,6 +62,7 @@ class ProposalForm < ApplicationForm
 
     @speaker_profile = user.speaker_profile || user.build_speaker_profile
     @speaker_profile.assign_attributes(build_speaker_attributes)
+    @speaker_profile.photo.attach(speaker_photo) if speaker_photo.present?
   end
 
   private

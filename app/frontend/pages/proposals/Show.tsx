@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import { Link, usePage, router } from "@inertiajs/react";
-import { ArrowLeftIcon, PencilIcon, TrashIcon } from 'lucide-react';
+import { ArrowLeftIcon, PencilIcon, TrashIcon, UserIcon } from 'lucide-react';
 import StatusBadge from "../../components/StatusBadge";
 import { Proposal, SpeakerProfile } from "../../serializers";
 
@@ -109,6 +109,20 @@ export default function Show({ proposal, speaker }: ShowProps) {
           <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-700">Speaker Profile</h2>
 
           <div className="space-y-6">
+            <div className="float-right">
+              {speaker.photo_url ? (
+                <img
+                  src={speaker.photo_url}
+                  alt={`${speaker.name}'s profile photo`}
+                  className="w-32 h-32 object-cover rounded-full border-2 border-sky-700 shadow-lg"
+                />
+              ) : (
+                <div className="w-32 h-32 rounded-full border-2 border-sky-700 bg-sky-50 flex items-center justify-center shadow-lg">
+                  <UserIcon className="w-16 h-16 text-sky-400" />
+                </div>
+              )}
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Name</h3>

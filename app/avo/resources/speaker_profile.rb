@@ -10,6 +10,7 @@ class Avo::Resources::SpeakerProfile < Avo::BaseResource
     field :name, as: :text, required: true
     field :email, as: :text, required: true
     field :company, as: :text
+    field :photo, as: :file
 
     field :user, as: :belongs_to
 
