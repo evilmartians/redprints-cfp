@@ -4,7 +4,7 @@ class SpeakerProfileSerializer < ApplicationSerializer
   attributes :name, :email, :bio, :company, :socials
 
   attribute :photo_url do |profile|
-    next unless profile.photo.attached?
+    next unless profile.photo.attached? && profile.photo.persisted?
 
     rails_blob_url(profile.photo, only_path: true)
   end
