@@ -33,6 +33,9 @@ export default function Form({ proposal, speaker }: FormProps) {
     }
   })
 
+  type ProposalFields = keyof typeof data.proposal;
+  const formErrors = errors as Partial<Record<ProposalFields, Array<string>>>
+
   const [submitting, setSubmitting] = useState(false);
 
   // TODO: sync with backend validations
@@ -106,6 +109,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                     placeholder={isStartupDemo ? "" : "A clear, concise title for your talk"}
                     required={submitting}
                   />
+                  {formErrors.title && (
+                    <p className="text-red-600 text-sm mb-4">{formErrors.title.join(", ")}</p>
+                  )}
                 </div>
 
                 <div>
@@ -120,6 +126,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                     placeholder={isStartupDemo ? "Tell us a bit about your stage and progress" : "A brief overview of your talk (will be published in the program)"}
                     required={submitting}
                   />
+                  {formErrors.abstract && (
+                    <p className="text-red-600 text-sm mb-4">{formErrors.abstract.join(", ")}</p>
+                  )}
                 </div>
 
                 {!isStartupDemo && (
@@ -139,6 +148,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                         { value: 'general', label: 'General' },
                       ]}
                     />
+                    {formErrors.track && (
+                      <p className="text-red-600 text-sm mb-4">{formErrors.track.join(", ")}</p>
+                    )}
                   </div>
                 )}
 
@@ -154,6 +166,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                     placeholder={isStartupDemo ? "Tell us a bit about the problem the product is solving, and the target audience. What can you demo?" : "A detailed description of your talk, including outline, key points, and what attendees will learn"}
                     required={submitting}
                   />
+                  {formErrors.details && (
+                    <p className="text-red-600 text-sm mb-4">{formErrors.details.join(", ")}</p>
+                  )}
                   {!isStartupDemo && (
                     <p className="mt-1 text-sm text-cloud-700">
                       This is for the review committee only and won't be published.
@@ -178,6 +193,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                     placeholder={isStartupDemo ? "" : "Why is this talk important for the Ruby community? What makes you the right person to give it?"}
                     required={submitting}
                   />
+                  {formErrors.pitch && (
+                    <p className="text-red-600 text-sm mb-4">{formErrors.pitch.join(", ")}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -204,6 +222,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                       placeholder="Your full name"
                       required={submitting}
                     />
+                    {formErrors.speaker_name && (
+                      <p className="text-red-600 text-sm mb-4">{formErrors.speaker_name.join(", ")}</p>
+                    )}
                   </div>
 
                   <div>
@@ -219,6 +240,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                       placeholder="Your email address"
                       required={submitting}
                     />
+                    {formErrors.speaker_email && (
+                      <p className="text-red-600 text-sm mb-4">{formErrors.speaker_email.join(", ")}</p>
+                    )}
                   </div>
                 </div>
 
@@ -234,6 +258,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                     className="input-field"
                     placeholder="Where you work (optional)"
                   />
+                  {formErrors.speaker_company && (
+                    <p className="text-red-600 text-sm mb-4">{formErrors.speaker_company.join(", ")}</p>
+                  )}
                 </div>
 
                 <div>
@@ -248,6 +275,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                     placeholder="A brief bio that will be published in the program"
                     required={submitting}
                   />
+                  {formErrors.speaker_bio && (
+                    <p className="text-red-600 text-sm mb-4">{formErrors.speaker_bio.join(", ")}</p>
+                  )}
                 </div>
 
                 <div>
@@ -262,6 +292,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                       onChange={(e) => setData('proposal.speaker_socials', e.target.value)}
                       className="input-field"
                     />
+                    {formErrors.speaker_socials && (
+                      <p className="text-red-600 text-sm mb-4">{formErrors.speaker_socials.join(", ")}</p>
+                    )}
                   </div>
                 </div>
 
@@ -307,6 +340,9 @@ export default function Form({ proposal, speaker }: FormProps) {
                       </p>
                     )}
                   </div>
+                  {formErrors.speaker_photo && (
+                    <p className="text-red-600 text-sm mb-4">{formErrors.speaker_photo.join(", ")}</p>
+                  )}
                 </div>
               </div>
             </div>

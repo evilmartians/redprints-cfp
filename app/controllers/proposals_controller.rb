@@ -19,7 +19,7 @@ class ProposalsController < ApplicationController
     if form.save
       inertia_location proposals_path
     else
-      render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), speaker: serialize(form.speaker_profile)}
+      render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), speaker: serialize(form.speaker_profile), errors: form.errors}
     end
   end
 
@@ -39,7 +39,7 @@ class ProposalsController < ApplicationController
     if form.save
       inertia_location proposal_path(@proposal)
     else
-      render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), speaker: serialize(form.speaker_profile)}
+      render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), speaker: serialize(form.speaker_profile), errors: form.errors}
     end
   end
 
