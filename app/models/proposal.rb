@@ -6,7 +6,7 @@ class Proposal < ApplicationRecord
 
   enum :track, %w[oss scale general startup workshop].index_by(&:itself)
 
-  enum :status, %w[draft submitted accepted rejected waitlisted].index_by(&:itself)
+  enum :status, %w[draft submitted accepted rejected waitlisted confirmed declined].index_by(&:itself)
 
   before_create do
     self.external_id ||= Nanoid.generate(size: 8)
