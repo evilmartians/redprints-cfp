@@ -18,4 +18,8 @@ class Avo::Resources::SpeakerProfile < Avo::BaseResource
     field :bio, as: :textarea, limit: 1000, hide_on: :index
     field :socials, as: :textarea, limit: 400
   end
+
+  def actions
+    action Avo::Actions::ExportSpeakerProfiles
+  end
 end
