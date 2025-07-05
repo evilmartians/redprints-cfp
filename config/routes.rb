@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :proposals, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+    resource :confirmation, only: [:create, :destroy], module: :proposals
     collection do
       get "/startup" => "proposals#new", :defaults => {proposal_track: "startup"}, :as => :new_startup_proposal
     end

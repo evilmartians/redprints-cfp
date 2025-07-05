@@ -12,6 +12,18 @@ interface ShowProps {
 export default function Show({ proposal, speaker }: ShowProps) {
   const { user } = usePage().props;
 
+  const handleConfirmProposal = () => {
+    if (confirm('Are you sure you want to confirm your participation in this proposal? This will notify the organizers that you will be presenting.')) {
+      router.post(`/proposals/${proposal.id}/confirmation`);
+    }
+  };
+
+  const handleDeclineProposal = () => {
+    if (confirm('Are you sure you want to decline this proposal? This will notify the organizers that you will not be presenting.')) {
+      router.delete(`/proposals/${proposal.id}/confirmation`);
+    }
+  };
+
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '–';
 
@@ -56,6 +68,16 @@ export default function Show({ proposal, speaker }: ShowProps) {
             <div className="flex items-center space-x-2">
               <StatusBadge status={proposal.status} />
             </div>
+            {proposal.status === 'accepted' && (
+              <div className="flex items-center space-x-2 mt-2">
+                <button
+                  onClick={handleConfirmProposal}
+                  className="btn btn-outline flex items-center sm:mt-0 text-nowrap"
+                >
+                  Confirm Participation
+                </button>
+              </div>
+            )}
           </div>
           <div className="flex flex-col items-start sm:flex-row sm:items-center space-y-2 sm:space-x-2 sm:space-y-0">
             <Link
@@ -171,10 +193,19 @@ export default function Show({ proposal, speaker }: ShowProps) {
             <h2 className="text-xl font-bold mb-4">Feedback from the Committee</h2>
 
             {proposal.status === 'accepted' && (
-              <p className="text-accent-800">
-                Congratulations! Your proposal has been accepted. We're excited to have you speak at SF Ruby Conference.
-                You'll receive an email with further instructions soon.
-              </p>
+              <>
+                <p className="text-accent-800">
+                  Congratulations! Your proposal has been accepted. We're excited to have you speak at SF Ruby Conference.
+                </p>
+              </>
+            )}
+
+            {proposal.status === 'confirmed' && (
+              <>
+                <p className="text-accent-800">
+                  Congratulations! You're a part of our amazing program! See you in San Francisco!
+                </p>
+              </>
             )}
 
             {proposal.status === 'rejected' && (
