@@ -1,7 +1,7 @@
 class SpeakerProfileSerializer < ApplicationSerializer
   typelize_from SpeakerProfile
 
-  attributes :name, :email, :bio, :company, :socials
+  attributes :name, :email, :bio, :company, :role, :socials
 
   attribute :photo_url do |profile|
     next unless profile.photo.attached? && profile.photo.persisted?

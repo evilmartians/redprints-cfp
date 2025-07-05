@@ -137,7 +137,12 @@ export default function Show({ proposal, speaker }: ShowProps) {
 
             <div>
               <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Company/Organization</h3>
-              <p className="text-cloud-700">{speaker.company || "—"}</p>
+              <p className="text-cloud-700">
+                {speaker.role && (
+                  <span>{speaker.role} @ </span>
+                )}
+                {speaker.company || "—"}
+              </p>
             </div>
 
             <div>

@@ -26,6 +26,7 @@ export default function Form({ proposal, speaker }: FormProps) {
       speaker_email: speaker?.email || '',
       speaker_bio: speaker?.bio || '',
       speaker_company: speaker?.company || '',
+      speaker_role: speaker?.role || '',
       speaker_socials: speaker?.socials || '',
       speaker_photo: null as File | null,
       speaker_photo_url: speaker?.photo_url || '',
@@ -260,6 +261,23 @@ export default function Form({ proposal, speaker }: FormProps) {
                   />
                   {formErrors.speaker_company && (
                     <p className="text-red-600 text-sm mb-4">{formErrors.speaker_company.join(", ")}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="role" className="label">
+                    Company Role
+                  </label>
+                  <input
+                    id="role"
+                    type="text"
+                    value={data.proposal.speaker_role}
+                    onChange={(e) => setData('proposal.speaker_role', e.target.value)}
+                    className="input-field"
+                    placeholder="Your role at the company (optional)"
+                  />
+                  {formErrors.speaker_role && (
+                    <p className="text-red-600 text-sm mb-4">{formErrors.speaker_role.join(", ")}</p>
                   )}
                 </div>
 

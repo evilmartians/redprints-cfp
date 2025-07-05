@@ -8,6 +8,7 @@ class ProposalForm < ApplicationForm
   attribute :speaker_name
   attribute :speaker_email
   attribute :speaker_company
+  attribute :speaker_role
   attribute :speaker_bio
   attribute :speaker_socials
   attribute :speaker_photo
@@ -86,6 +87,7 @@ class ProposalForm < ApplicationForm
       name: speaker_name,
       email: speaker_email,
       company: speaker_company,
+      role: speaker_role,
       bio: speaker_bio,
       socials: speaker_socials
     }
@@ -102,6 +104,7 @@ class ProposalForm < ApplicationForm
         speaker_name: profile&.name || user&.name,
         speaker_email: profile&.email || user&.email,
         speaker_company: profile&.company,
+        speaker_role: profile&.role,
         speaker_bio: profile&.bio,
         speaker_socials: profile&.socials
       }.compact
