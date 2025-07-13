@@ -17,17 +17,29 @@ const TextAreaWithCounter: React.FC<TextAreaWithCounterProps> = ({
   placeholder,
   required,
 }) => {
-  const characterCount = value.length;
+  // Count line breaks as \r\n (2 characters) to match Ruby/Rails backend
+  const lineBreaks = (value.match(/\n/g) || []).length;
+  const characterCount = value.length + lineBreaks;
   const isNearLimit = characterCount >= maxLength * 0.8;
   const isAtLimit = characterCount >= maxLength;
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    const newLineBreaks = (newValue.match(/\n/g) || []).length;
+    const newCharacterCount = newValue.length + newLineBreaks;
+
+    // Only update if within limit
+    if (newCharacterCount <= maxLength) {
+      onChange(newValue);
+    }
+  };
 
   return (
     <div className="relative">
       <textarea
         id={id}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        maxLength={maxLength}
+        onChange={handleChange}
         placeholder={placeholder}
         required={required}
         rows={5}
