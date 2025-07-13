@@ -1,6 +1,24 @@
 class Avo::Resources::Proposal < Avo::BaseResource
   self.includes = [:user]
 
+  self.search = {
+    query: -> {
+      proposals_table = ::Proposal.arel_table
+      users_table = ::User.arel_table
+
+      query.joins(:user).where(
+        proposals_table[:title].matches("%#{params[:q]}%")
+          .or(users_table[:name].matches("%#{params[:q]}%"))
+          .or(users_table[:email].matches("%#{params[:q]}%"))
+      )
+    },
+    item: -> do
+      {
+        title: "#{record.title} (#{record.user.name} — #{record.user.email})"
+      }
+    end
+  }
+
   self.find_record_method = -> {
     if id.is_a?(Array)
       Integer(id.first, exception: false) ? query.where(id:) : query.where(external_id: id)
