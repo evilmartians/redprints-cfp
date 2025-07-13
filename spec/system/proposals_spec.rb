@@ -117,5 +117,45 @@ describe "Proposals" do
       expect(proposals_page).to be_displayed
       expect(page).to have_text "You haven't submitted any proposals yet"
     end
+
+    context "when deadline passed" do
+      before { allow(AppConfig).to receive(:cfp_closed?) { true } }
+
+      specify "user cannot edit the proposal" do
+        proposal_page.load(id: proposal.external_id)
+        expect(proposal_page).to be_displayed(id: proposal.external_id)
+
+        expect(page).not_to have_text "Edit Proposal"
+      end
+    end
+  end
+
+  context "when deadline passed" do
+    before { allow(AppConfig).to receive(:cfp_closed?) { true } }
+
+    specify "user cannot submit a proposal" do
+      home_page.load
+
+      home_page.nav.within do |nav|
+        expect(page).not_to have_text "Submit proposal"
+      end
+
+      home_page.actions.within do |nav|
+        expect(page).not_to have_text "Submit proposal"
+      end
+
+      visit "/proposals/new"
+
+      expect(proposal_form_page).not_to be_displayed
+      expect(home_page).to be_displayed
+
+      home_page.actions.within do |nav|
+        click_on "My Proposals"
+      end
+
+      expect(proposals_page).to be_displayed
+
+      expect(page).not_to have_text("Submit Your First Proposal")
+    end
   end
 end

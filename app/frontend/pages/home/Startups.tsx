@@ -9,7 +9,7 @@ interface StartupsProps {
 }
 
 export default function Startups({oauth_providers}: StartupsProps) {
-  const { user } = usePage().props;
+  const { user, startup_cfp_closed } = usePage().props;
 
   return (
     <Layout currentUser={user}>
@@ -18,7 +18,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
           Call for Startups
         </h1>
         <p className="text-cloud-50 text-lg max-w-3xl">
-          The <a className="underline" href="https://sfruby.com" target="_blank">San Francisco Ruby Conference</a> is excited to open our Call for Ruby Startups! 
+          The <a className="underline" href="https://sfruby.com" target="_blank">San Francisco Ruby Conference</a> is excited to open our Call for Ruby Startups!
           </p>
           <p className="text-cloud-50 text-lg max-w-3xl"> Let's bring your ambitious story into the spotlight: demo your product among the other rising stars, inspire the next generation of Rubyists and connect with the brightest Ruby minds.
         </p>
@@ -81,7 +81,12 @@ export default function Startups({oauth_providers}: StartupsProps) {
 
         <div className="lg:pl-8 space-y-8">
           <div test-id="home-actions" className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            <h3 className="text-xl font-bold mb-6">Ready to introduce your startup to the Ruby world?</h3>
+            {!startup_cfp_closed && (
+              <h3 className="text-xl font-bold mb-6">Ready to introduce your startup to the Ruby world?</h3>
+            )}
+            {startup_cfp_closed && (
+              <h3 className="text-xl font-bold mb-6">The call for startups is now closed</h3>
+            )}
             <p className="text-neutral-600 mb-8">
             </p>
             <div className="flex flex-col space-y-2">
@@ -93,7 +98,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
                 ))
               )}
 
-              {user && (
+              {user && !startup_cfp_closed && (
                 <Link href={`/proposals/startup`} className="btn btn-sky flex items-center justify-center">
                   Submit a Demo Proposal
                 </Link>

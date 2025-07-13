@@ -11,7 +11,7 @@ class ApplicationQuery
     end
 
     def [](model)
-      Class.new(self).tap { _1.query_model_name = model.name }
+      Class.new(self).tap { it.query_model_name = model.name }
     end
 
     def resolve(...) = new.resolve(...)

@@ -3,7 +3,7 @@ class EvaluationSerializer < ApplicationSerializer
 
   attributes :id, :name, :tracks, :criteria
 
-  typelize tracks: "Array<#{Proposal.tracks.values.map { %('#{_1}') }.join(" | ")}>"
+  typelize tracks: "Array<#{Proposal.tracks.values.map { %('#{it}') }.join(" | ")}>"
   typelize criteria: "string[]"
 
   attributes :deadline

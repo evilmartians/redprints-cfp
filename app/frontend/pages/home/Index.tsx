@@ -9,7 +9,7 @@ interface IndexProps {
 }
 
 export default function Index({ oauth_providers }: IndexProps) {
-  const { user } = usePage().props;
+  const { user, cfp_closed, startup_cfp_closed } = usePage().props;
 
   return (
     <Layout currentUser={user}>
@@ -106,11 +106,23 @@ export default function Index({ oauth_providers }: IndexProps) {
 
         <div className="lg:pl-8 space-y-8">
           <div test-id="home-actions" className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            <h3 className="text-xl font-bold mb-6">Ready to share your Ruby expertise?</h3>
-            <p className="text-neutral-600 mb-8">
-              We welcome proposals from speakers of all experience levels. Whether you're a seasoned presenter or a first-time speaker,
-              we want to hear from you!
-            </p>
+            {cfp_closed && (
+              <>
+                <h3 className="text-xl font-bold mb-6">The call for proposals is now closed</h3>
+                <p className="text-neutral-600 mb-8">
+                  Than you everyone for your submissions! You will hear from us shortly!
+                </p>
+              </>
+            )}
+            {!cfp_closed && (
+              <>
+                <h3 className="text-xl font-bold mb-6">Ready to share your Ruby expertise?</h3>
+                <p className="text-neutral-600 mb-8">
+                  We welcome proposals from speakers of all experience levels. Whether you're a seasoned presenter or a first-time speaker,
+                  we want to hear from you!
+                </p>
+              </>
+            )}
             <div className="flex flex-col space-y-2">
               {!user && (
                 oauth_providers.map((provider: string) => (
@@ -120,7 +132,7 @@ export default function Index({ oauth_providers }: IndexProps) {
                 ))
               )}
 
-              {user && (
+              {user && !cfp_closed && (
                 <Link href={`/proposals/new`} className="btn btn-ruby flex items-center justify-center">
                   Submit a Proposal
                 </Link>
@@ -135,15 +147,17 @@ export default function Index({ oauth_providers }: IndexProps) {
             </div>
           </div>
 
-          <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            <h3 className="text-xl font-bold mb-4">Building a startup with Ruby?</h3>
-            <p className="text-neutral-600 mb-6">
-             Demo your startup at the conference! Share your story to inspire others, and connect with some of the best Ruby minds! All startup demos will be 10 minutes.
-            </p>
-            <Link href={`/startups`} className="btn btn-sky flex items-center justify-center">
-              Call for Startups
-            </Link>
-          </div>
+          {!startup_cfp_closed && (
+            <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+              <h3 className="text-xl font-bold mb-4">Building a startup with Ruby?</h3>
+              <p className="text-neutral-600 mb-6">
+                Demo your startup at the conference! Share your story to inspire others, and connect with some of the best Ruby minds! All startup demos will be 10 minutes.
+              </p>
+              <Link href={`/startups`} className="btn btn-sky flex items-center justify-center">
+                Call for Startups
+              </Link>
+            </div>
+          )}
 
           <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
             <h3 className="text-xl font-bold mb-4">Have questions?</h3>

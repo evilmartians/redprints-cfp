@@ -10,6 +10,7 @@ interface HeaderProps {
 
 export function Header({ currentUser }: HeaderProps) {
   const { url } = usePage();
+  const { cfp_closed } = usePage().props;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -53,16 +54,18 @@ export function Header({ currentUser }: HeaderProps) {
 
           {currentUser && (
             <nav className="hidden sm:flex items-center space-x-4 justify-end">
-              <Link
-                href="/proposals/new"
-                className={`text-sm font-medium transition-colors ${
-                  url === '/proposals/new'
-                    ? "text-sky-800 border-b border-sky-800"
-                    : "text-ruby hover:text-ruby-300"
-                }`}
-              >
-                Submit proposal
-              </Link>
+              {!cfp_closed &&
+                <Link
+                  href="/proposals/new"
+                  className={`text-sm font-medium transition-colors ${
+                    url === '/proposals/new'
+                      ? "text-sky-800 border-b border-sky-800"
+                      : "text-ruby hover:text-ruby-300"
+                  }`}
+                >
+                  Submit proposal
+                </Link>
+              }
 
               <Link
                 href="/proposals"

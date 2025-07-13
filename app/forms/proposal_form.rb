@@ -37,9 +37,8 @@ class ProposalForm < ApplicationForm
     if drafting
       # make sure it has at least a title
       proposal.title = "Untitled draft" if proposal.title.blank?
-    else
-      self.proposal_submitted = true if proposal.draft?
-
+    elsif proposal.draft?
+      self.proposal_submitted = true
       proposal.status = :submitted
       proposal.submitted_at = Time.current
     end

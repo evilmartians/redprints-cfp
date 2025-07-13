@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
 
   inertia_share do
     {
-      user: -> { serialize(current_user) if current_user }
+      user: -> { serialize(current_user) if current_user },
+      flash: -> { flash.to_hash },
+      cfp_closed: -> { AppConfig.cfp_closed? },
+      startup_cfp_closed: -> { AppConfig.startup_cfp_closed? }
     }
   end
 

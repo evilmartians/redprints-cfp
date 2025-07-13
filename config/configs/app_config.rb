@@ -1,6 +1,12 @@
 class AppConfig < ApplicationConfig
   attr_config :host, :port, :asset_host,
-    :slack_notifications_url
+    :slack_notifications_url, :cfp_deadline, :startup_deadline
+
+  coerce_types cfp_deadline: :datetime, startup_deadline: :datetime
+
+  def cfp_closed? = cfp_deadline.present? && Time.current > cfp_deadline
+
+  def startup_cfp_closed? = startup_deadline.present? && Time.current > startup_deadline
 
   def ssl?
     port == 443

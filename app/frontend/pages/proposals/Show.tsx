@@ -24,18 +24,6 @@ export default function Show({ proposal, speaker }: ShowProps) {
     }
   };
 
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return '–';
-
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      year: '2-digit'
-    });
-  };
-
   const hasFeedback = (proposal.status === 'accepted') ||
     (proposal.status === 'rejected') ||
     (proposal.status === 'waitlisted');
@@ -80,13 +68,15 @@ export default function Show({ proposal, speaker }: ShowProps) {
             )}
           </div>
           <div className="flex flex-col items-start sm:flex-row sm:items-center space-y-2 sm:space-x-2 sm:space-y-0">
-            <Link
-              href={`/proposals/${proposal.id}/edit`}
-              className="btn btn-outline mt-4 sm:mt-0 flex items-center text-nowrap"
-            >
-              <PencilIcon className="h-5 w-5 mr-2" />
-              Edit Proposal
-            </Link>
+            {proposal.can_edit && (
+              <Link
+                href={`/proposals/${proposal.id}/edit`}
+                className="btn btn-outline mt-4 sm:mt-0 flex items-center text-nowrap"
+              >
+                <PencilIcon className="h-5 w-5 mr-2" />
+                Edit Proposal
+              </Link>
+            )}
             <button
               onClick={handleRetractProposal}
               className="btn btn-outline mt-4 sm:mt-0 flex items-center text-nowrap border-red-300 text-red-700 hover:bg-red-50 focus:ring-red-500 cursor-pointer"

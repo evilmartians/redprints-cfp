@@ -14,14 +14,14 @@ class ApplicationForm
       @class, @context = cls, ctx
     end
 
-    def new(...) = form_with_context.tap { _1.send(:initialize, ...) }
+    def new(...) = form_with_context.tap { it.send(:initialize, ...) }
 
-    def from(...) = form_with_context.tap { _1.send(:initialize_from_params, ...) }
+    def from(...) = form_with_context.tap { it.send(:initialize_from_params, ...) }
 
     private
 
     def form_with_context
-      @class.allocate.tap { _1.assign_context(**@context) }
+      @class.allocate.tap { it.assign_context(**@context) }
     end
   end
 
@@ -50,7 +50,7 @@ class ApplicationForm
     end
 
     def from(params)
-      allocate.tap { _1.initialize_from_params(params) }
+      allocate.tap { it.initialize_from_params(params) }
     end
 
     def with(**context) = ContextProxy.new(self, context)

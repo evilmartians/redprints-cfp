@@ -30,8 +30,8 @@ class ReviewForm < ApplicationForm
 
   def permitted_attributes
     super.tap do
-      _1.delete(:scores)
-      _1.push({scores: evaluation.criteria})
+      it.delete(:scores)
+      it.push({scores: evaluation.criteria})
     end
   end
 

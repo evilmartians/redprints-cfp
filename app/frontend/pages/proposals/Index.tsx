@@ -9,7 +9,7 @@ interface IndexProps {
 }
 
 export default function Index({ proposals }: IndexProps) {
-  const { user } = usePage().props;
+  const { user, cfp_closed } = usePage().props;
 
   // Helper function to format the date
   const formatDate = (dateString: string | null) => {
@@ -48,16 +48,20 @@ export default function Index({ proposals }: IndexProps) {
           {proposals.length === 0 ? (
             <div className="card border border-sky-700 text-center py-16 animate-slide-up">
               <h3 className="text-xl font-medium text-cloud-800 mb-4">You haven't submitted any proposals yet</h3>
-              <p className="text-cloud-700 mb-8 max-w-md mx-auto">
-                Share your knowledge with the Ruby community by submitting a proposal for SF Ruby Conference.
-              </p>
-              <Link
-                href={`/proposals/new`}
-                className="btn btn-ruby inline-flex items-center"
-              >
-                <PlusIcon className="h-5 w-5 mr-2" />
-                Submit Your First Proposal
-              </Link>
+              {!cfp_closed && (
+                <>
+                  <p className="text-cloud-700 mb-8 max-w-md mx-auto">
+                    Share your knowledge with the Ruby community by submitting a proposal for SF Ruby Conference.
+                  </p>
+                  <Link
+                    href={`/proposals/new`}
+                    className="btn btn-ruby inline-flex items-center"
+                  >
+                    <PlusIcon className="h-5 w-5 mr-2" />
+                    Submit Your First Proposal
+                  </Link>
+                </>
+              )}
             </div>
           ) : (
             <div className="card border border-sky-800 overflow-hidden animate-slide-up">
