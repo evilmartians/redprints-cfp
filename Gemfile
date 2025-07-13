@@ -73,8 +73,6 @@ group :development do
   gem "lefthook", require: false
 
   gem "letter_opener_web"
-
-  gem "tidewave"
 end
 
 group :development, :test do
