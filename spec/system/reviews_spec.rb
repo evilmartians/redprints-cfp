@@ -49,10 +49,7 @@ describe "Reviews" do
       f.click_on "Submit Review"
     end
 
-    expect(page).to have_text "Your Review"
-    expect(review_page).to have_no_form
-
-    click_on "Back to evaluation"
+    expect(page).to have_text "Proposals Evaluation"
 
     expect(reviews_page).to be_displayed(evaluation_id: evaluation.id)
 

@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
     form = ReviewForm.with(review: @review).from(params.require(:review))
 
     if form.save
-      inertia_location review_path(@review)
+      inertia_location evaluation_reviews_path(@review.evaluation)
     else
       redirect_to review_path(@review), inertia: {errors: form.errors}
     end
