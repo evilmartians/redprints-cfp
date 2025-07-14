@@ -48,6 +48,11 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                 <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
                   Track
                 </th>
+                {!evaluation.blind && (
+                  <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                    Speaker
+                  </th>
+                )}
                 <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
                   Review Status
                 </th>
@@ -66,6 +71,11 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                   <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                     <div className="text-sm text-sky-800">{review.proposal!.track}</div>
                   </td>
+                  {!evaluation.blind && (
+                    <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                      <div className="text-sm text-sky-800">{review.user!.name}</div>
+                    </td>
+                  )}
                   <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                     {review.status !== 'submitted' && (
                       <StatusBadge status={review.status} />

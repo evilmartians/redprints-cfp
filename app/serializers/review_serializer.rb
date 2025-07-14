@@ -8,4 +8,9 @@ class ReviewSerializer < ApplicationSerializer
   one :proposal
   one :user
   one :evaluation
+
+  attribute :speaker do |review|
+    review.evaluation.blind? ? nil : SpeakerProfileSerializer.new(review.proposal.speaker_profile)
+  end
+  typelize speaker: "SpeakerProfile"
 end

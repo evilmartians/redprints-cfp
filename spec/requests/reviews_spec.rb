@@ -50,6 +50,17 @@ describe "/evaluations/:id/reviews" do
         .and change { proposal.score }.by(7)
     end
 
+    context "when evaluation is personal" do
+      before { evaluation.update!(personal: true) }
+
+      it "updates only the review score" do
+        expect { subject }.to change { review.reload.comment }.to("Good vibes")
+          .and change { review.status }.to("submitted")
+          .and change { proposal.reload.reviews_count }.by(0)
+          .and change { proposal.score }.by(0)
+      end
+    end
+
     context "when some scores are missing" do
       before { form_params[:scores].delete("Novelty") }
 

@@ -26,6 +26,9 @@ class Avo::Resources::Evaluation < Avo::BaseResource
 
     field :deadline, as: :date_time
 
+    field :blind, as: :boolean
+    field :personal, as: :boolean
+
     field :reviewers, as: :has_many, attach_scope: -> { query.reviewer }
     field :reviewed_proposals, as: :has_many
     field :reviews, as: :has_many

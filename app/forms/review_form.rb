@@ -37,7 +37,9 @@ class ReviewForm < ApplicationForm
 
   private
 
-  def invalidate_proposal_scores = proposal&.invalidate_scores!
+  def invalidate_proposal_scores
+    proposal&.invalidate_scores! unless evaluation.personal?
+  end
 
   def all_scores_set
     return errors.add(:scores, :blank) if scores.blank?

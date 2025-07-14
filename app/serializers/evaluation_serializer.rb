@@ -1,7 +1,7 @@
 class EvaluationSerializer < ApplicationSerializer
   typelize_from Evaluation
 
-  attributes :id, :name, :tracks, :criteria
+  attributes :id, :name, :tracks, :criteria, :blind, :personal
 
   typelize tracks: "Array<#{Proposal.tracks.values.map { %('#{it}') }.join(" | ")}>"
   typelize criteria: "string[]"
