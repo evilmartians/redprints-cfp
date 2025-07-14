@@ -42,7 +42,7 @@ export default function Index({ reviews, evaluation }: IndexProps) {
           <table className="min-w-full divide-y divide-sky-800">
             <thead>
               <tr>
-                <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider w-2/3">
                   Title
                 </th>
                 <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
@@ -57,7 +57,7 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                   Review Status
                 </th>
                 <th scope="col" className="p-2 sm:px-6 sm:py-3 text-center text-xs font-medium text-cloud-800 uppercase tracking-wider">
-                  
+
                 </th>
               </tr>
             </thead>
@@ -74,8 +74,8 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                     router.get(`/reviews/${review.id}`);
                   }}
                 >
-                  <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium">{review.proposal!.title}</div>
+                  <td className="p-2 sm:px-6 sm:py-4">
+                    <div className="text-sm font-medium break-words">{review.proposal!.title}</div>
                   </td>
                   <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                     <div className="text-sm text-sky-800">{review.proposal!.track}</div>

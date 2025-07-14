@@ -69,7 +69,7 @@ export default function Index({ proposals }: IndexProps) {
                 <table className="min-w-full divide-y divide-sky-800">
                   <thead>
                     <tr>
-                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider w-2/3">
                         Title
                       </th>
                       <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
@@ -90,8 +90,8 @@ export default function Index({ proposals }: IndexProps) {
                         className="hover:bg-sky-50 transition-colors cursor-pointer"
                         onClick={() => router.get(`/proposals/${proposal.id}`)}
                       >
-                        <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium">{proposal.title}</div>
+                        <td className="p-2 sm:px-6 sm:py-4">
+                          <div className="text-sm font-medium break-words">{proposal.title}</div>
                         </td>
                         <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                           <div className="text-sm text-sky-800">{proposal.track}</div>
