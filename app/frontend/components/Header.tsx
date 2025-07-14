@@ -107,15 +107,26 @@ export function Header({ currentUser }: HeaderProps) {
               >
                 Home
               </Link>
-              <Link
-                href="/proposals/new"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                }}
-                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium`}
-              >
-                Submit Proposal
-              </Link>
+              {!cfp_closed &&
+                <Link
+                  href="/proposals/new"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                  }}
+                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium`}
+                >
+                  Submit Proposal
+                </Link>
+              }
+              {currentUser.is_reviewer && (
+                <Link
+                  href="/evaluations"
+                  className="btn btn-ruby py-1 px-2 text-sm"
+                  title="Review"
+                >
+                  Review
+                </Link>
+              )}
               <Link
                 href="/proposals"
                 onClick={() => {
