@@ -13,5 +13,7 @@ test:
   startup_deadline: ~
 
 production: &production
+  <<: *default
   host: "cfp.sfruby.com"
   port: 443
+  
