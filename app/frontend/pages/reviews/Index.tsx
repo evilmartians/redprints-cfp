@@ -3,7 +3,7 @@ import StatusBadge from "../../components/StatusBadge";
 import { usePage, router } from "@inertiajs/react";
 import { Evaluation, Review } from "../../serializers";
 import { formatDeadline } from "../../utils/dateHelpers";
-import { AlertCircleIcon } from 'lucide-react';
+import { AlertCircleIcon, ExternalLinkIcon } from 'lucide-react';
 
 interface IndexProps {
   evaluation: Evaluation
@@ -56,6 +56,9 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                 <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
                   Review Status
                 </th>
+                <th scope="col" className="p-2 sm:px-6 sm:py-3 text-center text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                  
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-sky-800">
@@ -63,7 +66,13 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                 <tr
                   key={review.id}
                   className="hover:bg-sky-50 transition-colors cursor-pointer"
-                  onClick={() => router.get(`/reviews/${review.id}`)}
+                  onClick={(e) => {
+                    // Prevent navigation if clicking on the external link button
+                    if ((e.target as HTMLElement).closest('.external-link-btn')) {
+                      return;
+                    }
+                    router.get(`/reviews/${review.id}`);
+                  }}
                 >
                   <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                     <div className="text-sm font-medium">{review.proposal!.title}</div>
@@ -83,6 +92,15 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                     {review.status === 'submitted' && (
                       <span className={`badge ${scoreClass(review.score!)}`}>Score: {review.score}</span>
                     )}
+                  </td>
+                  <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap text-center">
+                    <button
+                      className="external-link-btn inline-flex items-center justify-center p-2 text-sky-600 hover:text-sky-800 hover:bg-white rounded-md transition-colors cursor-pointer"
+                      onClick={() => window.open(`/reviews/${review.id}`, '_blank')}
+                      title="Open in new tab"
+                    >
+                      <ExternalLinkIcon className="h-4 w-4" />
+                    </button>
                   </td>
                 </tr>
               ))}
