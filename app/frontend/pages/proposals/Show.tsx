@@ -89,36 +89,36 @@ export default function Show({ proposal, speaker }: ShowProps) {
 
         {/* Talk Information */}
         <div className="card border mb-8 animate-slide-up">
-            <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-700">{isStartupDemo ? "Demo Information" : "Talk Information"}</h2>
+            <h2 className="text-xl font-bold mb-6 pb-4 border-b border-secondary-700">{isStartupDemo ? "Demo Information" : "Talk Information"}</h2>
 
           <div className="space-y-6">
             {!isStartupDemo && (
               <div>
-                <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Track</h3>
+                <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">Track</h3>
                 <p className="text-cloud-700">{proposal.track}</p>
               </div>
             )}
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2"> {isStartupDemo ? "How far along are you?" : "Abstract"}</h3>
+              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2"> {isStartupDemo ? "How far along are you?" : "Abstract"}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.abstract}</p>
             </div>
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">{isStartupDemo ? "Demo Details" : "Detailed Description"}</h3>
+              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">{isStartupDemo ? "Demo Details" : "Detailed Description"}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.details}</p>
             </div>
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">{isStartupDemo ? "How does Ruby power your product?" : "Why this talk matters"}</h3>
+              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">{isStartupDemo ? "How does Ruby power your product?" : "Why this talk matters"}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.pitch}</p>
             </div>
           </div>
         </div>
 
         {/* Speaker Information */}
-        <div className="card border border-sky-700 mb-8 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-          <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-700">Speaker Profile</h2>
+        <div className="card border border-secondary-700 mb-8 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+          <h2 className="text-xl font-bold mb-6 pb-4 border-b border-secondary-700">Speaker Profile</h2>
 
           <div className="space-y-6">
             <div className="float-right">
@@ -126,29 +126,29 @@ export default function Show({ proposal, speaker }: ShowProps) {
                 <img
                   src={speaker.photo_url}
                   alt={`${speaker.name}'s profile photo`}
-                  className="w-32 h-32 object-cover rounded-full border-2 border-sky-700 shadow-lg"
+                  className="w-32 h-32 object-cover rounded-full border-2 border-secondary-700 shadow-lg"
                 />
               ) : (
-                <div className="w-32 h-32 rounded-full border-2 border-sky-700 bg-sky-50 flex items-center justify-center shadow-lg">
-                  <UserIcon className="w-16 h-16 text-sky-400" />
+                <div className="w-32 h-32 rounded-full border-2 border-secondary-700 bg-secondary-50 flex items-center justify-center shadow-lg">
+                  <UserIcon className="w-16 h-16 text-secondary-400" />
                 </div>
               )}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Name</h3>
+                <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">Name</h3>
                 <p className="text-cloud-700">{speaker.name}</p>
               </div>
 
               <div>
-                <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Email</h3>
+                <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">Email</h3>
                 <p className="text-cloud-700">{speaker.email}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Company/Organization</h3>
+              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">Company/Organization</h3>
               <p className="text-cloud-700">
                 {speaker.role && (
                   <span>{speaker.role} @ </span>
@@ -158,13 +158,13 @@ export default function Show({ proposal, speaker }: ShowProps) {
             </div>
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Bio</h3>
+              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">Bio</h3>
               <p className="text-cloud-700 whitespace-pre-line">{speaker.bio}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-sm uppercase font-medium border-sky-700 text-sky-800 mb-2">Socials</h3>
+                <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">Socials</h3>
                 <p className="text-cloud-700">{speaker.socials || "—"}</p>
               </div>
             </div>

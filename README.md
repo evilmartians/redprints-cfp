@@ -55,3 +55,27 @@ We use [Lookbook](https://lookbook.build) to work with UI (development, previews
 ## Working with emails
 
 We use [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to delivery and view emails in development. You can access the inbox at [localhost:3000/dev/letters](http://localhost:3000/dev/letters).
+
+## Styling
+
+### CSS
+
+Go to `app/frontend/styles/theme.css` to change the colors and the default font family. For example, SF Ruby CFP app configuration is as follows:
+
+```css
+@theme {
+  --font-display: 'Martian Grotesk', 'sans-serif';
+
+  /* https://oklch.com/#0.65,0.25,25,100 */
+  --clr-primary-chroma: 0.25;
+  --clr-primary-hue: 25;
+
+  /* https://oklch.com/#0.65,0.17,250,100 */
+  --clr-secondary-chroma: 0.17;
+  --clr-secondary-hue: 250;
+}
+```
+
+### Admin
+
+Go to `config/initializers/avo.rb` and update the corresponding configuration. See [Avo docs](https://docs.avohq.io/3.0/branding.html).

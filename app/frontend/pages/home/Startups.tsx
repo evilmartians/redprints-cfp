@@ -13,7 +13,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
 
   return (
     <Layout currentUser={user}>
-      <div className="bg-gradient-to-b from-sky-700 to-sky-900 text-white rounded-xl p-8 mb-12 shadow-medium animate-fade-in">
+      <div className="bg-gradient-to-b from-secondary-700 to-secondary-900 text-white rounded-xl p-8 mb-12 shadow-medium animate-fade-in">
         <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
           Call for Startups
         </h1>
@@ -41,7 +41,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div className="space-y-8 animate-slide-up">
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-sky-800">Proposal Guidelines</h2>
+            <h2 className="text-2xl font-bold mb-4 text-secondary-800">Proposal Guidelines</h2>
             <div className="space-y-6">
               <p>
                 We're looking for innovative Ruby startups to showcase their products in 10-minute demo sessions.
@@ -53,7 +53,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-sky-800">Selection Process</h2>
+            <h2 className="text-2xl font-bold mb-4 text-secondary-800">Selection Process</h2>
             <div className="space-y-4">
               <p>
                 Applications are open until all demo slots are filled.
@@ -70,7 +70,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-sky-800">Speaker Benefits</h2>
+            <h2 className="text-2xl font-bold mb-4 text-secondary-800">Speaker Benefits</h2>
             <div className="space-y-4 text-neutral-700">
               <p>
                 Selected speakers will receive complimentary conference tickets (one per startup).
@@ -80,7 +80,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
         </div>
 
         <div className="lg:pl-8 space-y-8">
-          <div test-id="home-actions" className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+          <div test-id="home-actions" className="card border border-secondary-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
             {!startup_cfp_closed && (
               <h3 className="text-xl font-bold mb-6">Ready to introduce your startup to the Ruby world?</h3>
             )}
@@ -99,7 +99,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
               )}
 
               {user && !startup_cfp_closed && (
-                <Link href={`/proposals/startup`} className="btn btn-sky flex items-center justify-center">
+                <Link href={`/proposals/startup`} className="btn btn-secondary flex items-center justify-center">
                   Submit a Demo Proposal
                 </Link>
               )}
@@ -113,7 +113,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
             </div>
           </div>
 
-          <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+          <div className="card border border-secondary-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
             <h3 className="text-xl font-bold mb-4">Have questions?</h3>
             <p className="text-neutral-600 mb-6">
               If you have any questions about the selection process or need help with your demo proposal,
@@ -121,7 +121,7 @@ export default function Startups({oauth_providers}: StartupsProps) {
             </p>
             <a
               href="mailto:conference@sfruby.com"
-              className="text-sky-800 font-medium hover:text-ruby-800 transition-colors inline-flex items-center"
+              className="text-secondary-800 font-medium hover:text-primary-800 transition-colors inline-flex items-center"
             >
               Contact the CFP team
               <span className="ml-1">→</span>

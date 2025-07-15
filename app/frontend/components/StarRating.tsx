@@ -39,7 +39,7 @@ const StarRating: React.FC<StarRatingProps> = ({ value, name, onChange, label, r
     <div className="space-y-2">
       {label && (
         <label className="label">
-          {label} {required && <span className="text-ruby-600">*</span>}
+          {label} {required && <span className="text-primary-600">*</span>}
         </label>
       )}
       <div

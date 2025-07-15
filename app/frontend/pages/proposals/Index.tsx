@@ -46,7 +46,7 @@ export default function Index({ proposals }: IndexProps) {
           </div>
 
           {proposals.length === 0 ? (
-            <div className="card border border-sky-700 text-center py-16 animate-slide-up">
+            <div className="card border border-secondary-700 text-center py-16 animate-slide-up">
               <h3 className="text-xl font-medium text-cloud-800 mb-4">You haven't submitted any proposals yet</h3>
               {!cfp_closed && (
                 <>
@@ -55,7 +55,7 @@ export default function Index({ proposals }: IndexProps) {
                   </p>
                   <Link
                     href={`/proposals/new`}
-                    className="btn btn-ruby inline-flex items-center"
+                    className="btn btn-primary inline-flex items-center"
                   >
                     <PlusIcon className="h-5 w-5 mr-2" />
                     Submit Your First Proposal
@@ -64,9 +64,9 @@ export default function Index({ proposals }: IndexProps) {
               )}
             </div>
           ) : (
-            <div className="card border border-sky-800 overflow-hidden animate-slide-up">
+            <div className="card border border-secondary-800 overflow-hidden animate-slide-up">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-sky-800">
+                <table className="min-w-full divide-y divide-secondary-800">
                   <thead>
                     <tr>
                       <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider w-2/3">
@@ -83,18 +83,18 @@ export default function Index({ proposals }: IndexProps) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-sky-800">
+                  <tbody className="bg-white divide-y divide-secondary-800">
                     {proposals.map((proposal) => (
                       <tr
                         key={proposal.id}
-                        className="hover:bg-sky-50 transition-colors cursor-pointer"
+                        className="hover:bg-secondary-50 transition-colors cursor-pointer"
                         onClick={() => router.get(`/proposals/${proposal.id}`)}
                       >
                         <td className="p-2 sm:px-6 sm:py-4">
                           <div className="text-sm font-medium break-words">{proposal.title}</div>
                         </td>
                         <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                          <div className="text-sm text-sky-800">{proposal.track}</div>
+                          <div className="text-sm text-secondary-800">{proposal.track}</div>
                         </td>
                         <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
                           <div className="text-sm">{formatDate(proposal.submitted_at)}</div>

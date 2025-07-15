@@ -93,8 +93,8 @@ export default function Form({ proposal, speaker }: FormProps) {
           </div>
 
           <form onSubmit={submit} className="space-y-8">
-            <div className="card border border-sky-800 animate-slide-up">
-              <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-800">{isStartupDemo ? "Demo Information" : "Talk Information"}</h2>
+            <div className="card border border-secondary-800 animate-slide-up">
+              <h2 className="text-xl font-bold mb-6 pb-4 border-b border-secondary-800">{isStartupDemo ? "Demo Information" : "Talk Information"}</h2>
 
               <div className="space-y-6">
                 <div>
@@ -202,8 +202,8 @@ export default function Form({ proposal, speaker }: FormProps) {
             </div>
 
             {/* Profile Section */}
-            <div className="card border border-sky-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              <h2 className="text-xl font-bold mb-6 pb-4 border-b border-sky-800">Speaker Profile</h2>
+            <div className="card border border-secondary-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+              <h2 className="text-xl font-bold mb-6 pb-4 border-b border-secondary-800">Speaker Profile</h2>
               <p className="text-amber-600 mb-4 flex items-center">
                 <AlertCircle className="h-4 w-4 mr-2 hidden sm:inline" />
                 Note: Your speaker profile information will be updated for all your proposals.
@@ -370,7 +370,7 @@ export default function Form({ proposal, speaker }: FormProps) {
               <button
                 type="submit"
                 onClick={() => setSubmitting(true)}
-                className="btn btn-ruby flex items-center justify-center cursor-pointer"
+                className="btn btn-primary flex items-center justify-center cursor-pointer"
               >
                 <SendIcon className="h-5 w-5 mr-2" />
                 Submit Proposal
