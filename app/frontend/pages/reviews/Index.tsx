@@ -36,7 +36,7 @@ export default function Index({ reviews, evaluation }: IndexProps) {
     if (reviews.length === 0) return null;
 
     return <div className="not-first:mt-8" test-id={test_id}>
-        <h2 className="text-xl font-bold mb-4">{title}</h2>
+      <h2 className="text-xl font-bold mb-4">{title} ({reviews.length})</h2>
         <div className="card border border-secondary-800 overflow-hidden animate-slide-up">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-secondary-800">
