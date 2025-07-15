@@ -7,11 +7,12 @@ class Avo::Resources::Review < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :status, as: :select, enum: ::Review.statuses
+    field :status, as: :select, enum: ::Review.statuses, sortable: true
     field :scores, as: :key_value
+    field :score, sortable: true
     field :comment, as: :textarea
-    field :user, as: :belongs_to
-    field :proposal, as: :belongs_to
+    field :user, as: :belongs_to, sortable: -> { query.joins(:user).order(users: {name: direction}) }
+    field :proposal, as: :belongs_to, sortable: -> { query.joins(:proposal).order(proposals: {title: direction}) }
     field :evaluation, as: :belongs_to
   end
 end
