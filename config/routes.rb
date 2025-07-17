@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :evaluations, only: [:index] do
     resources :reviews, only: [:index, :show, :update], shallow: true
+    resources :results, only: [:index], module: :evaluations
   end
 
   get "/startups" => "home#startups", :as => :startups

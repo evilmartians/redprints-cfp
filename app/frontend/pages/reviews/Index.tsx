@@ -1,9 +1,10 @@
 import Layout from "../../components/Layout";
 import StatusBadge from "../../components/StatusBadge";
-import { usePage, router } from "@inertiajs/react";
+import { usePage, router, Link } from "@inertiajs/react";
 import { Evaluation, Review } from "../../serializers";
 import { formatDeadline } from "../../utils/dateHelpers";
 import { AlertCircleIcon, ExternalLinkIcon } from 'lucide-react';
+import ReviewScores from "../../components/ReviewScores";
 
 interface IndexProps {
   evaluation: Evaluation
@@ -90,7 +91,10 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                       <StatusBadge status={review.status} />
                     )}
                     {review.status === 'submitted' && (
-                      <span className={`badge ${scoreClass(review.score!)}`}>Score: {review.score}</span>
+                      <div className="flex flex-col space-y-2 items-center">
+                        <span className={`badge ${scoreClass(review.score!)}`}>Score: {review.score}</span>
+                        <ReviewScores scores={review.scores} />
+                      </div>
                     )}
                   </td>
                   <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap text-center">
@@ -141,6 +145,9 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                 <p className={`mt-2 text-sm font-medium ${formatDeadline(evaluation.deadline).className}`}>
                   Deadline: {formatDeadline(evaluation.deadline).text}
                 </p>
+              )}
+              {!evaluation.submissions_allowed && (
+                <Link href={`/evaluations/${evaluation.id}/results`} className="btn btn-outline mt-2">Results</Link>
               )}
             </div>
           </div>
