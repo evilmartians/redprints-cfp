@@ -15,7 +15,12 @@ module Evaluations
     private
 
     def set_evaluation
-      @evaluation = current_user.evaluations.find(params[:evaluation_id])
+      @evaluation =
+        if current_user.admin?
+          Evaluation.find(params[:evaluation_id])
+        else
+          current_user.evaluations.find(params[:evaluation_id])
+        end
     end
   end
 end
