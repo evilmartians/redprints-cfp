@@ -1,8 +1,8 @@
 import Layout from "../../components/Layout";
-import { useState } from 'react';
-import { usePage } from "@inertiajs/react";
+import { useState, FormEvent } from 'react';
+import { usePage, useForm } from "@inertiajs/react";
 import { Evaluation, Review, EvaluationsProposal } from "../../serializers";
-import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react';
+import { CheckIcon, ChevronDownIcon, ChevronRightIcon, CrosshairIcon, CrossIcon, TimerIcon, XIcon } from 'lucide-react';
 import ReviewScores from "../../components/ReviewScores";
 
 interface IndexProps {
@@ -11,21 +11,36 @@ interface IndexProps {
   proposals: EvaluationsProposal[]
 }
 
-const restoreSelectedProposals = (evaluation: Evaluation): number[] => {
-  const data = localStorage.getItem(`evaluations/${evaluation.id}/proposals/picked`);
-  if (!data) return [];
+type proposalStatus = "accepted" | "waitlisted" | "rejected";
+
+const restoreSelectedProposals = (evaluation: Evaluation): Record<number, proposalStatus> => {
+  const data = localStorage.getItem(`evaluations/${evaluation.id}/results`);
+  if (!data) return {};
 
   return JSON.parse(data);
 }
 
-const storeSelectedProposals = (evaluation: Evaluation, ids: number[]) => {
-  localStorage.setItem(`evaluations/${evaluation.id}/proposals/picked`, JSON.stringify(ids));
+const storeSelectedProposals = (evaluation: Evaluation, statuses: Record<number, proposalStatus>) => {
+  localStorage.setItem(`evaluations/${evaluation.id}/results`, JSON.stringify(statuses));
 }
 
 export default function Index({ reviews, evaluation, proposals }: IndexProps) {
   const { user } = usePage().props;
+
   const [selectedProposals, setSelectedProposals] = useState(restoreSelectedProposals(evaluation));
   const [expandedComments, setExpandedComments] = useState<{[key: string]: boolean}>({});
+
+  const { data, setData, post, processing, errors } = useForm({
+    proposals: Object.entries(selectedProposals).map(([id, status]) => ({ id, status })),
+  });
+
+  function submitReview(e: FormEvent) {
+    e.preventDefault();
+
+    if (confirm('Are you sure you want to submit the selected results? This will cause notifications sent to the speakers')) {
+      post(`/evaluations/${evaluation.id}/results`, {preserveScroll: true})
+    }
+  }
 
   const progress = reviews.filter(review => review.status === 'submitted').length / reviews.length;
 
@@ -45,15 +60,24 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
     return 'badge-draft';
   }
 
-  const toggleProposalSelection = (proposalId: number) => {
-    setSelectedProposals((prev) => {
-      const newVal = prev.includes(proposalId)
-        ? prev.filter(id => id !== proposalId)
-        : [...prev, proposalId];
+  const toggleProposalSelection = (proposalId: number, status: proposalStatus) => {
+    const wasSelected = selectedProposals[proposalId] === status;
 
-      storeSelectedProposals(evaluation, newVal);
-      return newVal;
+    setSelectedProposals((prev) => {
+      if (status !== prev[proposalId]) {
+        prev[proposalId] = status
+      } else {
+        delete prev[proposalId]
+      }
+      storeSelectedProposals(evaluation, prev);
+      return { ...prev };
     });
+
+    if (wasSelected) {
+      setData(`proposals`, [...data.proposals.filter(v => v.id != proposalId)])
+    } else {
+      setData(`proposals`, [...data.proposals.filter(v => v.id != proposalId), { id: proposalId, status }])
+    }
   };
 
   const toggleCommentExpansion = (key: string) => {
@@ -71,8 +95,13 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
 
     return 0;
   });
-  const pendingProposals = sortedProposals.filter(proposal => !selectedProposals.includes(proposal.id));
-  const pickedProposals = sortedProposals.filter(proposal => selectedProposals.includes(proposal.id));
+
+  const canSubmit = evaluation.can_submit;
+
+  const pendingProposals = sortedProposals.filter(proposal => !selectedProposals[proposal.id]);
+  const acceptedProposals = sortedProposals.filter(proposal => selectedProposals[proposal.id] === 'accepted');
+  const waitlistedProposals = sortedProposals.filter(proposal => selectedProposals[proposal.id] === 'waitlisted');
+  const rejectedProposals = sortedProposals.filter(proposal => selectedProposals[proposal.id] === 'rejected');
 
   const renderProposals = (title: string, proposals: EvaluationsProposal[], test_id: string) => {
     if (proposals.length === 0) return null;
@@ -174,19 +203,27 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                       </div>
                     </td>
                     <td className="p-2 sm:px-6 sm:py-4 text-right">
-                      {!selectedProposals.includes(proposal.id) && (
-                        <button
-                          className="btn btn-secondary px-2 py-1 text-sm cursor-pointer"
-                          onClick={() => toggleProposalSelection(proposal.id)}
-                        >Pick
-                        </button>
-                      )}
-                      {selectedProposals.includes(proposal.id) && (
-                        <button
-                          className="btn btn-outline px-2 py-1 text-sm cursor-pointer"
-                          onClick={() => toggleProposalSelection(proposal.id)}
-                        >Unpick
-                        </button>
+                      {canSubmit && (
+                        <div className="flex space-x-0.5 justify-end">
+                          <i
+                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'accepted' ? 'bg-green-800 text-white hover:bg-green-700 focus:ring-green-600' : 'text-green-800 hover:bg-green-100 border-green-800 border'}`}
+                            onClick={() => toggleProposalSelection(proposal.id, 'accepted')}
+                          >
+                            <CheckIcon />
+                          </i>
+                          <i
+                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'waitlisted' ? 'bg-cloud-600 text-white hover:bg-cloud-500 focus:ring-cloud-500' : 'text-cloud-600 hover:bg-cloud-100 border-cloud-600 border'}`}
+                            onClick={() => toggleProposalSelection(proposal.id, 'waitlisted')}
+                          >
+                            <TimerIcon />
+                          </i>
+                          <i
+                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'rejected' ? 'bg-red-800 text-white hover:bg-red-700 focus:ring-red-600' : 'text-red-800 hover:bg-red-100 border-red-800 border'}`}
+                            onClick={() => toggleProposalSelection(proposal.id, 'rejected')}
+                          >
+                            <XIcon />
+                          </i>
+                        </div>
                       )}
                     </td>
                   </tr>
@@ -203,39 +240,47 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
     <Layout currentUser={user}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 animate-fade-in">
-            <div>
-              <h1 className="text-3xl font-bold mb-2">Evaluation Results</h1>
+          <form onSubmit={submitReview}>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 animate-fade-in">
+              <div>
+                <h1 className="text-3xl font-bold mb-2">Evaluation Results</h1>
 
-              <div className="space-y-2">
-                <div className="flex items-center space-x-4">
-                  <span className="text-sm font-medium text-cloud-700">Progress:</span>
-                  <div className="flex-1 bg-secondary-200 rounded-full h-2 max-w-xs">
-                    <div
-                      className="bg-secondary-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${Math.round(progress * 100)}%` }}
-                    ></div>
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-4">
+                    <span className="text-sm font-medium text-cloud-700">Progress:</span>
+                    <div className="flex-1 bg-secondary-200 rounded-full h-2 max-w-xs">
+                      <div
+                        className="bg-secondary-600 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${Math.round(progress * 100)}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm text-cloud-600">{Math.round(progress * 100)}%</span>
                   </div>
-                  <span className="text-sm text-cloud-600">{Math.round(progress * 100)}%</span>
+                  {canSubmit && (
+                    <button
+                      type="submit"
+                      className="btn btn-primary flex items-center justify-center cursor-pointer"
+                    >
+                      Submit Review Results
+                    </button>
+                  )}
                 </div>
-
-                <p className="text-red-800 font-medium">
-                  Picked proposals are only stored in the current browser.
-                </p>
               </div>
             </div>
-          </div>
 
-          {reviews.length === 0 ? (
-            <div className="card border border-secondary-700 text-center py-16 animate-slide-up">
-              <h3 className="text-xl font-medium text-cloud-800 mb-4">This evaluation has no reviews yet</h3>
-            </div>
-          ) : (
-            <>
-              {renderProposals("Picked Proposals", pickedProposals, "selected-proposals")}
-              {renderProposals("Unpicked Proposals", pendingProposals, "proposals")}
-            </>
-          )}
+            {reviews.length === 0 ? (
+              <div className="card border border-secondary-700 text-center py-16 animate-slide-up">
+                <h3 className="text-xl font-medium text-cloud-800 mb-4">This evaluation has no proposals for review</h3>
+              </div>
+            ) : (
+              <>
+                {renderProposals("Accepted", acceptedProposals, "accepted-proposals")}
+                {renderProposals("Waitlisted", waitlistedProposals, "waitlisted-proposals")}
+                {renderProposals("Under Review", pendingProposals, "pending-proposals")}
+                {renderProposals("Rejected", rejectedProposals, "rejected-proposals")}
+              </>
+            )}
+          </form>
         </div>
       </div>
     </Layout>

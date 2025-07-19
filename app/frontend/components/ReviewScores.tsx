@@ -25,7 +25,7 @@ const ReviewScores: React.FC<ReviewScoresProps> = ({ scores }) => {
   }
 
   return <div className="text-xs text-cloud-600 font-mono">
-    {Object.values(scores).map((score) => <span className={`${scoreClass(score)} border rounded-sm mx-1 px-1 py-0.5`}>{score}</span>)}
+    {Object.values(scores).map((score, index) => <span key={index} className={`${scoreClass(score)} border rounded-sm mx-1 px-1 py-0.5`}>{score}</span>)}
   </div>
 }
 

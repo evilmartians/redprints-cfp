@@ -14,4 +14,9 @@ class EvaluationSerializer < ApplicationSerializer
   end
 
   typelize submissions_allowed: "boolean"
+
+  attribute :can_submit do
+    !!params[:current_user]&.admin?
+  end
+  typelize can_submit: "boolean"
 end
