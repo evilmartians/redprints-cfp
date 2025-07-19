@@ -146,7 +146,7 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                   Deadline: {formatDeadline(evaluation.deadline).text}
                 </p>
               )}
-              {!evaluation.submissions_allowed && (
+              {evaluation.can_see_results && (
                 <Link href={`/evaluations/${evaluation.id}/results`} className="btn btn-outline mt-2">Results</Link>
               )}
             </div>

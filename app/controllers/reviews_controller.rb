@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
     evaluation = current_user.evaluations.find(params[:evaluation_id])
     reviews = evaluation.reviews.where(user: current_user).joins(:proposal).order(score: :desc).order(proposals: {created_at: :desc})
 
-    render inertia: "reviews/Index", props: {reviews: serialize(reviews), evaluation: serialize(evaluation)}
+    render inertia: "reviews/Index", props: {reviews: serialize(reviews), evaluation: serialize(evaluation, current_user:)}
   end
 
   def show

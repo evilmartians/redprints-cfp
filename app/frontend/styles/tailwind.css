@@ -83,19 +83,19 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:!cursor-not-allowed;
   }
 
   .btn-primary {
-    @apply bg-primary-500 text-white hover:bg-primary-700 focus:ring-primary-600;
+    @apply bg-primary-500 text-white hover:bg-primary-700 focus:ring-primary-600 disabled:bg-primary-500;
   }
 
   .btn-secondary {
-    @apply bg-secondary-500 text-white hover:bg-secondary-700 focus:ring-secondary-600;
+    @apply bg-secondary-500 text-white hover:bg-secondary-700 focus:ring-secondary-600 disabled:bg-secondary-500;
   }
 
   .btn-outline {
-    @apply border border-cloud-700 bg-white text-cloud-700 hover:bg-cloud-200 focus:ring-cloud-700;
+    @apply border border-cloud-700 bg-white text-cloud-700 hover:bg-cloud-200 focus:ring-cloud-700 disabled:bg-white;
   }
 
   .input-field {

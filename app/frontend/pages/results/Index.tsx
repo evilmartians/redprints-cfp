@@ -1,8 +1,8 @@
 import Layout from "../../components/Layout";
 import { useState, FormEvent } from 'react';
-import { usePage, useForm } from "@inertiajs/react";
+import { usePage, useForm, Link } from "@inertiajs/react";
 import { Evaluation, Review, EvaluationsProposal } from "../../serializers";
-import { CheckIcon, ChevronDownIcon, ChevronRightIcon, CrosshairIcon, CrossIcon, TimerIcon, XIcon } from 'lucide-react';
+import { ArrowLeftIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, CrosshairIcon, CrossIcon, TimerIcon, XIcon } from 'lucide-react';
 import ReviewScores from "../../components/ReviewScores";
 
 interface IndexProps {
@@ -203,28 +203,26 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                       </div>
                     </td>
                     <td className="p-2 sm:px-6 sm:py-4 text-right">
-                      {canSubmit && (
-                        <div className="flex space-x-0.5 justify-end">
-                          <i
-                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'accepted' ? 'bg-green-800 text-white hover:bg-green-700 focus:ring-green-600' : 'text-green-800 hover:bg-green-100 border-green-800 border'}`}
-                            onClick={() => toggleProposalSelection(proposal.id, 'accepted')}
-                          >
-                            <CheckIcon />
-                          </i>
-                          <i
-                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'waitlisted' ? 'bg-cloud-600 text-white hover:bg-cloud-500 focus:ring-cloud-500' : 'text-cloud-600 hover:bg-cloud-100 border-cloud-600 border'}`}
-                            onClick={() => toggleProposalSelection(proposal.id, 'waitlisted')}
-                          >
-                            <TimerIcon />
-                          </i>
-                          <i
-                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'rejected' ? 'bg-red-800 text-white hover:bg-red-700 focus:ring-red-600' : 'text-red-800 hover:bg-red-100 border-red-800 border'}`}
-                            onClick={() => toggleProposalSelection(proposal.id, 'rejected')}
-                          >
-                            <XIcon />
-                          </i>
-                        </div>
-                      )}
+                      <div className="flex space-x-0.5 justify-end">
+                        <i
+                          className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'accepted' ? 'bg-green-800 text-white hover:bg-green-700 focus:ring-green-600' : 'text-green-800 hover:bg-green-100 border-green-800 border'}`}
+                          onClick={() => toggleProposalSelection(proposal.id, 'accepted')}
+                        >
+                          <CheckIcon />
+                        </i>
+                        <i
+                          className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'waitlisted' ? 'bg-cloud-600 text-white hover:bg-cloud-500 focus:ring-cloud-500' : 'text-cloud-600 hover:bg-cloud-100 border-cloud-600 border'}`}
+                          onClick={() => toggleProposalSelection(proposal.id, 'waitlisted')}
+                        >
+                          <TimerIcon />
+                        </i>
+                        <i
+                          className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'rejected' ? 'bg-red-800 text-white hover:bg-red-700 focus:ring-red-600' : 'text-red-800 hover:bg-red-100 border-red-800 border'}`}
+                          onClick={() => toggleProposalSelection(proposal.id, 'rejected')}
+                        >
+                          <XIcon />
+                        </i>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -239,6 +237,13 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
   return (
     <Layout currentUser={user}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Link
+            href={`/evaluations/${evaluation!.id}/reviews`}
+          className="flex items-center text-cloud-600 hover:text-cloud-700 transition-colors mb-6"
+        >
+          <ArrowLeftIcon className="h-4 w-4 mr-1" />
+          Back to evaluation
+        </Link>
         <div className="max-w-4xl mx-auto">
           <form onSubmit={submitReview}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 animate-fade-in">
@@ -256,14 +261,14 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                     </div>
                     <span className="text-sm text-cloud-600">{Math.round(progress * 100)}%</span>
                   </div>
-                  {canSubmit && (
-                    <button
-                      type="submit"
-                      className="btn btn-primary flex items-center justify-center cursor-pointer"
-                    >
-                      Submit Review Results
-                    </button>
-                  )}
+                  <button
+                    type="submit"
+                    className="btn btn-primary flex items-center justify-center cursor-pointer"
+                    disabled={!canSubmit}
+                    title={canSubmit ? 'Submit review results' : 'Only admins can submit review results'}
+                  >
+                    Submit Review Results
+                  </button>
                 </div>
               </div>
             </div>
