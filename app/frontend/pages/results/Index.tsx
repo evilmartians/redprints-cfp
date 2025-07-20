@@ -181,6 +181,7 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                               </div>
                               {isLong && (
                                 <button
+                                  type="button"
                                   onClick={() => toggleCommentExpansion(commentKey)}
                                   className="mt-1 text-primary-600 hover:text-primary-800 flex items-center text-xs font-medium"
                                 >
