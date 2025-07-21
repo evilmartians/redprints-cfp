@@ -37,7 +37,7 @@ export function Header({ currentUser }: HeaderProps) {
           </div>
 
           {currentUser && (
-            <div className="sm:hidden">
+            <div className="sm:hidden print:hidden">
               <button
                 onClick={toggleMenu}
                 className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
@@ -53,7 +53,7 @@ export function Header({ currentUser }: HeaderProps) {
           )}
 
           {currentUser && (
-            <nav className="hidden sm:flex items-center space-x-4 justify-end">
+            <nav className="hidden sm:flex items-center space-x-4 justify-end print:hidden">
               {!cfp_closed &&
                 <Link
                   href="/proposals/new"

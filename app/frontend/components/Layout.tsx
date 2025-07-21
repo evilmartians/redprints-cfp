@@ -16,7 +16,7 @@ export default function Layout({ currentUser, children }: LayoutProps) {
       <Header currentUser={currentUser} />
 
       <main className="flex-grow">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 print:!px-2 print:w-full">
           {flash.alert && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
               <span className="block sm:inline">{flash.alert}</span>

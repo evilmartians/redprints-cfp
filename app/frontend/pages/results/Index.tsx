@@ -123,7 +123,7 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                 <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
                   Comments
                 </th>
-                <th scope="col" className="px-2 py-4"></th>
+                <th scope="col" className="px-2 py-4 print:hidden"></th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-secondary-800">
@@ -176,15 +176,15 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                           const isLong = review.comment.length > 60;
 
                           return (
-                            <div key={index} className="text-xs text-cloud-600 bg-neutral-50 rounded p-2">
-                              <div className={isExpanded ? '' : 'line-clamp-2'}>
+                            <div key={index} className="text-xs text-cloud-600 bg-neutral-50 rounded p-2 print:p-0.5">
+                              <div className={isExpanded ? '' : 'line-clamp-2 print:line-clamp-none'}>
                                 {review.comment}
                               </div>
                               {isLong && (
                                 <button
                                   type="button"
                                   onClick={() => toggleCommentExpansion(commentKey)}
-                                  className="mt-1 text-primary-600 hover:text-primary-800 flex items-center text-xs font-medium"
+                                  className="print:hidden mt-1 text-primary-600 hover:text-primary-800 flex items-center text-xs font-medium"
                                 >
                                   {isExpanded ? (
                                     <>
@@ -206,38 +206,46 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                     </td>
                     <td className="p-2 sm:px-6 sm:py-4 text-right">
                       {proposal.status === 'submitted' && (
-                        <div className="flex space-x-0.5 justify-end">
-                          <button
-                            type="button"
-                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'accepted' ? 'bg-green-800 text-white hover:bg-green-700 focus:ring-green-600' : 'text-green-800 hover:bg-green-100 border-green-800 border'}`}
-                            onClick={() => toggleProposalSelection(proposal.id, 'accepted')}
-                            aria-label={`Mark proposal "${proposal.title}" as accepted`}
-                            aria-pressed={selectedProposals[proposal.id] === 'accepted'}
-                          >
-                            <span className="sr-only">Accept</span>
-                            <CheckIcon />
-                          </button>
-                          <button
-                            type="button"
-                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'waitlisted' ? 'bg-cloud-600 text-white hover:bg-cloud-500 focus:ring-cloud-500' : 'text-cloud-600 hover:bg-cloud-100 border-cloud-600 border'}`}
-                            onClick={() => toggleProposalSelection(proposal.id, 'waitlisted')}
-                            aria-label={`Mark proposal "${proposal.title}" as waitlisted`}
-                            aria-pressed={selectedProposals[proposal.id] === 'waitlisted'}
-                          >
-                            <span className="sr-only">Waitlist</span>
-                            <TimerIcon />
-                          </button>
-                          <button
-                            type="button"
-                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'rejected' ? 'bg-red-800 text-white hover:bg-red-700 focus:ring-red-600' : 'text-red-800 hover:bg-red-100 border-red-800 border'}`}
-                            onClick={() => toggleProposalSelection(proposal.id, 'rejected')}
-                            aria-label={`Mark proposal "${proposal.title}" as rejected`}
-                            aria-pressed={selectedProposals[proposal.id] === 'rejected'}
-                          >
-                            <span className="sr-only">Reject</span>
-                            <XIcon />
-                          </button>
-                        </div>
+                        <>
+                          <div className="print:hidden flex space-x-0.5 justify-end">
+                            <button
+                              type="button"
+                              className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'accepted' ? 'bg-green-800 text-white hover:bg-green-700 focus:ring-green-600' : 'text-green-800 hover:bg-green-100 border-green-800 border'}`}
+                              onClick={() => toggleProposalSelection(proposal.id, 'accepted')}
+                              aria-label={`Mark proposal "${proposal.title}" as accepted`}
+                              aria-pressed={selectedProposals[proposal.id] === 'accepted'}
+                            >
+                              <span className="sr-only">Accept</span>
+                              <CheckIcon />
+                            </button>
+                            <button
+                              type="button"
+                              className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'waitlisted' ? 'bg-cloud-600 text-white hover:bg-cloud-500 focus:ring-cloud-500' : 'text-cloud-600 hover:bg-cloud-100 border-cloud-600 border'}`}
+                              onClick={() => toggleProposalSelection(proposal.id, 'waitlisted')}
+                              aria-label={`Mark proposal "${proposal.title}" as waitlisted`}
+                              aria-pressed={selectedProposals[proposal.id] === 'waitlisted'}
+                            >
+                              <span className="sr-only">Waitlist</span>
+                              <TimerIcon />
+                            </button>
+                            <button
+                              type="button"
+                              className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'rejected' ? 'bg-red-800 text-white hover:bg-red-700 focus:ring-red-600' : 'text-red-800 hover:bg-red-100 border-red-800 border'}`}
+                              onClick={() => toggleProposalSelection(proposal.id, 'rejected')}
+                              aria-label={`Mark proposal "${proposal.title}" as rejected`}
+                              aria-pressed={selectedProposals[proposal.id] === 'rejected'}
+                            >
+                              <span className="sr-only">Reject</span>
+                              <XIcon />
+                            </button>
+                          </div>
+                          <div className="hidden print:block text-sm font-medium">
+                            {selectedProposals[proposal.id] ?
+                              <span className="badge badge-draft">pending: {selectedProposals[proposal.id]}</span> :
+                              'Under Review'
+                            }
+                          </div>
+                        </>
                       )}
                       {proposal.status !== 'submitted' && (
                         <StatusBadge status={proposal.status} />
@@ -255,22 +263,22 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
 
   return (
     <Layout currentUser={user}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 print:px-0 print:w-full">
         <Link
             href={`/evaluations/${evaluation!.id}/reviews`}
-          className="flex items-center text-cloud-600 hover:text-cloud-700 transition-colors mb-6"
+          className="print:hidden flex items-center text-cloud-600 hover:text-cloud-700 transition-colors mb-6"
         >
           <ArrowLeftIcon className="h-4 w-4 mr-1" />
           Back to evaluation
         </Link>
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto print:w-full">
           <form onSubmit={submitReview}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 animate-fade-in">
               <div>
                 <h1 className="text-3xl font-bold mb-2">Evaluation Results</h1>
 
                 <div className="space-y-2">
-                  <div className="flex items-center space-x-4">
+                  <div className="print:hidden flex items-center space-x-4">
                     <span className="text-sm font-medium text-cloud-700">Progress:</span>
                     <div className="flex-1 bg-secondary-200 rounded-full h-2 max-w-xs">
                       <div
@@ -282,7 +290,7 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                   </div>
                   <button
                     type="submit"
-                    className="btn btn-primary flex items-center justify-center cursor-pointer"
+                    className="print:hidden btn btn-primary flex items-center justify-center cursor-pointer"
                     disabled={!canSubmit}
                     title={canSubmit ? 'Submit review results' : 'Only admins can submit review results'}
                   >
