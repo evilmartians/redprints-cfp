@@ -1,0 +1,17 @@
+<% content_for :title do %>
+  Congratulations! You're in!
+<% end %>
+
+<% content_for :body do %>
+  <p>
+    Your submission, <strong><%= @proposal.title %></strong>, has been accepted to the SF Ruby program.
+    See you in San Francisco this November!
+  </p>
+
+  <p>
+    Please, confirm your participation using the link below. You can also update the proposal details there.
+  </p>
+<% end %>
+
+<% content_for(:link) { proposal_url(@proposal) } %>
+<% content_for(:link_label) { "Confirm Participation" } %>
