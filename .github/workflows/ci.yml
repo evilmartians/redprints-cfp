@@ -25,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
+      # Increase Ferrum timeout to avoid occasional Ferrum::ProcessTimeoutError Browser did not produce websocket url within 10 second
+      FERRUM_PROCESS_TIMEOUT: 25
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
