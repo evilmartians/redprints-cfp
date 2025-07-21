@@ -12,7 +12,7 @@ class ProposalMailer < ApplicationMailer
     @speaker = params.fetch(:speaker)
     return unless @speaker
 
-    mail(to: @speaker.email, subject: "Your proposal has been accepted")
+    mail(to: @speaker.email, subject: "You’re In! Please Confirm Your SF Ruby Conference Talk")
   end
 
   def proposal_rejected
@@ -20,7 +20,7 @@ class ProposalMailer < ApplicationMailer
     @speaker = params.fetch(:speaker)
     return unless @speaker
 
-    mail(to: @speaker.email, subject: "Your proposal has NOT been accepted")
+    mail(to: @speaker.email, subject: "Thanks for Submitting to SF Ruby Conference")
   end
 
   def proposal_waitlisted
@@ -28,6 +28,6 @@ class ProposalMailer < ApplicationMailer
     @speaker = params.fetch(:speaker)
     return unless @speaker
 
-    mail(to: @speaker.email, subject: "Your proposal has been waitlisted")
+    mail(to: @speaker.email, subject: "Your SF Ruby Conference Proposal—Waitlisted")
   end
 end

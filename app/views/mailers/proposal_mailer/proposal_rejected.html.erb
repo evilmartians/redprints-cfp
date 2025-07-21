@@ -1,16 +1,25 @@
 <% content_for :title do %>
-  We're sorry, but your proposal was not accepted this time
+  Hi <%= @speaker.name %>,
 <% end %>
 
 <% content_for :body do %>
   <p>
-    Your submission, <strong><%= @proposal.title %></strong>, has not been accepted to the SF Ruby program.
-    We appreciate your interest and encourage you to apply again in the future.
+    We really appreciate your talk proposal, <strong><%= @proposal.title %></strong>. Right now, you’re on our waitlist—spots are tight, and your talk’s still in the running.
   </p>
 
+  <br/>
+
   <p>
-    You can view your proposal details using the link below.
+    We’ll be in touch if a slot opens up soon.
   </p>
+
+  <br/>
+
+  <p>
+    Hope to see you at the conference one way or another!
+  </p>
+
+  <br/>
 <% end %>
 
 <% content_for(:link) { proposal_url(@proposal) } %>

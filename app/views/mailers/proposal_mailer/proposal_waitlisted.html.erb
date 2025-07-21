@@ -1,16 +1,20 @@
 <% content_for :title do %>
-  You're on the waitlist!
+  Hi <%= @speaker.name %>,
 <% end %>
 
 <% content_for :body do %>
   <p>
-    Your submission, <strong><%= @proposal.title %></strong>, has been added to the waitlist for the SF Ruby program.
-    We'll notify you if a spot becomes available!
+    Thanks so much for your proposal, <strong><%= @proposal.title %></strong>.
+    We couldn’t fit it into this year’s schedule, but we’re grateful you took the time to share your perspective with us.
   </p>
 
+  <br/>
+
   <p>
-    Please, let us know if you're not interesting in being on the waitlist by replying to this email.
+    Thanks for being part of the community—and we hope you’ll join us at the event, in any way you can.
   </p>
+
+  <br/>
 <% end %>
 
 <% content_for(:link) { proposal_url(@proposal) } %>

@@ -1,16 +1,25 @@
 <% content_for :title do %>
-  Congratulations! You're in!
+  Hi <%= @speaker.name %>,
 <% end %>
 
 <% content_for :body do %>
   <p>
-    Your submission, <strong><%= @proposal.title %></strong>, has been accepted to the SF Ruby program.
-    See you in San Francisco this November!
+    We’re excited to let you know your talk, <strong><%= @proposal.title %></strong>, has been accepted for the San Francisco Ruby Conference on November 19-20!
   </p>
 
+  <br/>
+
   <p>
-    Please, confirm your participation using the link below. You can also update the proposal details there.
+    Please confirm your participation on <%= link_to "CFP website", root_url %> as soon as possible.
   </p>
+
+  <br/>
+
+  <p>
+    Thank you for sharing your ideas with us—we can’t wait to see you in San Francisco!
+  </p>
+
+  <br/>
 <% end %>
 
 <% content_for(:link) { proposal_url(@proposal) } %>
