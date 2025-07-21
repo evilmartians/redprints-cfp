@@ -30,6 +30,8 @@ class ApplicationPrism
 
   def review = ReviewPage.new
 
+  def results = ResultsPage.new
+
   private
 
   attr_reader :root_namespace

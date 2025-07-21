@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :proposal do
-    user
+    association :user, factory: :speaker
 
     title { Faker::Lorem.sentence }
     abstract { Faker::Lorem.paragraph }

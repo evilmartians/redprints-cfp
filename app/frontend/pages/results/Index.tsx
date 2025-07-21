@@ -4,6 +4,7 @@ import { usePage, useForm, Link } from "@inertiajs/react";
 import { Evaluation, Review, EvaluationsProposal } from "../../serializers";
 import { ArrowLeftIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, CrosshairIcon, CrossIcon, TimerIcon, XIcon } from 'lucide-react';
 import ReviewScores from "../../components/ReviewScores";
+import StatusBadge from "../../components/StatusBadge";
 
 interface IndexProps {
   evaluation: Evaluation
@@ -204,26 +205,43 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
                       </div>
                     </td>
                     <td className="p-2 sm:px-6 sm:py-4 text-right">
-                      <div className="flex space-x-0.5 justify-end">
-                        <i
-                          className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'accepted' ? 'bg-green-800 text-white hover:bg-green-700 focus:ring-green-600' : 'text-green-800 hover:bg-green-100 border-green-800 border'}`}
-                          onClick={() => toggleProposalSelection(proposal.id, 'accepted')}
-                        >
-                          <CheckIcon />
-                        </i>
-                        <i
-                          className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'waitlisted' ? 'bg-cloud-600 text-white hover:bg-cloud-500 focus:ring-cloud-500' : 'text-cloud-600 hover:bg-cloud-100 border-cloud-600 border'}`}
-                          onClick={() => toggleProposalSelection(proposal.id, 'waitlisted')}
-                        >
-                          <TimerIcon />
-                        </i>
-                        <i
-                          className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'rejected' ? 'bg-red-800 text-white hover:bg-red-700 focus:ring-red-600' : 'text-red-800 hover:bg-red-100 border-red-800 border'}`}
-                          onClick={() => toggleProposalSelection(proposal.id, 'rejected')}
-                        >
-                          <XIcon />
-                        </i>
-                      </div>
+                      {proposal.status === 'submitted' && (
+                        <div className="flex space-x-0.5 justify-end">
+                          <button
+                            type="button"
+                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'accepted' ? 'bg-green-800 text-white hover:bg-green-700 focus:ring-green-600' : 'text-green-800 hover:bg-green-100 border-green-800 border'}`}
+                            onClick={() => toggleProposalSelection(proposal.id, 'accepted')}
+                            aria-label={`Mark proposal "${proposal.title}" as accepted`}
+                            aria-pressed={selectedProposals[proposal.id] === 'accepted'}
+                          >
+                            <span className="sr-only">Accept</span>
+                            <CheckIcon />
+                          </button>
+                          <button
+                            type="button"
+                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'waitlisted' ? 'bg-cloud-600 text-white hover:bg-cloud-500 focus:ring-cloud-500' : 'text-cloud-600 hover:bg-cloud-100 border-cloud-600 border'}`}
+                            onClick={() => toggleProposalSelection(proposal.id, 'waitlisted')}
+                            aria-label={`Mark proposal "${proposal.title}" as waitlisted`}
+                            aria-pressed={selectedProposals[proposal.id] === 'waitlisted'}
+                          >
+                            <span className="sr-only">Waitlist</span>
+                            <TimerIcon />
+                          </button>
+                          <button
+                            type="button"
+                            className={`btn px-1 py-1 text-xs cursor-pointer ${selectedProposals[proposal.id] === 'rejected' ? 'bg-red-800 text-white hover:bg-red-700 focus:ring-red-600' : 'text-red-800 hover:bg-red-100 border-red-800 border'}`}
+                            onClick={() => toggleProposalSelection(proposal.id, 'rejected')}
+                            aria-label={`Mark proposal "${proposal.title}" as rejected`}
+                            aria-pressed={selectedProposals[proposal.id] === 'rejected'}
+                          >
+                            <span className="sr-only">Reject</span>
+                            <XIcon />
+                          </button>
+                        </div>
+                      )}
+                      {proposal.status !== 'submitted' && (
+                        <StatusBadge status={proposal.status} />
+                      )}
                     </td>
                   </tr>
                 );
