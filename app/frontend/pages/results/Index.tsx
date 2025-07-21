@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import { useState, FormEvent } from 'react';
 import { usePage, useForm, Link } from "@inertiajs/react";
 import { Evaluation, Review, EvaluationsProposal } from "../../serializers";
-import { ArrowLeftIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, CrosshairIcon, CrossIcon, TimerIcon, XIcon } from 'lucide-react';
+import { ArrowLeftIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, TimerIcon, XIcon } from 'lucide-react';
 import ReviewScores from "../../components/ReviewScores";
 import StatusBadge from "../../components/StatusBadge";
 
@@ -14,14 +14,14 @@ interface IndexProps {
 
 type proposalStatus = "accepted" | "waitlisted" | "rejected";
 
-const restoreSelectedProposals = (evaluation: Evaluation): Record<number, proposalStatus> => {
+const restoreSelectedProposals = (evaluation: Evaluation): Record<string, proposalStatus> => {
   const data = localStorage.getItem(`evaluations/${evaluation.id}/results`);
   if (!data) return {};
 
   return JSON.parse(data);
 }
 
-const storeSelectedProposals = (evaluation: Evaluation, statuses: Record<number, proposalStatus>) => {
+const storeSelectedProposals = (evaluation: Evaluation, statuses: Record<string, proposalStatus>) => {
   localStorage.setItem(`evaluations/${evaluation.id}/results`, JSON.stringify(statuses));
 }
 
@@ -61,7 +61,7 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
     return 'badge-draft';
   }
 
-  const toggleProposalSelection = (proposalId: number, status: proposalStatus) => {
+  const toggleProposalSelection = (proposalId: string, status: proposalStatus) => {
     const wasSelected = selectedProposals[proposalId] === status;
 
     setSelectedProposals((prev) => {
