@@ -85,6 +85,7 @@ module SFRubyCFP
       config.autoload_paths << Rails.root.join("lookbook/previews")
       config.paths["app/views"] << Rails.root.join("lookbook/app/views")
       config.paths["app/controllers"] << Rails.root.join("lookbook/app/controllers")
+      config.view_component.show_previews = true
       config.view_component.preview_paths << Rails.root.join("lookbook/previews")
       config.lookbook.preview_controller = "LookbookController"
     end
