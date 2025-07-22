@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Evaluation do
+describe Evaluation::Distribution do
   let_it_be(:proposal_a) { create(:proposal, track: "general") }
   let_it_be(:proposal_b) { create(:proposal, track: "startup") }
   let_it_be(:proposal_c) { create(:proposal, track: "oss") }
@@ -13,23 +13,7 @@ describe Evaluation do
 
   let_it_be(:evaluation) { create(:evaluation, reviewers: [reviewer_a], tracks: %w[general oss]) }
 
-  describe "#proposals" do
-    subject(:proposals) { evaluation.proposals.to_a }
-
-    it "returns matching submitted proposals only" do
-      expect(proposals).to include(proposal_a, proposal_c)
-      expect(proposals).not_to include(proposal_b, proposal_draft, proposal_accepted, proposal_rejected)
-    end
-
-    context "when tracks are blank" do
-      before { evaluation.update!(tracks: nil) }
-
-      it "returns all submitted proposals" do
-        expect(proposals).to include(proposal_a, proposal_b, proposal_c)
-        expect(proposals).not_to include(proposal_draft, proposal_accepted, proposal_rejected)
-      end
-    end
-  end
+  subject(:distribution) { evaluation.distribution }
 
   describe "#invalidate!" do
     it "creates pending reviews for all missing proposal-reviewer pairs" do
@@ -39,6 +23,14 @@ describe Evaluation do
       # add new proposal
       create(:proposal, track: "general", status: "submitted")
       expect { evaluation.invalidate! }.to change(evaluation.reviews.pending.where(user: reviewer_a), :count).by(1)
+
+      # add new proposal with non-matching track
+      create(:proposal, track: "startup", status: "submitted")
+      expect { evaluation.invalidate! }.not_to change(evaluation.reviews, :count)
+
+      # add new proposal with non-matching status
+      create(:proposal, track: "general", status: "accepted")
+      expect { evaluation.invalidate! }.not_to change(evaluation.reviews, :count)
 
       # add new reviewer
       evaluation.reviewers << reviewer_b

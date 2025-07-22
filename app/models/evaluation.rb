@@ -5,29 +5,7 @@ class Evaluation < ApplicationRecord
 
   has_many :reviewed_proposals, -> { distinct }, through: :reviews, source: :proposal
 
-  def proposals
-    return Proposal.submitted if tracks.blank?
+  has_object :distribution
 
-    Proposal.submitted.where(track: tracks)
-  end
-
-  def invalidate!
-    proposal_ids = proposals.pluck(:id)
-    reviewer_ids = reviewers.pluck(:id)
-
-    Review.upsert_all(
-      proposal_ids.product(reviewer_ids).map do |proposal_id, user_id|
-        {
-          evaluation_id: id,
-          proposal_id:,
-          user_id:,
-          status: "pending",
-          created_at: Time.current,
-          updated_at: Time.current
-        }
-      end,
-      unique_by: %i[evaluation_id proposal_id user_id],
-      on_duplicate: :skip
-    )
-  end
+  delegate :invalidate!, to: :distribution
 end

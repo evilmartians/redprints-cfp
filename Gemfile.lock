@@ -49,6 +49,8 @@ GEM
     active_link_to (1.0.5)
       actionpack
       addressable
+    active_record-associated_object (0.9.1)
+      activerecord (>= 6.1)
     activejob (8.0.2)
       activesupport (= 8.0.2)
       globalid (>= 0.3.6)
@@ -562,6 +564,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_delivery
+  active_record-associated_object
   after_commit_everywhere
   alba
   anyway_config

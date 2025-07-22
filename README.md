@@ -79,3 +79,29 @@ Go to `app/frontend/styles/theme.css` to change the colors and the default font 
 ### Admin
 
 Go to `config/initializers/avo.rb` and update the corresponding configuration. See [Avo docs](https://docs.avohq.io/3.0/branding.html).
+
+## Event(-s) Configuration
+
+TBD
+
+## Evaluation Configuration
+
+The review process is managed by the Evaluation object. There can be multiple evaulations (distinct by tracks or reviewers).
+
+You can create a new evaluation in Avo. Here are some settings explained:
+
+- `tracks`: you can select the tracks to only include submitted proposals matching these tracks. This way, for example, you can configure different reviewers for different tracks.
+
+- `criteria`: list of the evaulation criteria (any words), e.g., "Novelty", "Relevance", etc. These will translate into "stars" inputs in the review form.
+
+- `blind`: whether the review process is blind or not (showing speaker details or not).
+
+- `personal`: personal evaulations do not update the proposal scores; you can use them as _readonly evaluations_ (e.g., if you want to share the proposals with non-reviewers).
+
+- `deadline`: defines the final date when reviews could be submitted by the reviewers (and the final results become available to them).
+
+After creating the evaulation configuration, add reviewers (users with the role "reviewer") and trigger the "Invalidate" action (all in Avo)—that would populate pending reviews for the reviewers. You MUST trigger invalidate every time you add a reviewer or a proposal to review (the action is assumed to be idempotent).
+
+### Proposals Distribution
+
+The default proposals distribution among reviewers logic is "everyone must review everything". You can tweak it by updating the `Evaluation::Distribution` model (`app/models/evaluation/distribution.rb`).
