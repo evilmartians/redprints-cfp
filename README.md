@@ -64,6 +64,65 @@ We use [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to deliv
 
 > Check out a demo PR that shows which changes required to create an SF Ruby CFP app from this template: TBD
 
+### Authentication
+
+We use OAuth via [omniauth](https://github.com/omniauth/omniauth) to authenticate users. By default, GitHub and Google plugins are added and activated if the corresponding credentials are configured.
+
+For GitHub, see the [omniauth-github](https://github.com/omniauth/omniauth-github) documentation. Put the credenetials in the Rails credentials file as follows:
+
+```yml
+github:
+  oauth_key: <key>
+  oauth_secret: <secret>
+```
+
+For Google, see the [omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2) documentation. Put the credenetials in the Rails credentials file as follows:
+
+```yml
+google:
+  client_id: <client-id>
+  client_secret: <secret>
+```
+
+If you omit credentials for any of the default providers, they won't be activated (and available to users). Thus, it's not necessary to configure both.
+
+In development and tests, the "Sign in as developer" option is available.
+
+### Mailers / SMTP
+
+The default SMTP configuration for mailers is stored in the `config/smtp.yml` file (we use Mandrill by default). SMTP authentication credentials must be stored in the Rails credentials file as follows:
+
+```yml
+smtp:
+  username: <username>
+  password: <password>
+```
+
+Default mailer parameters (From, Reply-To) are defined in the `config/mailer.yml` file.
+
+### Slack Notifications
+
+You can configure Slack notifications to notify about proposal submissions. For that, add a webhook URL to the credentials as follows:
+
+```yml
+app:
+  slack_notifications_url: https://hooks.slack.com/services/...
+```
+
+### Database backups / Litestream
+
+We use SQLite3 as a database and provide the [Litestream](https://litestream.io/) configuration for creating backups. All you need is to provide your S3 bucket access information in the credentials:
+
+```yml
+litestream_rails:
+  bucket: <bucket-name>
+  access_key_id: <access-key-id>
+  secret_access_key: <secret-access-key>
+```
+
+> [!TIP]
+> We use [Anyway Config](https://github.com/palkan/anyway_config) for configuration management, so you can also use env variables for providing secrets, not necessary Rails credentials.
+
 ## CFP(-s) Configuration
 
 This app is meant to be used for a single event and by default has a signle ("primary") CFP configured in a YAML file (`config/data/cfps.yml`):
@@ -167,3 +226,7 @@ You may want to add your conference name and various links to some Inertia pages
 ### Admin
 
 Go to `config/initializers/avo.rb` and update the corresponding configuration. See [Avo docs](https://docs.avohq.io/3.0/branding.html).
+
+## Deployment
+
+There is a production Dockerfile and an example [Fly.io](https://fly.io) configuration is included in the template. Change the `app` value in the `fly.toml` file (and, optionally, the `primary_region`) and run the `fly deploy` command to bring your app to live!
