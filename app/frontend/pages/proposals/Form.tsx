@@ -3,25 +3,28 @@ import { useForm, Link, usePage } from "@inertiajs/react";
 import { AlertCircle, ArrowLeftIcon, Save, SendIcon, Upload } from 'lucide-react';
 import TextAreaWithCounter from "../../components/TextAreaWithCounter";
 import Select from "../../components/Select";
-import { Proposal, SpeakerProfile } from "../../serializers";
+import { CFP, Proposal, SpeakerProfile } from "../../serializers";
 import { FormEvent, useState, useRef } from "react";
 
 interface FormProps {
   proposal: Proposal
   speaker: SpeakerProfile | null
+  cfp: CFP
 }
 
-export default function Form({ proposal, speaker }: FormProps) {
+export default function Form({ proposal, speaker, cfp }: FormProps) {
   const { user } = usePage().props;
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { data, setData, post, patch, processing, errors } = useForm({
+  const defaultTrack = Object.keys(cfp.tracks).length === 1 ? Object.keys(cfp.tracks)[0] : '';
+
+  const { data, setData, post, patch, errors } = useForm({
     proposal: {
       title: proposal.title || '',
       abstract: proposal.abstract || '',
       details: proposal.details || '',
       pitch: proposal.pitch || '',
-      track: proposal.track || '',
+      track: proposal.track || defaultTrack,
       speaker_name: speaker?.name || user.email,
       speaker_email: speaker?.email || '',
       speaker_bio: speaker?.bio || '',
@@ -49,7 +52,11 @@ export default function Form({ proposal, speaker }: FormProps) {
 
   const isEditing = !!proposal.id;
   const canSaveDraft = proposal.status === 'draft';
-  const isStartupDemo = proposal.track === 'startup';
+  const homeLink = cfp.id !== 'primary' ? `/${cfp.id}` : '/';
+
+  const fieldName = (field: string, defaultName: string) => {
+    return (cfp.field_names && cfp.field_names[field] !== undefined) ? cfp.field_names[field] : defaultName;
+  }
 
   function submit(e: FormEvent) {
     e.preventDefault()
@@ -68,7 +75,7 @@ export default function Form({ proposal, speaker }: FormProps) {
     <Layout currentUser={user}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link
-          href={isEditing ? `/proposals/${proposal.id}` : (isStartupDemo ? '/startups' : '/')}
+          href={isEditing ? `/proposals/${proposal.id}` : homeLink}
           className="flex items-center text-cloud-600 hover:text-cloud-700 transition-colors mb-6"
         >
           <ArrowLeftIcon className="h-4 w-4 mr-1" />
@@ -77,29 +84,20 @@ export default function Form({ proposal, speaker }: FormProps) {
 
         <div className="max-w-4xl mx-auto">
           <div className="mb-8 animate-fade-in">
-            <h1 className="text-3xl font-bold mb-2">{isStartupDemo ? "Submit Your Demo Proposal" : "Submit Your Proposal"}</h1>
-            {!isStartupDemo && (
-              <p className="text-cloud-600">
-                Share your knowledge with the Ruby community. All fields marked with * are required.
-              </p>
-            )}
-            {isStartupDemo && (
-              <p className="text-cloud-600">
-                Share your story among the rising stars of the Ruby community and help inspire the next generation of Rubyists—while bringing your product into the spotlight.
-                <br/>
-                All fields marked with * are required.
-              </p>
-            )}
+            <h1 className="text-3xl font-bold mb-2">{fieldName("header", "Submit Your Proposal")}</h1>
+            <p className="text-cloud-600">
+              {fieldName("description", "Share your knowledge with the Ruby community. All fields marked with * are required.")}
+            </p>
           </div>
 
           <form onSubmit={submit} className="space-y-8">
             <div className="card border border-secondary-800 animate-slide-up">
-              <h2 className="text-xl font-bold mb-6 pb-4 border-b border-secondary-800">{isStartupDemo ? "Demo Information" : "Talk Information"}</h2>
+              <h2 className="text-xl font-bold mb-6 pb-4 border-b border-secondary-800">{fieldName("talk_header", "Talk Information")}</h2>
 
               <div className="space-y-6">
                 <div>
                   <label htmlFor="title" className="label">
-                    {isStartupDemo ? "Startup Name" : "Title"} *
+                    {fieldName("title", "Title")} *
                   </label>
                   <input
                     id="title"
@@ -107,7 +105,7 @@ export default function Form({ proposal, speaker }: FormProps) {
                     value={data.proposal.title}
                     onChange={(e) => setData('proposal.title', e.target.value)}
                     className="input-field"
-                    placeholder={isStartupDemo ? "" : "A clear, concise title for your talk"}
+                    placeholder={fieldName("title_description", "A clear, concise title for your talk")}
                     required={submitting}
                   />
                   {formErrors.title && (
@@ -117,14 +115,14 @@ export default function Form({ proposal, speaker }: FormProps) {
 
                 <div>
                   <label htmlFor="abstract" className="label">
-                    {isStartupDemo ? "How far along are you?" : "Abstract"} *
+                    {fieldName("abstract", "Abstract")} *
                   </label>
                   <TextAreaWithCounter
                     id="abstract"
                     value={data.proposal.abstract}
                     onChange={(val) => setData('proposal.abstract', val)}
                     maxLength={limits.abstract}
-                    placeholder={isStartupDemo ? "Tell us a bit about your stage and progress" : "A brief overview of your talk (will be published in the program)"}
+                    placeholder={fieldName("abstract_description", "A brief overview of your talk (will be published in the program)")}
                     required={submitting}
                   />
                   {formErrors.abstract && (
@@ -132,7 +130,7 @@ export default function Form({ proposal, speaker }: FormProps) {
                   )}
                 </div>
 
-                {!isStartupDemo && (
+                {Object.keys(cfp.tracks).length > 1 && (
                   <div>
                     <label htmlFor="track" className="label">
                       Track *
@@ -144,9 +142,7 @@ export default function Form({ proposal, speaker }: FormProps) {
                       required={!canSaveDraft}
                       options={[
                         { value: '', label: 'Select a track' },
-                        { value: 'oss', label: 'New Open Source and Tooling' },
-                        { value: 'scale', label: 'Scaling Ruby and Rails' },
-                        { value: 'general', label: 'General' },
+                        ...Object.keys(cfp.tracks).map(track => ({ value: track, label: cfp.tracks[track] })),
                       ]}
                     />
                     {formErrors.track && (
@@ -157,41 +153,34 @@ export default function Form({ proposal, speaker }: FormProps) {
 
                 <div>
                   <label htmlFor="details" className="label">
-                    {isStartupDemo ? "Demo Details" : "Detailed Description"} *
+                    {fieldName("details", "Detailed Description")} *
                   </label>
                   <TextAreaWithCounter
                     id="details"
                     value={data.proposal.details}
                     onChange={(val) => setData('proposal.details', val)}
                     maxLength={limits.details}
-                    placeholder={isStartupDemo ? "Tell us a bit about the problem the product is solving, and the target audience. What can you demo?" : "A detailed description of your talk, including outline, key points, and what attendees will learn"}
+                    placeholder={fieldName("details_description", "A detailed description of your talk, including outline, key points, and what attendees will learn")}
                     required={submitting}
                   />
                   {formErrors.details && (
                     <p className="text-red-600 text-sm mb-4">{formErrors.details.join(", ")}</p>
                   )}
-                  {!isStartupDemo && (
-                    <p className="mt-1 text-sm text-cloud-700">
-                      This is for the review committee only and won't be published.
-                    </p>
-                  )}
-                  {isStartupDemo && (
-                    <p className="mt-1 text-sm text-cloud-700">
-                      Don't forget to add links to your website and such.
-                    </p>
-                  )}
+                  <p className="mt-1 text-sm text-cloud-700">
+                    {fieldName("detailsNotice", "This is for the review committee only and won't be published.")}
+                  </p>
                 </div>
 
                 <div>
                   <label htmlFor="pitch" className="label">
-                    {isStartupDemo ? "How does Ruby power your product?" : "Why this talk matters"} *
+                    {fieldName("pitch", "Why this talk matters")} *
                   </label>
                   <TextAreaWithCounter
                     id="pitch"
                     value={data.proposal.pitch}
                     onChange={(val) => setData('proposal.pitch', val)}
                     maxLength={limits.pitch}
-                    placeholder={isStartupDemo ? "" : "Why is this talk important for the Ruby community? What makes you the right person to give it?"}
+                    placeholder={fieldName("pitch_details", "Why is this talk important for the Ruby community? What makes you the right person to give it?")}
                     required={submitting}
                   />
                   {formErrors.pitch && (

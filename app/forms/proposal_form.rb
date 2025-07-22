@@ -1,4 +1,6 @@
 class ProposalForm < ApplicationForm
+  attribute :cfp_id, default: -> { "primary" }
+
   attribute :title
   attribute :abstract
   attribute :details
@@ -73,6 +75,7 @@ class ProposalForm < ApplicationForm
 
   def build_proposal_attributes
     {
+      cfp_id:,
       title:,
       abstract:,
       details:,
@@ -112,6 +115,7 @@ class ProposalForm < ApplicationForm
     return attrs unless proposal
 
     attrs.merge!({
+      cfp_id: proposal.cfp_id,
       title: proposal.title.presence,
       abstract: proposal.abstract.presence,
       details: proposal.details.presence,

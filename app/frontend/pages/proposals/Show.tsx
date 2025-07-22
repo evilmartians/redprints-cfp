@@ -2,14 +2,15 @@ import Layout from "../../components/Layout";
 import { Link, usePage, router } from "@inertiajs/react";
 import { ArrowLeftIcon, PencilIcon, TrashIcon, UserIcon } from 'lucide-react';
 import StatusBadge from "../../components/StatusBadge";
-import { Proposal, SpeakerProfile } from "../../serializers";
+import { CFP, Proposal, SpeakerProfile } from "../../serializers";
 
 interface ShowProps {
   proposal: Proposal
   speaker: SpeakerProfile
+  cfp: CFP
 }
 
-export default function Show({ proposal, speaker }: ShowProps) {
+export default function Show({ proposal, speaker, cfp }: ShowProps) {
   const { user } = usePage().props;
 
   const handleConfirmProposal = () => {
@@ -34,7 +35,11 @@ export default function Show({ proposal, speaker }: ShowProps) {
     }
   };
 
-  const isStartupDemo = proposal.track === 'startup';
+  const fieldName = (field: string, defaultName: string) => {
+    return (cfp.field_names && cfp.field_names[field] !== undefined) ? cfp.field_names[field] : defaultName;
+  }
+
+  const hasTracks = Object.keys(cfp.tracks).length > 1;
 
   return (
   <Layout currentUser={user}>
@@ -89,10 +94,10 @@ export default function Show({ proposal, speaker }: ShowProps) {
 
         {/* Talk Information */}
         <div className="card border mb-8 animate-slide-up">
-            <h2 className="text-xl font-bold mb-6 pb-4 border-b border-secondary-700">{isStartupDemo ? "Demo Information" : "Talk Information"}</h2>
+            <h2 className="text-xl font-bold mb-6 pb-4 border-b border-secondary-700">{fieldName("talk_header", "Talk Information")}</h2>
 
           <div className="space-y-6">
-            {!isStartupDemo && (
+            {hasTracks && (
               <div>
                 <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">Track</h3>
                 <p className="text-cloud-700">{proposal.track}</p>
@@ -100,17 +105,17 @@ export default function Show({ proposal, speaker }: ShowProps) {
             )}
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2"> {isStartupDemo ? "How far along are you?" : "Abstract"}</h3>
+              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2"> {fieldName("abstract", "Abstract")}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.abstract}</p>
             </div>
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">{isStartupDemo ? "Demo Details" : "Detailed Description"}</h3>
+              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">{fieldName("details", "Detailed Description")}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.details}</p>
             </div>
 
             <div>
-              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">{isStartupDemo ? "How does Ruby power your product?" : "Why this talk matters"}</h3>
+              <h3 className="text-sm uppercase font-medium border-secondary-700 text-secondary-800 mb-2">{fieldName("pitch", "Why this talk matters")}</h3>
               <p className="text-cloud-700 whitespace-pre-line">{proposal.pitch}</p>
             </div>
           </div>

@@ -15,6 +15,7 @@ gem "solid_queue"
 # Active Record extensions
 gem "store_model"
 gem "active_record-associated_object"
+gem "frozen_record"
 
 gem "nanoid"
 

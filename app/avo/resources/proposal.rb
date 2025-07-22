@@ -89,6 +89,7 @@ class Avo::Resources::Proposal < Avo::BaseResource
     field :abstract, as: :textarea, hide_on: :index
     field :details, as: :textarea, hide_on: :index
     field :pitch, as: :textarea, hide_on: :index
+    field :cfp_id, as: :select, enum: ::CFP.all.map { [it.id, it.id] }, hide_on: :index
 
     field :submitted_at, as: :date
   end

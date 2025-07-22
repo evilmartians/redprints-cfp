@@ -5,6 +5,7 @@ describe "Startups" do
 
   let(:startups_page) { prism.startups }
   let(:oauth_page) { prism.oauth_dev }
+  let(:proposal_form_page) { prism.proposal_form }
 
   it "user goes back to the startups page after login" do
     startups_page.load
@@ -26,6 +27,12 @@ describe "Startups" do
 
     startups_page.actions.within do |actions|
       expect(actions).to have_link "Submit a Demo Proposal"
+      click_on "Submit a Demo Proposal"
     end
+
+    expect(proposal_form_page).to be_displayed
+
+    expect(page).to have_text "Startup Name"
+    expect(page).to have_text "How does Ruby power your product?"
   end
 end

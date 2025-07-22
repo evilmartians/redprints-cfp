@@ -14,9 +14,6 @@ Rails.application.routes.draw do
 
   resources :proposals, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     resource :confirmation, only: [:create, :destroy], module: :proposals
-    collection do
-      get "/startup" => "proposals#new", :defaults => {proposal_track: "startup"}, :as => :new_startup_proposal
-    end
   end
 
   resources :evaluations, only: [:index] do
@@ -25,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   get "/startups" => "home#startups", :as => :startups
+  get "/startups/new" => "proposals#new", :as => :new_startup_proposal, :defaults => {cfp_id: "startups"}
 
   mount Avo::Engine, at: Avo.configuration.root_path
 

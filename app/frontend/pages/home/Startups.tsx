@@ -3,13 +3,15 @@ import { FileTextIcon, UsersIcon, CalendarIcon, MapPinIcon } from 'lucide-react'
 import { OAuthButtons } from "../../components/OAuthButtons";
 
 import { usePage, Link } from "@inertiajs/react";
+import { CFP } from "../../serializers";
 
 interface StartupsProps {
   oauth_providers: string[]
+  startup_cfp: CFP
 }
 
-export default function Startups({oauth_providers}: StartupsProps) {
-  const { user, startup_cfp_closed } = usePage().props;
+export default function Startups({oauth_providers, startup_cfp}: StartupsProps) {
+  const { user } = usePage().props;
 
   return (
     <Layout currentUser={user}>
@@ -81,10 +83,10 @@ export default function Startups({oauth_providers}: StartupsProps) {
 
         <div className="lg:pl-8 space-y-8">
           <div test-id="home-actions" className="card border border-secondary-800 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            {!startup_cfp_closed && (
+            {!startup_cfp.is_closed && (
               <h3 className="text-xl font-bold mb-6">Ready to introduce your startup to the Ruby world?</h3>
             )}
-            {startup_cfp_closed && (
+            {startup_cfp.is_closed && (
               <h3 className="text-xl font-bold mb-6">The call for startups is now closed</h3>
             )}
             <p className="text-neutral-600 mb-8">
@@ -98,8 +100,8 @@ export default function Startups({oauth_providers}: StartupsProps) {
                 ))
               )}
 
-              {user && !startup_cfp_closed && (
-                <Link href={`/proposals/startup`} className="btn btn-secondary flex items-center justify-center">
+              {user && !startup_cfp.is_closed && (
+                <Link href={`/startups/new`} className="btn btn-secondary flex items-center justify-center">
                   Submit a Demo Proposal
                 </Link>
               )}

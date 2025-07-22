@@ -119,7 +119,7 @@ describe "Proposals" do
     end
 
     context "when deadline passed" do
-      before { allow(AppConfig).to receive(:cfp_closed?) { true } }
+      before { travel_to(2.days.since) }
 
       specify "user cannot edit the proposal" do
         proposal_page.load(id: proposal.external_id)
@@ -131,7 +131,7 @@ describe "Proposals" do
   end
 
   context "when deadline passed" do
-    before { allow(AppConfig).to receive(:cfp_closed?) { true } }
+    before { travel_to(2.days.since) }
 
     specify "user cannot submit a proposal" do
       home_page.load

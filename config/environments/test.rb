@@ -50,4 +50,6 @@ Rails.application.configure do
   config.active_storage.service = :test
 
   config.assets.prefix = "/assets-test"
+
+  FrozenRecord::Base.base_path = Rails.root.join("spec/data")
 end

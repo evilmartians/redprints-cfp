@@ -3,13 +3,15 @@ import { FileTextIcon, UsersIcon, CalendarIcon, MapPinIcon } from 'lucide-react'
 import { OAuthButtons } from "../../components/OAuthButtons";
 
 import { usePage, Link } from "@inertiajs/react";
+import { CFP } from "../../serializers";
 
 interface IndexProps {
   oauth_providers: string[]
+  startup_cfp: CFP
 }
 
-export default function Index({ oauth_providers }: IndexProps) {
-  const { user, cfp_closed, startup_cfp_closed } = usePage().props;
+export default function Index({ oauth_providers, startup_cfp }: IndexProps) {
+  const { user, cfp_closed } = usePage().props;
 
   return (
     <Layout currentUser={user}>
@@ -147,7 +149,7 @@ export default function Index({ oauth_providers }: IndexProps) {
             </div>
           </div>
 
-          {!startup_cfp_closed && (
+          {!startup_cfp.is_closed && (
             <div className="card border border-secondary-800 animate-slide-up" style={{ animationDelay: "0.2s" }}>
               <h3 className="text-xl font-bold mb-4">Building a startup with Ruby?</h3>
               <p className="text-neutral-600 mb-6">

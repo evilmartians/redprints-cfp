@@ -177,6 +177,8 @@ GEM
     ffi (1.17.2-x86_64-linux-gnu)
     freezolite (0.6.0)
       require-hooks (~> 0.2)
+    frozen_record (0.27.4)
+      activemodel
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -578,6 +580,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   freezolite
+  frozen_record
   fuubar
   inertia_rails
   inertia_rails-contrib

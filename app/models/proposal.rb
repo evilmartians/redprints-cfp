@@ -12,6 +12,8 @@ class Proposal < ApplicationRecord
     self.external_id ||= Nanoid.generate(size: 8)
   end
 
+  def cfp = @cfp ||= CFP.find_by(id: cfp_id) || CFP.primary
+
   def to_param = external_id
 
   def invalidate_scores!

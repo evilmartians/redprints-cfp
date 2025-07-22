@@ -3,12 +3,10 @@ class ProposalSerializer < ApplicationSerializer
 
   attribute :id, &:external_id
   typelize id: "string"
-  attributes :title, :details, :abstract, :pitch, :track, :status, :submitted_at
+  attributes :cfp_id, :title, :details, :abstract, :pitch, :track, :status, :submitted_at
 
   attribute :can_edit do
-    it.accepted? || !(
-      (it.track == "startup") ? AppConfig.startup_cfp_closed? : AppConfig.cfp_closed?
-    )
+    it.accepted? || !it.cfp.closed?
   end
   typelize can_edit: :boolean
 end

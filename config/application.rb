@@ -50,6 +50,8 @@ module SFRubyCFP
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
+    FrozenRecord::Base.base_path = Rails.root.join("config/data")
+
     config.solid_queue.connects_to = {database: {writing: :queue, reading: :queue}}
 
     config.mission_control.jobs.base_controller_class = "AdminController"
