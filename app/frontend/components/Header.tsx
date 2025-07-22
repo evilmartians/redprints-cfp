@@ -3,6 +3,7 @@ import { usePage } from "@inertiajs/react";
 import { Menu, X } from 'lucide-react';
 import { User } from "../serializers";
 import { useState } from "react";
+import { Logo } from "./Logo";
 
 interface HeaderProps {
   currentUser: User;
@@ -24,14 +25,14 @@ export function Header({ currentUser }: HeaderProps) {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             {url === "/" ? (
-              <img src="/sfruby.png" className="h-6" />
+              <Logo />
             ) : (
               <Link
                 href="/"
                 className="flex items-center space-x-2 hover:opacity-85"
                 prefetch
               >
-                <img src="/sfruby.png" className="h-6" />
+                <Logo />
               </Link>
             )}
           </div>

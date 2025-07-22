@@ -62,6 +62,8 @@ We use [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to deliv
 
 ## Setting up
 
+> Check out a demo PR that shows which changes required to create an SF Ruby CFP app from this template: TBD
+
 ## CFP(-s) Configuration
 
 This app is meant to be used for a single event and by default has a signle ("primary") CFP configured in a YAML file (`config/data/cfps.yml`):
@@ -134,7 +136,7 @@ After creating the evaulation configuration, add reviewers (users with the role 
 
 The default proposals distribution among reviewers logic is "everyone must review everything". You can tweak it by updating the `Evaluation::Distribution` model (`app/models/evaluation/distribution.rb`).
 
-## Styling
+## Styling / UI
 
 ### CSS
 
@@ -153,6 +155,14 @@ Go to `app/frontend/styles/theme.css` to change the colors and the default font 
   --clr-secondary-hue: 250;
 }
 ```
+
+### Logo
+
+Add your logo by updating the `frontend/components/Logo.tsx` component. That's it!
+
+### Views / Mailers
+
+You may want to add your conference name and various links to some Inertia pages and components as well as mailer templates—just do that! The React UI is not meant to be magically configurabale, tune it up to your needs (but prefer to stick to the page props, so you don't need to touch backend).
 
 ### Admin
 
