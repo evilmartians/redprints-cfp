@@ -63,14 +63,15 @@ class Avo::Resources::Proposal < Avo::BaseResource
   class ResendConfirmation < Avo::BaseAction
     self.name = "Resend Confirmation"
     self.no_confirmation = false
-    self.visible = -> { view.show? }
 
     def handle(query:, fields:, current_user:, resource:, **args)
-      proposal = resource.record
+      proposals = Array(resource.record || query.all.to_a)
 
-      return unless proposal.accepted? || proposal.rejected? || proposal.waitlisted?
+      proposals.each do |proposal|
+        next unless proposal.accepted? || proposal.rejected? || proposal.waitlisted?
 
-      ProposalDelivery.with(proposal:, speaker: proposal.speaker_profile).public_send(:"proposal_#{proposal.status}").deliver_later
+        ProposalDelivery.with(proposal:, speaker: proposal.speaker_profile).public_send(:"proposal_#{proposal.status}").deliver_later
+      end
 
       succeed "Done!"
     end
