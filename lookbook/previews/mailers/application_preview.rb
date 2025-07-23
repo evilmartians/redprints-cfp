@@ -5,7 +5,7 @@ module Mailers
       render_email(
         ApplicationMailer.check(
           email,
-          "Testing email configuration on #{Date.current} from SF Ruby CFP [#{Rails.env}]"
+          "Testing email configuration on #{Date.current} from the CFP app [#{Rails.env}]"
         )
       )
     end

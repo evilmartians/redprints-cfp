@@ -11,7 +11,8 @@ createInertiaApp({
   // Set default page title
   // see https://inertia-rails.netlify.app/guide/title-and-meta
   //
-  title: (title) => (title ? `${title}, SF Ruby CFP` : "SF Ruby CFP"),
+  // FIXME: Replace with your application's title
+  title: (title) => (title ? `${title}, CFP App` : "CFP App"),
 
   // Disable progress bar
   //

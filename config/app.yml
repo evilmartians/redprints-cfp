@@ -10,5 +10,6 @@ test:
 
 production: &production
   <<: *default
-  host: "cfp.sfruby.com"
+  # FIXME: change to the actual app's hostname
+  host: "cfp.example.com"
   port: 443

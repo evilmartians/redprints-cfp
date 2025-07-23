@@ -3,14 +3,14 @@
 name: Fly Deploy
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - CI
-    branches:
-      - main
-      - master
-    types:
-      - completed
+  # workflow_run:
+  #   workflows:
+  #     - CI
+  #   branches:
+  #     - main
+  #     - master
+  #   types:
+  #     - completed
 
 jobs:
   deploy:

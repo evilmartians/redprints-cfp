@@ -21,9 +21,6 @@ Rails.application.routes.draw do
     resources :results, only: [:index, :create], module: :evaluations
   end
 
-  get "/startups" => "home#startups", :as => :startups
-  get "/startups/new" => "proposals#new", :as => :new_startup_proposal, :defaults => {cfp_id: "startups"}
-
   mount Avo::Engine, at: Avo.configuration.root_path
 
   namespace :dev do

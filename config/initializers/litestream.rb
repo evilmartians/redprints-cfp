@@ -8,5 +8,5 @@ Rails.application.configure do
 
   # Configure db paths via ENV
   ENV["LITESTREAM_SOURCE_DB_PATH"] ||= File.join(ENV.fetch("DATA_PATH", "storage"), "#{Rails.env}.sqlite3").to_s
-  ENV["LITESTREAM_REPLICA_DB_PATH"] ||= File.join("sfruby-cfp-data", "#{Rails.env}.sqlite3.replica").to_s
+  ENV["LITESTREAM_REPLICA_DB_PATH"] ||= File.join("redprints-cfp-data", "#{Rails.env}.sqlite3.replica").to_s
 end

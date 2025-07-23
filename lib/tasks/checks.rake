@@ -4,7 +4,7 @@ namespace :checks do
   desc "Send test email notification to the provided email address"
   task :send_email, [:email] => [:environment] do |_t, args|
     email = args.fetch(:email)
-    body = "Testing email configuration on #{Date.current} from SF Ruby CFP [#{Rails.env}]"
+    body = "Testing email configuration on #{Date.current} from the CFP app [#{Rails.env}]"
 
     $stdout.puts "### Sending email notification to #{email}:\n\n#{body}"
 
