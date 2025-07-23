@@ -1,8 +1,15 @@
-# CFP for all
+# Redprints: CFP app
 
-This is a CFP management app for conferences built with Ruby on Rails, Inertia.js and React.
+This is a _redprint_ ("a blueprint from Mars") of a CFP ("call for proposals") management app for built with Ruby on Rails, Inertia.js, TailwindCSS and React.
 
 > Built for [SF Ruby Conference](https://sfruby.com), open to everyone!
+
+<a href="https://evilmartians.com/?utm_source=redprints-cfp"><img
+    src="https://evilmartians.com/badges/sponsored-by-evil-martians_v2.0.svg"
+    alt="Sponsored by Evil Martians"
+    width="236"
+    height="54"
+/></a>
 
 ## Requirements
 
