@@ -11,6 +11,7 @@ interface SelectProps {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: SelectOption[];
   required?: boolean;
+  placeholder?: string;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -19,6 +20,7 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   options,
   required,
+  placeholder,
 }) => {
   return (
     <div className="relative">
@@ -29,6 +31,11 @@ const Select: React.FC<SelectProps> = ({
         required={required}
         className="input-field appearance-none pr-10"
       >
+        {placeholder && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
+        )}
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

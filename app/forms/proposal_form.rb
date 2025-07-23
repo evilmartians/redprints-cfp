@@ -22,8 +22,9 @@ class ProposalForm < ApplicationForm
   validates :details, length: {maximum: 800}
   validates :pitch, length: {maximum: 600}
   validates :speaker_bio, length: {maximum: 300}
+  validates :track, inclusion: {in: CFP.all.flat_map(&:tracks).map(&:keys).flatten}, allow_blank: true
 
-  validates :title, :abstract, :details, :pitch,
+  validates :title, :abstract, :details, :pitch, :track,
     :speaker_name, :speaker_email, :speaker_bio,
     presence: true, unless: :drafting
 

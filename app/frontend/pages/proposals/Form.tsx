@@ -140,10 +140,8 @@ export default function Form({ proposal, speaker, cfp }: FormProps) {
                       value={data.proposal.track}
                       onChange={(e) => setData('proposal.track', e.target.value)}
                       required={!canSaveDraft}
-                      options={[
-                        { value: '', label: 'Select a track' },
-                        ...Object.keys(cfp.tracks).map(track => ({ value: track, label: cfp.tracks[track] })),
-                      ]}
+                      placeholder="Select a track"
+                      options={Object.keys(cfp.tracks).map(track => ({ value: track, label: cfp.tracks[track] }))}
                     />
                     {formErrors.track && (
                       <p className="text-red-600 text-sm mb-4">{formErrors.track.join(", ")}</p>
