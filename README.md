@@ -61,7 +61,7 @@ You can access our [Avo](https://avohq.io) admin console at: [localhost:3000/adm
 
 ### Lookbook
 
-We use [Lookbook](https://lookbook.build) to work with UI (development, previews). All the code related to previews is stored under the `lookbook/` fodler. The lookbook itself is available at: [localhost:3000/dev/lookbook](http://localhost:3000/dev/lookbook).
+We use [Lookbook](https://lookbook.build) to work with UI (development, previews). All the code related to previews is stored under the `lookbook/` folder. The lookbook itself is available at: [localhost:3000/dev/lookbook](http://localhost:3000/dev/lookbook).
 
 ### Working with emails
 
@@ -69,13 +69,13 @@ We use [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to deliv
 
 ## Setting up
 
-> Check out a demo PR that shows which changes required to create an SF Ruby CFP app from this template: [PR#1](https://github.com/evilmartians/redprints-cfp/pull/1).
+> Check out a demo PR that shows which changes are required to create an SF Ruby CFP app from this template: [PR#1](https://github.com/evilmartians/redprints-cfp/pull/1).
 
 ### Authentication
 
 We use OAuth via [omniauth](https://github.com/omniauth/omniauth) to authenticate users. By default, GitHub and Google plugins are added and activated if the corresponding credentials are configured.
 
-For GitHub, see the [omniauth-github](https://github.com/omniauth/omniauth-github) documentation. Put the credenetials in the Rails credentials file as follows:
+For GitHub, see the [omniauth-github](https://github.com/omniauth/omniauth-github) documentation. Put the credentials in the Rails credentials file as follows:
 
 ```yml
 github:
@@ -83,7 +83,7 @@ github:
   oauth_secret: <secret>
 ```
 
-For Google, see the [omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2) documentation. Put the credenetials in the Rails credentials file as follows:
+For Google, see the [omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2) documentation. Put the credentials in the Rails credentials file as follows:
 
 ```yml
 google:
@@ -132,7 +132,7 @@ litestream_rails:
 
 ## CFP(-s) Configuration
 
-This app is meant to be used for a single event and by default has a signle ("primary") CFP configured in a YAML file (`config/data/cfps.yml`):
+This app is meant to be used for a single event and by default has a single ("primary") CFP configured in a YAML file (`config/data/cfps.yml`):
 
 ```yml
 - id: primary
@@ -145,7 +145,7 @@ This app is meant to be used for a single event and by default has a signle ("pr
 
 ### Multiple forms / submission flows
 
-The apps supports handling different submission types (i.e., different forms). For example, if you want to have a separate form for workshops and lightning talks (with different verbiage), you can add another CFP configuration:
+The app supports handling different submission types (i.e., different forms). For example, if you want to have a separate form for workshops and lightning talks (with different verbiage), you can add another CFP configuration:
 
 ```yml
 - id: primary
@@ -180,21 +180,21 @@ The `field_names` mapping allows you to customize the form field labels.
 
 ## Evaluation Configuration
 
-The review process is managed by the Evaluation object. There can be multiple evaulations (distinct by tracks or reviewers).
+The review process is managed by the Evaluation object. There can be multiple evaluations (distinct by tracks or reviewers).
 
 You can create a new evaluation in Avo. Here are some settings explained:
 
 - `tracks`: you can select the tracks to only include submitted proposals matching these tracks. This way, for example, you can configure different reviewers for different tracks.
 
-- `criteria`: list of the evaulation criteria (any words), e.g., "Novelty", "Relevance", etc. These will translate into "stars" inputs in the review form.
+- `criteria`: list of the evaluation criteria (any words), e.g., "Novelty", "Relevance", etc. These will translate into "stars" inputs in the review form.
 
 - `blind`: whether the review process is blind or not (showing speaker details or not).
 
-- `personal`: personal evaulations do not update the proposal scores; you can use them as _readonly evaluations_ (e.g., if you want to share the proposals with non-reviewers).
+- `personal`: personal evaluations do not update the proposal scores; you can use them as _readonly evaluations_ (e.g., if you want to share the proposals with non-reviewers).
 
 - `deadline`: defines the final date when reviews could be submitted by the reviewers (and the final results become available to them).
 
-After creating the evaulation configuration, add reviewers (users with the role "reviewer") and trigger the "Invalidate" action (all in Avo)—that would populate pending reviews for the reviewers. You MUST trigger invalidate every time you add a reviewer or a proposal to review (the action is assumed to be idempotent).
+After creating the evaluation configuration, add reviewers (users with the role "reviewer") and trigger the "Prepare review sheets" action (all in Avo)—that would populate pending reviews for the reviewers. You MUST trigger "Prepare review sheets" every time you add a reviewer or a proposal to review (the action is assumed to be idempotent).
 
 ### Proposals Distribution
 
@@ -226,7 +226,7 @@ Add your logo by updating the `frontend/components/Logo.tsx` component. That's i
 
 ### Views / Mailers
 
-You may want to add your conference name and various links to some Inertia pages and components as well as mailer templates—just do that! The React UI is not meant to be magically configurabale, tune it up to your needs (but prefer to stick to the page props, so you don't need to touch backend).
+You may want to add your conference name and various links to some Inertia pages and components as well as mailer templates—just do that! The React UI is not meant to be magically configurable, tune it up to your needs (but prefer to stick to the page props, so you don't need to touch the backend).
 
 > [!TIP]
 > Search for the `FIXME: ...` and `EXAMPLE Conference` comments in the codebase to see the bits to be updated with your information.

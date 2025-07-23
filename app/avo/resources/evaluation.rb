@@ -5,7 +5,7 @@ class Avo::Resources::Evaluation < Avo::BaseResource
   #   query: -> { query.ransack(id_eq: params[:q], m: "or").result(distinct: false) }
   # }
   class Invalidate < Avo::BaseAction
-    self.name = "Invalidate"
+    self.name = "Prepare review sheets"
     self.no_confirmation = true
     self.visible = -> { view.show? }
 
