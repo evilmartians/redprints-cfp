@@ -136,8 +136,6 @@ This app is meant to be used for a single event and by default has a signle ("pr
   deadline:  "2026-06-14T00:00:00-07:00"
 ```
 
-**NOTE:** Tracks must also be specified in the `Proposal` model (we use Rails enum feature there).
-
 ### Multiple forms / submission flows
 
 The apps supports handling different submission types (i.e., different forms). For example, if you want to have a separate form for workshops and lightning talks (with different verbiage), you can add another CFP configuration:

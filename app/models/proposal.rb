@@ -4,7 +4,7 @@ class Proposal < ApplicationRecord
   has_one :speaker_profile, through: :user
   has_many :reviews, dependent: :destroy
 
-  enum :track, %w[oss scale general startup workshop].index_by(&:itself)
+  enum :track, CFP.all.flat_map { it.tracks.keys }.uniq.index_by(&:itself)
 
   enum :status, %w[draft submitted accepted rejected waitlisted confirmed declined].index_by(&:itself)
 

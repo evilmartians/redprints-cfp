@@ -4,9 +4,12 @@
     scale: Scaling Ruby and Rails
     general: General
   deadline: "2025-07-14T00:00:00-07:00"
+- id: workshops
+  tracks:
+    workshop:
 - id: startups
   tracks:
-    startups: ""
+    startup: ""
   deadline: "2025-10-14T00:00:00-07:00"
   field_names:
     header: "Submit Your Demo Proposal"
