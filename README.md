@@ -69,7 +69,7 @@ We use [letter_opener_web](https://github.com/fgrehm/letter_opener_web) to deliv
 
 ## Setting up
 
-> Check out a demo PR that shows which changes required to create an SF Ruby CFP app from this template: TBD
+> Check out a demo PR that shows which changes required to create an SF Ruby CFP app from this template: [PR#1](https://github.com/evilmartians/redprints-cfp/pull/1).
 
 ### Authentication
 
