@@ -13,7 +13,7 @@ interface ShowProps {
 export default function Show({ review }: ShowProps) {
   const { user } = usePage().props;
 
-  const { data, setData, patch, processing, errors } = useForm({
+  const { data, setData, patch, errors } = useForm({
     review: {
       comment: review.comment || '',
       scores: review.scores || {} as Record<string, number>

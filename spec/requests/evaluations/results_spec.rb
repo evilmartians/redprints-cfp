@@ -13,7 +13,7 @@ describe "/evaluations/:id/results" do
 
     it "renders results index page" do
       subject
-      expect(inertia).to render_component("results/Index")
+      expect(inertia).to render_component "evaluations/results/index"
     end
   end
 

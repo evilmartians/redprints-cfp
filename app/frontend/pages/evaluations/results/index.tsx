@@ -1,10 +1,10 @@
-import Layout from "../../components/Layout";
+import Layout from "../../../components/Layout.tsx";
 import { useState, FormEvent } from 'react';
 import { usePage, useForm, Link } from "@inertiajs/react";
-import { Evaluation, Review, EvaluationsProposal } from "../../serializers";
+import { Evaluation, Review, EvaluationsProposal } from "../../../serializers";
 import { ArrowLeftIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, TimerIcon, XIcon } from 'lucide-react';
-import ReviewScores from "../../components/ReviewScores";
-import StatusBadge from "../../components/StatusBadge";
+import ReviewScores from "../../../components/ReviewScores.tsx";
+import StatusBadge from "../../../components/StatusBadge.tsx";
 
 interface IndexProps {
   evaluation: Evaluation
@@ -31,7 +31,7 @@ export default function Index({ reviews, evaluation, proposals }: IndexProps) {
   const [selectedProposals, setSelectedProposals] = useState(restoreSelectedProposals(evaluation));
   const [expandedComments, setExpandedComments] = useState<{[key: string]: boolean}>({});
 
-  const { data, setData, post, processing, errors } = useForm({
+  const { data, setData, post } = useForm({
     proposals: Object.entries(selectedProposals).map(([id, status]) => ({ id, status })),
   });
 

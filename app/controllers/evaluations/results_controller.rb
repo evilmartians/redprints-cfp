@@ -5,7 +5,7 @@ module Evaluations
     def index
       proposals = @evaluation.reviewed_proposals.order(score: :desc)
       reviews = @evaluation.reviews
-      render inertia: "results/Index", props: {
+      render inertia: {
         reviews: serialize(reviews),
         evaluation: serialize(@evaluation, current_user:),
         proposals: serialize(proposals, with: ProposalSerializer)

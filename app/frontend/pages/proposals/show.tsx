@@ -19,12 +19,6 @@ export default function Show({ proposal, speaker, cfp }: ShowProps) {
     }
   };
 
-  const handleDeclineProposal = () => {
-    if (confirm('Are you sure you want to decline this proposal? This will notify the organizers that you will not be presenting.')) {
-      router.delete(`/proposals/${proposal.id}/confirmation`);
-    }
-  };
-
   const hasFeedback = (proposal.status === 'accepted') ||
     (proposal.status === 'rejected') ||
     (proposal.status === 'waitlisted');

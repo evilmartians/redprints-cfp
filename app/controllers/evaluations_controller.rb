@@ -7,7 +7,7 @@ class EvaluationsController < ApplicationController
     if evaluations.size == 1
       redirect_to evaluation_reviews_path(evaluations.first)
     else
-      render inertia: "evaluations/Index", props: {evaluations: serialize(evaluations)}
+      render inertia: {evaluations: serialize(evaluations)}
     end
   end
 end

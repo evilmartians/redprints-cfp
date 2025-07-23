@@ -11,11 +11,7 @@ module Auth
       cookies.delete(:session_token)
       reset_session
 
-      if inertia_request?
-        inertia_location root_path
-      else
-        redirect_to root_path
-      end
+      redirect_to root_path
     end
   end
 end

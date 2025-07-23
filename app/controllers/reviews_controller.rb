@@ -7,18 +7,18 @@ class ReviewsController < ApplicationController
     evaluation = current_user.evaluations.find(params[:evaluation_id])
     reviews = evaluation.reviews.where(user: current_user).joins(:proposal).order(score: :desc).order(proposals: {created_at: :desc})
 
-    render inertia: "reviews/Index", props: {reviews: serialize(reviews), evaluation: serialize(evaluation, current_user:)}
+    render inertia: {reviews: serialize(reviews), evaluation: serialize(evaluation, current_user:)}
   end
 
   def show
-    render inertia: "reviews/Show", props: {review: serialize(@review)}
+    render inertia: {review: serialize(@review)}
   end
 
   def update
     form = ReviewForm.with(review: @review).from(params.require(:review))
 
     if form.save
-      inertia_location evaluation_reviews_path(@review.evaluation)
+      redirect_to evaluation_reviews_path(@review.evaluation)
     else
       redirect_to review_path(@review), inertia: {errors: form.errors}
     end

@@ -16,11 +16,7 @@ module Authenticated
   def authenticate!
     return if current_user
 
-    if inertia_request?
-      inertia_location root_path
-    else
-      redirect_to root_path
-    end
+    redirect_to root_path
   end
 
   def after_authentication_path

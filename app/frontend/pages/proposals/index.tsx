@@ -1,15 +1,15 @@
 import Layout from "../../components/Layout";
-import { ArrowLeftIcon, PlusIcon } from 'lucide-react';
+import {ArrowLeftIcon, PlusIcon} from 'lucide-react';
 import StatusBadge from "../../components/StatusBadge";
-import { usePage, Link, router } from "@inertiajs/react";
-import { Proposal } from "../../serializers";
+import {usePage, Link, router, Head} from "@inertiajs/react";
+import {Proposal} from "../../serializers";
 
 interface IndexProps {
   proposals: Proposal[]
 }
 
-export default function Index({ proposals }: IndexProps) {
-  const { user, cfp_closed } = usePage().props;
+export default function Index({proposals}: IndexProps) {
+  const {user, cfp_closed} = usePage().props;
 
   // Helper function to format the date
   const formatDate = (dateString: string | null) => {
@@ -26,12 +26,14 @@ export default function Index({ proposals }: IndexProps) {
 
   return (
     <Layout currentUser={user}>
+      <Head title="My proposals"/>
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link
           href="/"
           className="flex items-center text-cloud-600 hover:text-cloud-700 transition-colors mb-6"
         >
-          <ArrowLeftIcon className="h-4 w-4 mr-1" />
+          <ArrowLeftIcon className="h-4 w-4 mr-1"/>
           Back home
         </Link>
 
@@ -57,7 +59,7 @@ export default function Index({ proposals }: IndexProps) {
                     href={`/proposals/new`}
                     className="btn btn-primary inline-flex items-center"
                   >
-                    <PlusIcon className="h-5 w-5 mr-2" />
+                    <PlusIcon className="h-5 w-5 mr-2"/>
                     Submit Your First Proposal
                   </Link>
                 </>
@@ -68,42 +70,46 @@ export default function Index({ proposals }: IndexProps) {
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-secondary-800">
                   <thead>
-                    <tr>
-                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider w-2/3">
-                        Title
-                      </th>
-                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
-                        Track
-                      </th>
-                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
-                        Submitted On
-                      </th>
-                      <th scope="col" className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
-                        Status
-                      </th>
-                    </tr>
+                  <tr>
+                    <th scope="col"
+                        className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider w-2/3">
+                      Title
+                    </th>
+                    <th scope="col"
+                        className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                      Track
+                    </th>
+                    <th scope="col"
+                        className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                      Submitted On
+                    </th>
+                    <th scope="col"
+                        className="p-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-cloud-800 uppercase tracking-wider">
+                      Status
+                    </th>
+                  </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-secondary-800">
-                    {proposals.map((proposal) => (
-                      <tr
-                        key={proposal.id}
-                        className="hover:bg-secondary-50 transition-colors cursor-pointer"
-                        onClick={() => router.get(`/proposals/${proposal.id}`)}
-                      >
-                        <td className="p-2 sm:px-6 sm:py-4">
-                          <div className="text-sm font-medium break-words">{proposal.title}</div>
-                        </td>
-                        <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                          <div className="text-sm text-secondary-800">{proposal.track}</div>
-                        </td>
-                        <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                          <div className="text-sm">{formatDate(proposal.submitted_at)}</div>
-                        </td>
-                        <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
-                          <StatusBadge status={proposal.status} />
-                        </td>
-                      </tr>
-                    ))}
+                  {proposals.map((proposal) => (
+                    <tr
+                      key={proposal.id}
+                      className="hover:bg-secondary-50 transition-colors cursor-pointer"
+                      onClick={() => router.get(`/proposals/${proposal.id}`)}
+                    >
+                      <td className="p-2 sm:px-6 sm:py-4">
+                        <div className="text-sm font-medium break-words">{proposal.title}</div>
+                      </td>
+                      <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                        <div className="text-sm text-secondary-800">{proposal.track}</div>
+                      </td>
+                      <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                        <div className="text-sm">{formatDate(proposal.submitted_at)}</div>
+                      </td>
+                      <td className="p-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                        <StatusBadge status={proposal.status}/>
+                      </td>
+                    </tr>
+                  ))}
                   </tbody>
                 </table>
               </div>

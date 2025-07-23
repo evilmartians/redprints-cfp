@@ -16,7 +16,7 @@ describe "/evaluations" do
         subject
 
         expect(response).to be_successful
-        expect(inertia).to render_component "evaluations/Index"
+        expect(inertia).to render_component "evaluations/index"
         expect(inertia.props[:evaluations].as_json.size).to eq reviewer.evaluations.count
       end
     end
