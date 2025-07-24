@@ -2,6 +2,12 @@ class ProposalsController < ApplicationController
   before_action :set_cfp, only: [:new, :create]
   before_action :set_proposal, only: [:show, :edit, :update, :destroy]
 
+  inertia_share do
+    {
+      limits: ProposalForm::LENGTH_LIMITS
+    }
+  end
+
   def index
     render inertia: {proposals: serialize(current_user.proposals)}
   end

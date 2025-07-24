@@ -4,6 +4,7 @@ import TextAreaWithCounter from "../../components/TextAreaWithCounter";
 import Select from "../../components/Select";
 import { CFP, Proposal, SpeakerProfile } from "../../serializers";
 import { FormEvent, useState, useRef } from "react";
+import {AppPageProps} from "../../types/global";
 
 interface FormProps {
   proposal: Proposal
@@ -12,7 +13,7 @@ interface FormProps {
 }
 
 export default function Form({ proposal, speaker, cfp }: FormProps) {
-  const { user } = usePage().props;
+  const { user, limits } = usePage<AppPageProps<{limits: Record<string, number>}>>().props;
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const defaultTrack = Object.keys(cfp.tracks).length === 1 ? Object.keys(cfp.tracks)[0] : '';
@@ -40,14 +41,6 @@ export default function Form({ proposal, speaker, cfp }: FormProps) {
   const formErrors = errors as Partial<Record<ProposalFields, Array<string>>>
 
   const [submitting, setSubmitting] = useState(false);
-
-  // TODO: sync with backend validations
-  const limits = {
-    abstract: 400,
-    details: 800,
-    pitch: 600,
-    speaker_bio: 300
-  }
 
   const isEditing = !!proposal.id;
   const canSaveDraft = proposal.status === 'draft';

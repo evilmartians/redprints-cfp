@@ -37,7 +37,7 @@ export default function New({ proposal, speaker, cfp }: NewProps) {
             </p>
           </div>
 
-          <Form proposal={proposal} speaker={speaker} cfp={cfp} />
+          <Form proposal={proposal} speaker={speaker} cfp={cfp}  />
         </div>
       </div>
     </Layout>
