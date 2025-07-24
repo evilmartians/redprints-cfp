@@ -90,6 +90,7 @@ export function Header({ currentUser }: HeaderProps) {
               <Link
                 href="/auth/sign_out"
                 method="delete"
+                onClick={router.clearHistory}
                 as="button"
                 className="text-sm font-medium transition-colors text-cloud-800 hover:text-cloud-700 cursor-pointer"
                 title="Sign out"
