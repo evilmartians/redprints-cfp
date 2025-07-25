@@ -1,38 +1,45 @@
-import Layout from "../../components/Layout";
 import { Link, usePage } from "@inertiajs/react";
-import { ArrowLeftIcon } from 'lucide-react';
+import { ArrowLeftIcon } from "lucide-react";
+
+import Layout from "../../components/Layout";
+import type { CFP, Proposal, SpeakerProfile } from "../../serializers";
+
 import Form from "./Form";
-import { CFP, Proposal, SpeakerProfile } from "../../serializers";
 
 interface EditProps {
-  proposal: Proposal
-  speaker: SpeakerProfile | null
-  cfp: CFP
+  proposal: Proposal;
+  speaker: SpeakerProfile | null;
+  cfp: CFP;
 }
 
 export default function Edit({ proposal, speaker, cfp }: EditProps) {
   const { user } = usePage().props;
 
   const fieldName = (field: string, defaultName: string) => {
-    return (cfp.field_names && cfp.field_names[field] !== undefined) ? cfp.field_names[field] : defaultName;
-  }
+    return cfp.field_names?.[field] ?? defaultName;
+  };
 
   return (
     <Layout currentUser={user}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <Link
           href={`/proposals/${proposal.id}`}
-          className="flex items-center text-cloud-600 hover:text-cloud-700 transition-colors mb-6"
+          className="text-cloud-600 hover:text-cloud-700 mb-6 flex items-center transition-colors"
         >
-          <ArrowLeftIcon className="h-4 w-4 mr-1" />
+          <ArrowLeftIcon className="mr-1 h-4 w-4" />
           Back to the proposal
         </Link>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8 animate-fade-in">
-            <h1 className="text-3xl font-bold mb-2">{fieldName("header", "Edit Your Proposal")}</h1>
+        <div className="mx-auto max-w-4xl">
+          <div className="animate-fade-in mb-8">
+            <h1 className="mb-2 text-3xl font-bold">
+              {fieldName("header", "Edit Your Proposal")}
+            </h1>
             <p className="text-cloud-600">
-              {fieldName("description", "Update your proposal details. All fields marked with * are required.")}
+              {fieldName(
+                "description",
+                "Update your proposal details. All fields marked with * are required.",
+              )}
             </p>
           </div>
 

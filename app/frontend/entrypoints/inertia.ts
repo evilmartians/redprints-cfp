@@ -1,13 +1,14 @@
 import { createInertiaApp } from "@inertiajs/react";
-import { createElement, ReactNode } from "react";
+import type { ReactNode } from "react";
+import { createElement } from "react";
 import { createRoot } from "react-dom/client";
 
-type ResolvedComponent = {
+interface ResolvedComponent {
   default: ReactNode;
   layout?: (page: ReactNode) => ReactNode;
-};
+}
 
-createInertiaApp({
+void createInertiaApp({
   // Set default page title
   // see https://inertia-rails.netlify.app/guide/title-and-meta
   //
@@ -35,7 +36,7 @@ createInertiaApp({
     //
     // page.default.layout ||= (page) => createElement(Layout, null, page)
 
-    return page
+    return page;
   },
 
   setup({ el, App, props }) {

@@ -115,7 +115,7 @@ describe "Proposals" do
       end
 
       expect(proposals_page).to be_displayed
-      expect(page).to have_text "You haven't submitted any proposals yet"
+      expect(page).to have_text "You haven’t submitted any proposals yet"
     end
 
     context "when deadline passed" do

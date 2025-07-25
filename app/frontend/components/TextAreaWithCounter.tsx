@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from "react";
 
 interface TextAreaWithCounterProps {
   id: string;
@@ -18,14 +18,14 @@ const TextAreaWithCounter: React.FC<TextAreaWithCounterProps> = ({
   required,
 }) => {
   // Count line breaks as \r\n (2 characters) to match Ruby/Rails backend
-  const lineBreaks = (value.match(/\n/g) || []).length;
+  const lineBreaks = (value.match(/\n/g) ?? []).length;
   const characterCount = value.length + lineBreaks;
   const isNearLimit = characterCount >= maxLength * 0.8;
   const isAtLimit = characterCount >= maxLength;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
-    const newLineBreaks = (newValue.match(/\n/g) || []).length;
+    const newLineBreaks = (newValue.match(/\n/g) ?? []).length;
     const newCharacterCount = newValue.length + newLineBreaks;
 
     // Only update if within limit
@@ -46,10 +46,12 @@ const TextAreaWithCounter: React.FC<TextAreaWithCounterProps> = ({
         className="input-field min-h-[120px]"
       />
       <div
-        className={`text-xs mt-1 text-right ${
-          isAtLimit ? 'text-error-600 font-medium' :
-          isNearLimit ? 'text-warning-600' :
-          'text-neutral-500'
+        className={`mt-1 text-right text-xs ${
+          isAtLimit
+            ? "text-error-600 font-medium"
+            : isNearLimit
+              ? "text-warning-600"
+              : "text-neutral-500"
         } transition-colors`}
       >
         {characterCount}/{maxLength} characters
