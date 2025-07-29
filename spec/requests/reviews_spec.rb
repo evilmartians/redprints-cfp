@@ -15,7 +15,7 @@ describe "/evaluations/:id/reviews" do
       subject
 
       expect(response).to be_successful
-      expect(inertia).to render_component "reviews/Index"
+      expect(inertia).to render_component "reviews/index"
       expect(inertia.props[:reviews].as_json.size).to eq 1
     end
 

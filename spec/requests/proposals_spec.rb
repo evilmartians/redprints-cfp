@@ -16,7 +16,7 @@ describe "/proposals" do
 
       expect(response).to be_successful
 
-      expect(inertia).to render_component "proposals/Index"
+      expect(inertia).to render_component "proposals/index"
 
       expect(inertia.props[:proposals].as_json.size).to eq user.proposals.count
     end
@@ -66,7 +66,7 @@ describe "/proposals" do
 
       expect(response).to be_successful
 
-      expect(inertia).to render_component "proposals/Show"
+      expect(inertia).to render_component "proposals/show"
 
       proposal_prop = inertia.props[:proposal].as_json
 
@@ -83,7 +83,7 @@ describe "/proposals" do
 
       expect(response).to be_successful
 
-      expect(inertia).to render_component "proposals/Form"
+      expect(inertia).to render_component "proposals/new"
 
       expect(inertia.props[:proposal]).to be_present
       expect(inertia.props[:speaker]).to be_present
@@ -100,7 +100,7 @@ describe "/proposals" do
 
       expect(response).to be_successful
 
-      expect(inertia).to render_component "proposals/Form"
+      expect(inertia).to render_component "proposals/edit"
 
       proposal_prop = inertia.props[:proposal].as_json
 
@@ -150,8 +150,7 @@ describe "/proposals" do
       it "renders the form with errors" do
         expect { subject }.not_to change { proposal.reload.title }
 
-        expect(response).to be_successful
-        expect(inertia).to render_component "proposals/Form"
+        expect(response).to redirect_to(edit_proposal_path(proposal.external_id))
       end
     end
   end

@@ -2,39 +2,43 @@ class ProposalsController < ApplicationController
   before_action :set_cfp, only: [:new, :create]
   before_action :set_proposal, only: [:show, :edit, :update, :destroy]
 
-  def index
-    proposals = serialize(current_user.proposals)
+  inertia_share do
+    {
+      limits: ProposalForm::LENGTH_LIMITS
+    }
+  end
 
-    render inertia: "proposals/Index", props: {proposals:}
+  def index
+    render inertia: {proposals: serialize(current_user.proposals)}
   end
 
   def new
     form = ProposalForm.with(user: current_user).new(cfp_id: @cfp.id)
 
-    render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), cfp: serialize(@cfp), speaker: serialize(form.speaker_profile)}
+    render inertia: {proposal: serialize(form.proposal), cfp: serialize(@cfp), speaker: serialize(form.speaker_profile)}
   end
 
   def create
     form = ProposalForm.with(user: current_user).from(params.require(:proposal))
 
     if form.save
-      inertia_location proposals_path
+      redirect_to proposals_path
     else
-      render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), cfp: serialize(@cfp), speaker: serialize(form.speaker_profile), errors: form.errors}
+      redirect_to new_proposal_path, inertia: {errors: form.errors}
     end
   end
 
   def show
-    render inertia: "proposals/Show", props: {proposal: serialize(@proposal), cfp: serialize(@proposal.cfp), speaker: serialize(@proposal.speaker_profile)}
+    render inertia: {proposal: serialize(@proposal), cfp: serialize(@proposal.cfp), speaker: serialize(@proposal.speaker_profile)}
   end
 
   def edit
-    # You can edit accepted proposal even after CFP closed
+    # You can edit an accepted proposal even after CFP closed
     return redirect_on_cfp_closed if !@proposal.accepted? && @proposal.cfp.closed?
 
     form = ProposalForm.with(user: current_user, proposal: @proposal).new
 
-    render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), cfp: serialize(@proposal.cfp), speaker: serialize(form.speaker_profile)}
+    render inertia: {proposal: serialize(form.proposal), cfp: serialize(@proposal.cfp), speaker: serialize(form.speaker_profile)}
   end
 
   def update
@@ -43,15 +47,15 @@ class ProposalsController < ApplicationController
     form = ProposalForm.with(user: current_user, proposal: @proposal).from(params.require(:proposal))
 
     if form.save
-      inertia_location proposal_path(@proposal)
+      redirect_to proposal_path(@proposal)
     else
-      render inertia: "proposals/Form", props: {proposal: serialize(form.proposal), cfp: serialize(@proposal.cfp), speaker: serialize(form.speaker_profile), errors: form.errors}
+      redirect_to edit_proposal_path(@proposal), inertia: {errors: form.errors}
     end
   end
 
   def destroy
     @proposal.destroy!
-    inertia_location proposals_path
+    redirect_to proposals_path
   end
 
   private

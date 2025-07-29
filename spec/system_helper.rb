@@ -11,8 +11,8 @@ Capybara.default_max_wait_time = 2
 Capybara.server_port = 3002
 # Use Puma with multiple threads to speed up assets serving
 Capybara.server = :puma, {Silent: true, Threads: "5:5"}
-# Use test-id as a test-specific selector
-Capybara.test_id = "test-id"
+# Use data-test-id as a test-specific selector
+Capybara.test_id = "data-test-id"
 Capybara.add_selector(:test_id) do
   xpath do |locator|
     XPath.descendant[XPath.attr(Capybara.test_id) == locator]

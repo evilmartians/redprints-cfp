@@ -17,13 +17,21 @@ class ProposalForm < ApplicationForm
 
   attribute :drafting, :boolean, default: false
 
-  validates :title, length: {maximum: 256}
-  validates :abstract, length: {maximum: 400}
-  validates :details, length: {maximum: 800}
-  validates :pitch, length: {maximum: 600}
-  validates :speaker_bio, length: {maximum: 300}
+  LENGTH_LIMITS = {
+    title: 256,
+    abstract: 400,
+    details: 800,
+    pitch: 600,
+    speaker_bio: 300
+  }.freeze
 
-  validates :title, :abstract, :details, :pitch,
+  LENGTH_LIMITS.each do |attribute, limit|
+    validates attribute, length: {maximum: limit}
+  end
+
+  validates :track, inclusion: {in: CFP.all.flat_map(&:tracks).map(&:keys).flatten}, allow_blank: true
+
+  validates :title, :abstract, :details, :pitch, :track,
     :speaker_name, :speaker_email, :speaker_bio,
     presence: true, unless: :drafting
 

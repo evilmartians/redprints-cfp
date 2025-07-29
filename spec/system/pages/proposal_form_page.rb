@@ -1,5 +1,5 @@
 class ProposalFormPage < BasePage
-  set_url_matcher %r{/(proposals|startups)/(new|[^\/]+/edit)}
+  set_url_matcher %r{/proposals/(new|[^\/]+/edit)}
 
   section :form, Sections::Form
 

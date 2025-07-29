@@ -21,6 +21,28 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
+  lint_js:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Check prettier formatting
+        run: bun run format
+
+      - name: Check for linting errors
+        run: bun run lint
+
+      - name: Check type errors
+        run: bun run check
+
   test:
     runs-on: ubuntu-latest
     env:
