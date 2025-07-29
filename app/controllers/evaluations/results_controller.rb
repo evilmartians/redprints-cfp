@@ -1,5 +1,5 @@
 module Evaluations
-  class ResultsController < ApplicationController
+  class ResultsController < InertiaController
     before_action :set_evaluation
 
     def index

@@ -1,4 +1,4 @@
-class EvaluationsController < ApplicationController
+class EvaluationsController < InertiaController
   before_action :authenticate_reviewer!
 
   def index

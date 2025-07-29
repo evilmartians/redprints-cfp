@@ -1,4 +1,4 @@
-class ProposalsController < ApplicationController
+class ProposalsController < InertiaController
   before_action :set_cfp, only: [:new, :create]
   before_action :set_proposal, only: [:show, :edit, :update, :destroy]
 
@@ -9,13 +9,20 @@ class ProposalsController < ApplicationController
   end
 
   def index
-    render inertia: {proposals: serialize(current_user.proposals)}
+    # render inertia: {proposals: serialize(current_user.proposals)}
+
+    @proposals = current_user.proposals
+
+    # Implicitly calls:
+    # render inertia: Pages::Proposals::IndexSerializer.new(view_assigns.symbolize_keys).to_inertia
   end
 
   def new
     form = ProposalForm.with(user: current_user).new(cfp_id: @cfp.id)
+    @proposal = form.proposal
+    @speaker = form.speaker_profile
 
-    render inertia: {proposal: serialize(form.proposal), cfp: serialize(@cfp), speaker: serialize(form.speaker_profile)}
+    # render inertia: {proposal: serialize(form.proposal), cfp: serialize(@cfp), speaker: serialize(form.speaker_profile)}
   end
 
   def create

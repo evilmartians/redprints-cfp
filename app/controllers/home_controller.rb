@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < InertiaController
   skip_authentication
 
   def index

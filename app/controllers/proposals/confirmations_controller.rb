@@ -1,5 +1,5 @@
 module Proposals
-  class ConfirmationsController < ApplicationController
+  class ConfirmationsController < InertiaController
     before_action :set_proposal
 
     def create

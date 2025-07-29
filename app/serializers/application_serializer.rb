@@ -1,6 +1,7 @@
 class ApplicationSerializer
   include Rails.application.routes.url_helpers
   include Alba::Resource
+  include Alba::Inertia
   include Typelizer::DSL
 
   class << self

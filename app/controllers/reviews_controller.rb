@@ -1,4 +1,4 @@
-class ReviewsController < ApplicationController
+class ReviewsController < InertiaController
   before_action :authenticate_reviewer!
   before_action :set_review, only: [:show, :update]
   before_action :check_deadline, only: [:update]
