@@ -22,7 +22,7 @@ require "freezolite/auto"
 # See https://github.com/palkan/anyway_config/issues/81
 require_relative "initializers/inflections"
 
-module RedprintsCFP
+module SFRubyCFP
   class Application < Rails::Application
     # Configure the path for configuration classes that should be used before initialization
     # NOTE: path should be relative to the project root (Rails.root)
