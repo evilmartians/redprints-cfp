@@ -3,7 +3,7 @@ import { usePage } from "@inertiajs/react";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-import type { User } from "../serializers";
+import type { User } from "@/serializers";
 
 import { Logo } from "./Logo";
 

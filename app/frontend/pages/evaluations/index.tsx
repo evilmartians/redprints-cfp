@@ -1,8 +1,8 @@
 import { router, usePage } from "@inertiajs/react";
 
-import Layout from "../../components/Layout";
-import type { Evaluation } from "../../serializers";
-import { formatDeadline } from "../../utils/dateHelpers";
+import Layout from "@/components/Layout";
+import type { Evaluation } from "@/serializers";
+import { formatDeadline } from "@/utils/dateHelpers";
 
 interface IndexProps {
   evaluations: Evaluation[];

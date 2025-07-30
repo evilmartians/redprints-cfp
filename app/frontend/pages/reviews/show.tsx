@@ -3,10 +3,10 @@ import { AlertCircleIcon, ArrowLeftIcon, UserIcon } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
 
-import Layout from "../../components/Layout";
-import StarRating from "../../components/StarRating";
-import TextAreaWithCounter from "../../components/TextAreaWithCounter";
-import type { Review } from "../../serializers";
+import Layout from "@/components/Layout";
+import StarRating from "@/components/StarRating";
+import TextAreaWithCounter from "@/components/TextAreaWithCounter";
+import type { Review } from "@/serializers";
 
 interface ShowProps {
   review: Review;

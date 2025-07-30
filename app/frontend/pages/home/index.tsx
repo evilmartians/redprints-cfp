@@ -6,8 +6,8 @@ import {
   UsersIcon,
 } from "lucide-react";
 
-import Layout from "../../components/Layout";
-import { OAuthButtons } from "../../components/OAuthButtons";
+import Layout from "@/components/Layout";
+import { OAuthButtons } from "@/components/OAuthButtons";
 
 interface IndexProps {
   oauth_providers: string[];

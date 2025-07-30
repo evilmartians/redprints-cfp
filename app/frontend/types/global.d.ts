@@ -1,6 +1,6 @@
 import type { PageProps as InertiaPageProps } from "@inertiajs/core";
 
-import type { User } from "../serializers";
+import type { User } from "@/serializers";
 
 type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> =
   T & {

@@ -1,11 +1,11 @@
 import { Link, router, usePage } from "@inertiajs/react";
 import { AlertCircleIcon, ExternalLinkIcon } from "lucide-react";
 
-import Layout from "../../components/Layout";
-import ReviewScores from "../../components/ReviewScores";
-import StatusBadge from "../../components/StatusBadge";
-import type { Evaluation, Review } from "../../serializers";
-import { formatDeadline } from "../../utils/dateHelpers";
+import Layout from "@/components/Layout";
+import ReviewScores from "@/components/ReviewScores";
+import StatusBadge from "@/components/StatusBadge";
+import type { Evaluation, Review } from "@/serializers";
+import { formatDeadline } from "@/utils/dateHelpers";
 
 interface IndexProps {
   evaluation: Evaluation;

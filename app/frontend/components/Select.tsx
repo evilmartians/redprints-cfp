@@ -1,4 +1,4 @@
-import type React from "react";
+import type { ChangeEvent } from "react";
 
 interface SelectOption {
   value: string;
@@ -8,20 +8,20 @@ interface SelectOption {
 interface SelectProps {
   id: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   options: SelectOption[];
   required?: boolean;
   placeholder?: string;
 }
 
-const Select: React.FC<SelectProps> = ({
+const Select = ({
   id,
   value,
   onChange,
   options,
   required,
   placeholder,
-}) => {
+}: SelectProps) => {
   return (
     <div className="relative">
       <select

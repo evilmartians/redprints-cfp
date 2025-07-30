@@ -1,8 +1,8 @@
 import { Link, usePage } from "@inertiajs/react";
 import { ArrowLeftIcon } from "lucide-react";
 
-import Layout from "../../components/Layout";
-import type { CFP, Proposal, SpeakerProfile } from "../../serializers";
+import Layout from "@/components/Layout";
+import type { CFP, Proposal, SpeakerProfile } from "@/serializers";
 
 import Form from "./Form";
 
