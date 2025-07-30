@@ -18,6 +18,8 @@ class ApplicationPrism
 
   def home = HomePage.new
 
+  def startups = StartupsPage.new
+
   def proposals = ProposalsPage.new
 
   def proposal_form = ProposalFormPage.new

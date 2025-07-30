@@ -8,12 +8,14 @@ import {
 
 import Layout from "@/components/Layout";
 import { OAuthButtons } from "@/components/OAuthButtons";
+import type { CFP } from "@/serializers";
 
 interface IndexProps {
   oauth_providers: string[];
+  startup_cfp: CFP;
 }
 
-export default function Index({ oauth_providers }: IndexProps) {
+export default function Index({ oauth_providers, startup_cfp }: IndexProps) {
   const { user, cfp_closed } = usePage().props;
 
   return (
@@ -23,20 +25,30 @@ export default function Index({ oauth_providers }: IndexProps) {
           Call for Proposals
         </h1>
         <p className="text-cloud-50 max-w-3xl text-lg">
-          Share your knowledge and experience at the EXAMPLE conference!
+          Share your Ruby knowledge and experience at the{" "}
+          <a
+            className="underline"
+            href="https://sfruby.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            San Francisco Ruby Conference 2025
+          </a>
+          . We’re looking for talks to support and inspire the new generation of
+          successful startups built on Ruby and Rails.
         </p>
         <div className="text-primary-100 mt-8 flex flex-wrap gap-4">
           <div className="flex items-center">
             <CalendarIcon className="mr-2 h-5 w-5" />
-            <span>Neverber 39-40, 2025</span>
+            <span>November 19-20, 2025</span>
           </div>
           <div className="flex items-center">
             <MapPinIcon className="mr-2 h-5 w-5" />
-            <span>Olympus Mons, Mars</span>
+            <span>Fort Mason, San Francisco</span>
           </div>
           <div className="flex items-center">
             <UsersIcon className="mr-2 h-5 w-5" />
-            <span>1500+ Attendees</span>
+            <span>400+ Attendees</span>
           </div>
         </div>
       </div>
@@ -50,7 +62,7 @@ export default function Index({ oauth_providers }: IndexProps) {
             <div className="space-y-6">
               <p>
                 Thank you for your interest in speaking at our conference! We’re
-                excited to invite proposals for talks in the following tracks:
+                excited to invite proposals for talks in two tracks:
               </p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>
@@ -103,8 +115,8 @@ export default function Index({ oauth_providers }: IndexProps) {
               </p>
               <ul className="list-disc space-y-1 pl-6">
                 <li>CFP opens: June 4, 2025</li>
-                <li>CFP closes: July 13, 2035</li>
-                <li>Notifications: July 21, 2035</li>
+                <li>CFP closes: July 13, 2025</li>
+                <li>Notifications: July 21, 2025</li>
               </ul>
             </div>
           </div>
@@ -117,6 +129,10 @@ export default function Index({ oauth_providers }: IndexProps) {
               <p>Selected speakers will receive:</p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>A complimentary conference ticket</li>
+                <li>
+                  A travel stipend (up to $500 for domestic travel, $1,000 for
+                  international travel)
+                </li>
                 <li>Invitation to the speaker dinner</li>
               </ul>
               <p>
@@ -149,7 +165,7 @@ export default function Index({ oauth_providers }: IndexProps) {
             {!cfp_closed && (
               <>
                 <h3 className="mb-6 text-xl font-bold">
-                  Ready to share your expertise?
+                  Ready to share your Ruby expertise?
                 </h3>
                 <p className="mb-8 text-neutral-600">
                   We welcome proposals from speakers of all experience levels.
@@ -185,6 +201,28 @@ export default function Index({ oauth_providers }: IndexProps) {
             </div>
           </div>
 
+          {!startup_cfp.is_closed && (
+            <div
+              className="card border-secondary-800 animate-slide-up border"
+              style={{ animationDelay: "0.2s" }}
+            >
+              <h3 className="mb-4 text-xl font-bold">
+                Building a startup with Ruby?
+              </h3>
+              <p className="mb-6 text-neutral-600">
+                Demo your startup at the conference! Share your story to inspire
+                others, and connect with some of the best Ruby minds! All
+                startup demos will be 10 minutes.
+              </p>
+              <Link
+                href={`/startups`}
+                className="btn btn-secondary flex items-center justify-center"
+              >
+                Call for Startups
+              </Link>
+            </div>
+          )}
+
           <div
             className="card border-secondary-800 animate-slide-up border"
             style={{ animationDelay: "0.2s" }}
@@ -194,9 +232,8 @@ export default function Index({ oauth_providers }: IndexProps) {
               If you have any questions about the CFP process or need help with
               your proposal, feel free to reach out to our team.
             </p>
-            {/* FIXME: Replace with your contact email */}
             <a
-              href="mailto:conference@example.com"
+              href="mailto:conference@sfruby.com"
               className="text-primary-600 hover:text-primary-800 inline-flex items-center font-medium transition-colors"
             >
               Contact the CFP team

@@ -21,7 +21,7 @@ class ApplicationMailer < ActionMailer::Base
     @body = body
     mail(
       to: email,
-      subject: "Test email from the CFP app [#{Rails.env}]"
+      subject: "Test email from SF Ruby CFP [#{Rails.env}]"
     )
   end
 end
