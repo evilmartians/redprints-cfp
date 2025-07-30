@@ -1,6 +1,6 @@
 import { usePage } from "@inertiajs/react";
 
-import type { User } from "../serializers";
+import type { User } from "@/serializers";
 
 import { Footer } from "./Footer";
 import { Header } from "./Header";

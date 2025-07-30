@@ -3,7 +3,7 @@ class EvaluationSerializer < ApplicationSerializer
 
   attributes :id, :name, :tracks, :criteria, :blind, :personal
 
-  typelize tracks: "Array<#{Proposal.tracks.values.map { %('#{it}') }.join(" | ")}>"
+  typelize tracks: 'Exclude<Proposal["track"], null>[]'
   typelize criteria: "string[]"
 
   attributes :deadline

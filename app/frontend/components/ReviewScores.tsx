@@ -1,5 +1,3 @@
-import type React from "react";
-
 interface ReviewScoresProps {
   scores: Record<string, number> | undefined;
 }
@@ -19,7 +17,7 @@ const scoreClass = (value: number) => {
   }
 };
 
-const ReviewScores: React.FC<ReviewScoresProps> = ({ scores }) => {
+const ReviewScores = ({ scores }: ReviewScoresProps) => {
   if (!scores || Object.keys(scores).length === 0) {
     return null;
   }

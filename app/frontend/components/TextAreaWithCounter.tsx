@@ -1,4 +1,4 @@
-import type React from "react";
+import type { ChangeEvent } from "react";
 
 interface TextAreaWithCounterProps {
   id: string;
@@ -9,21 +9,21 @@ interface TextAreaWithCounterProps {
   required?: boolean;
 }
 
-const TextAreaWithCounter: React.FC<TextAreaWithCounterProps> = ({
+const TextAreaWithCounter = ({
   id,
   value,
   onChange,
   maxLength,
   placeholder,
   required,
-}) => {
+}: TextAreaWithCounterProps) => {
   // Count line breaks as \r\n (2 characters) to match Ruby/Rails backend
   const lineBreaks = (value.match(/\n/g) ?? []).length;
   const characterCount = value.length + lineBreaks;
   const isNearLimit = characterCount >= maxLength * 0.8;
   const isAtLimit = characterCount >= maxLength;
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     const newLineBreaks = (newValue.match(/\n/g) ?? []).length;
     const newCharacterCount = newValue.length + newLineBreaks;

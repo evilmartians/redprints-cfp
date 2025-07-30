@@ -1,5 +1,3 @@
-import type React from "react";
-
 type ProposalStatus =
   | "draft"
   | "submitted"
@@ -14,7 +12,7 @@ interface StatusBadgeProps {
   status: ProposalStatus;
 }
 
-const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
+const StatusBadge = ({ status }: StatusBadgeProps) => {
   let badgeClasses = "badge ";
   let statusText = "";
 

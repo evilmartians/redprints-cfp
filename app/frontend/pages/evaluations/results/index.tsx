@@ -10,14 +10,10 @@ import {
 import type { FormEvent } from "react";
 import { useState } from "react";
 
-import Layout from "../../../components/Layout";
-import ReviewScores from "../../../components/ReviewScores";
-import StatusBadge from "../../../components/StatusBadge";
-import type {
-  Evaluation,
-  EvaluationsProposal,
-  Review,
-} from "../../../serializers";
+import Layout from "@/components/Layout";
+import ReviewScores from "@/components/ReviewScores";
+import StatusBadge from "@/components/StatusBadge";
+import type { Evaluation, EvaluationsProposal, Review } from "@/serializers";
 
 interface IndexProps {
   evaluation: Evaluation;

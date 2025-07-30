@@ -3,10 +3,10 @@ import { AlertCircle, Save, SendIcon, Upload } from "lucide-react";
 import type { FormEvent } from "react";
 import { useRef, useState } from "react";
 
-import Select from "../../components/Select";
-import TextAreaWithCounter from "../../components/TextAreaWithCounter";
-import type { CFP, Proposal, SpeakerProfile } from "../../serializers";
-import type { AppPageProps } from "../../types/global";
+import Select from "@/components/Select";
+import TextAreaWithCounter from "@/components/TextAreaWithCounter";
+import type { CFP, Proposal, SpeakerProfile } from "@/serializers";
+import type { AppPageProps } from "@/types/global";
 
 interface FormProps {
   proposal: Proposal;
@@ -130,9 +130,9 @@ export default function Form({ proposal, speaker, cfp }: FormProps) {
                 onChange={(e) => setData("proposal.track", e.target.value)}
                 required={!canSaveDraft}
                 placeholder="Select a track"
-                options={Object.keys(cfp.tracks).map((track) => ({
-                  value: track,
-                  label: cfp.tracks[track],
+                options={Object.entries(cfp.tracks).map(([value, label]) => ({
+                  value,
+                  label,
                 }))}
               />
               {formErrors.track && (

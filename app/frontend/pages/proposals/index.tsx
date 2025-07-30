@@ -1,9 +1,9 @@
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import { ArrowLeftIcon, PlusIcon } from "lucide-react";
 
-import Layout from "../../components/Layout";
-import StatusBadge from "../../components/StatusBadge";
-import type { Proposal } from "../../serializers";
+import Layout from "@/components/Layout";
+import StatusBadge from "@/components/StatusBadge";
+import type { Proposal } from "@/serializers";
 
 interface IndexProps {
   proposals: Proposal[];

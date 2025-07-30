@@ -1,5 +1,4 @@
 import { Star } from "lucide-react";
-import type React from "react";
 import { useState } from "react";
 
 interface StarRatingProps {
@@ -11,14 +10,14 @@ interface StarRatingProps {
   readonly?: boolean;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({
+const StarRating = ({
   value,
   name,
   onChange,
   label,
   required,
   readonly,
-}) => {
+}: StarRatingProps) => {
   const [hoverRating, setHoverRating] = useState(0);
 
   const handleStarClick = (rating: number) => {
