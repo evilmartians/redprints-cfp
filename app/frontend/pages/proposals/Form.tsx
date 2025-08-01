@@ -24,6 +24,7 @@ export default function Form({ proposal, speaker, cfp }: FormProps) {
 
   const { data, setData, post, patch, errors } = useForm({
     proposal: {
+      cfp_id: proposal.cfp_id ?? cfp.id,
       title: proposal.title ?? "",
       abstract: proposal.abstract ?? "",
       details: proposal.details ?? "",
