@@ -1,6 +1,8 @@
 class CFP < FrozenRecord::Base
   class << self
     def primary = find("primary")
+
+    def startups = find("startups")
   end
 
   class DateTimeType

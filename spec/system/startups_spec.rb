@@ -1,16 +1,35 @@
 require "system_helper"
 
-# This spec verifies the CFP form with a custom mapping behaviour (see spec/data/cfps.yml.erb)
 describe "Startups" do
   let_it_be(:user) { create(:user, name: "Vova", email: "jack@sparrow.inc") }
 
   let(:proposals_page) { prism.proposals }
+  let(:startups_page) { prism.startups }
+  let(:oauth_page) { prism.oauth_dev }
   let(:proposal_form_page) { prism.proposal_form }
 
-  before { sign_in_as(user) }
+  it "user goes back to the startups page after login" do
+    startups_page.load
 
-  it "the form shows non-default field names" do
-    visit "/proposals/new?cfp_id=startups"
+    startups_page.actions.within do |actions|
+      actions.click_on "Sign in as developer"
+    end
+
+    expect(oauth_page).to be_displayed
+
+    oauth_page.form do |f|
+      f.fill_in "Name", with: "Vova"
+      f.fill_in "Email", with: "jack@sparrow.inc"
+    end
+
+    click_on "Sign In"
+
+    expect(startups_page).to be_displayed
+
+    startups_page.actions.within do |actions|
+      expect(actions).to have_link "Submit a Demo Proposal"
+      click_on "Submit a Demo Proposal"
+    end
 
     expect(proposal_form_page).to be_displayed
 
@@ -24,10 +43,12 @@ describe "Startups" do
 
       # Create a speaker profile so we don't need to fill it again
       user.create_speaker_profile(name: "Vova Dem", email: "palkan@mars.test", bio: "Meow-coder")
+
+      sign_in_as(user)
     end
 
     it "still can submit another CFP form" do
-      visit "/proposals/new?cfp_id=startups"
+      visit "/startups/new"
 
       expect(proposal_form_page).to be_displayed
 

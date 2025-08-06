@@ -54,7 +54,7 @@ bundle exec rspec --tag type:system
 
 ### Logging in
 
-In development, use a corresponding record from `db/seeds.rb` or log in via Google or GitHub. If you need admin access, use `admin: true`, or login as a developer using the following email: `admin@redprints.test`.
+In development, use a corresponding record from `db/seeds.rb` or log in via Google or GitHub. If you need admin access, use `admin: true`, or login as a developer using the following email: `karl@sfruby.com`.
 
 ### Admin console
 
@@ -230,9 +230,6 @@ Add your logo by updating the `frontend/components/Logo.tsx` component. That's i
 ### Views / Mailers
 
 You may want to add your conference name and various links to some Inertia pages and components as well as mailer templates—just do that! The React UI is not meant to be magically configurable, tune it up to your needs (but prefer to stick to the page props, so you don't need to touch the backend).
-
-> [!TIP]
-> Search for the `FIXME: ...` and `EXAMPLE Conference` comments in the codebase to see the bits to be updated with your information.
 
 ### Admin
 

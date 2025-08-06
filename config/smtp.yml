@@ -1,4 +1,3 @@
 production: &production
-  # FIXME: Change to your SMTP server address
   address: "smtp.mandrillapp.com"
   port: 587
