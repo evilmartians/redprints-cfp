@@ -2,7 +2,10 @@
 
 This is a _redprint_ ("a blueprint from Mars") of a CFP ("call for proposals") management app for built with Ruby on Rails, Inertia.js, TailwindCSS and React.
 
-> Built for [SF Ruby Conference](https://sfruby.com), open to everyone!
+> **Built for [SF Ruby Conference](https://sfruby.com), open to everyone!**
+
+> [!TIP]
+> 📖 Read the Redprints CFP introduction post at [Evil Martians Chronicles](https://evilmartians.com/chronicles/redprints-cfp-open-source-cfp-management-app-build-with-rails-and-inertia-js)
 
 <a href="https://evilmartians.com/?utm_source=redprints-cfp"><img
     src="https://evilmartians.com/badges/sponsored-by-evil-martians_v2.0.svg"
