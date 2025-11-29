@@ -22,3 +22,5 @@ AllCops:
   NewCops: disable
   SuggestExtensions: false
   TargetRubyVersion: 3.4
+  Exclude:
+    - "lib/**/*"

@@ -7,7 +7,7 @@ export function Footer() {
         <div className="border-secondary-400 mt-8 flex flex-col items-center justify-between border-t pt-6 md:flex-row">
           {/* FIXME: Add your conference name */}
           <p className="text-secondary-400 text-sm">
-            &copy; {currentYear} Example Conference
+            &copy; {currentYear} Tropical on Rails
           </p>
         </div>
       </div>
