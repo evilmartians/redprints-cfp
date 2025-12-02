@@ -26,7 +26,8 @@ export default function Index({ oauth_providers }: IndexProps) {
           <a
             href="https://tropicalonrails.com"
             target="_blank"
-            className="underline" rel="noreferrer"
+            className="underline"
+            rel="noreferrer"
           >
             Tropical on Rails
           </a>{" "}
@@ -84,6 +85,10 @@ export default function Index({ oauth_providers }: IndexProps) {
                   <b>Ruby/Rails and AI/ML:</b> How AI is being integrated into
                   Rails applications — from code generation to AI-powered
                   features, testing, tooling, gems, and architecture
+                </li>
+                <li>
+                  <b>Developer Expirience:</b> tools to improve the experience
+                  for developers. LSPs, MCPs, generators, debuggers, etc
                 </li>
                 <li>
                   <b>Rails for Startups:</b> How small startups leverage Rails
@@ -224,7 +229,8 @@ export default function Index({ oauth_providers }: IndexProps) {
                   <a
                     href="https://linkana.notion.site/Tropical-CFP-exemple-1479bf8c6c9a80ca9d4bc98d18532e47?pvs=4"
                     target="_blank"
-                    className="underline" rel="noreferrer"
+                    className="underline"
+                    rel="noreferrer"
                   >
                     example proposal
                   </a>{" "}
