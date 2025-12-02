@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- FIXME: Add your app title here -->
-    <title inertia><%= content_for(:title) || "CFP App" %></title>
+    <title inertia><%= content_for(:title) || "Tropical on Rails CFP" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cfp.tropicalonrails.com">
+    <meta property="og:title" content="CFP for Tropical on Rails 2026">
+    <meta property="og:description" content="Tropical on Rails returns for its 5th edition, welcoming 700 Rails enthusiasts for two
+          days of learning, energy, and celebration.">
+    # <meta property="og:image" content="https://sfruby.com/sfruby_og.jpg">
+    <!-- Twitter --><meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cfp.tropicalonrails.com">
+    <meta property="twitter:title" content="CFP for the San Francisco Ruby Conference 2025"><meta property="twitter:description" content="Tropical on Rails returns for its 5th edition, welcoming 700 Rails enthusiasts for two days of learning, energy, and celebration.">
+    # <meta property="twitter:image" content="https://sfruby.com/sfruby_og.jpg">
+    <!-- End of Open Graph / Social Media -->
+
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="apple-touch-icon" href="/icon.png">
 
