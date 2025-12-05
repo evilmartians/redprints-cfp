@@ -88,7 +88,8 @@ export default function Index({ oauth_providers }: IndexProps) {
                 </li>
                 <li>
                   <b>Developer Experience:</b> Tools to improve the experience
-                  for developers, such as LSPs, MCPs, generators, debuggers, etc.
+                  for developers, such as LSPs, MCPs, generators, debuggers,
+                  etc.
                 </li>
                 <li>
                   <b>Rails for Startups:</b> How small startups leverage Rails
