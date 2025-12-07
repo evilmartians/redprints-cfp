@@ -60,6 +60,7 @@ export default function Index({ oauth_providers }: IndexProps) {
             </h2>
             <div className="space-y-6">
               <ul className="list-disc space-y-2 pl-6">
+                <li>Deadline: January 10, 2026</li>
                 <li>30-minute talks</li>
                 <li>Single-track</li>
                 <li>700 attendees</li>
