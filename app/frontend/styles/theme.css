@@ -1,12 +1,12 @@
 /* Update this file to change the colors and the font */
 @theme {
-  --font-display: 'Martian Grotesk', 'sans-serif';
+  --font-display: 'Transducer', 'sans-serif';
 
-  /* https://oklch.com/#0.6122,0.2313,22.61,100 */
-  --clr-primary-chroma: 0.2313;
-  --clr-primary-hue: 22.61;
+  /* https://oklch(0.2397 0.0937 294.88) */
+  --clr-primary-chroma: 0.2397;
+  --clr-primary-hue: 294.88;
 
-  /* https://oklch.com/#0.6804,0.034,261.69,100 */
-  --clr-secondary-chroma: 0.034;
-  --clr-secondary-hue: 261.69;
+  /* https://oklch(0.2397 0.0937 294.88) */
+  --clr-secondary-chroma: 0.0937;
+  --clr-secondary-hue: 294.88;
 }

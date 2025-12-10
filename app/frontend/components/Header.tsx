@@ -22,7 +22,7 @@ export function Header({ currentUser }: HeaderProps) {
   };
 
   return (
-    <header className="bg-cloud-50 border-primary-200 sticky top-0 z-10 border-b">
+    <header className="bg-primary-700 border-primary-200 sticky top-0 z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">

@@ -18,8 +18,9 @@ export default function Index({ oauth_providers }: IndexProps) {
 
   return (
     <Layout currentUser={user}>
-      <div className="from-primary-500 to-primary-700 shadow-medium animate-fade-in mb-12 rounded-xl bg-gradient-to-b p-8 text-white">
-        <h1 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+      <div className="bg-primary-700 shadow-medium animate-fade-in mb-12 rounded-xl p-8 text-white">
+      <div className="flex grid-row">
+        <div className=""><h1 className="mb-4 text-3xl font-bold text-white md:text-4xl">
           Call for Proposals
         </h1>
         <p className="text-cloud-50 max-w-3xl text-lg">
@@ -39,12 +40,17 @@ export default function Index({ oauth_providers }: IndexProps) {
             <span>1500+ Attendees</span>
           </div>
         </div>
+        </div>  
+        <div className="">
+          <img src="/logo_full.svg" alt="" />
+        </div> 
+      </div>
       </div>
 
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
         <div className="animate-slide-up space-y-8">
           <div>
-            <h2 className="text-secondary-800 mb-4 text-2xl font-bold">
+            <h2 className="text-white mb-4 text-2xl font-bold">
               Proposal Guidelines
             </h2>
             <div className="space-y-6">
@@ -83,7 +89,7 @@ export default function Index({ oauth_providers }: IndexProps) {
           </div>
 
           <div>
-            <h2 className="text-secondary-800 mb-4 text-2xl font-bold">
+            <h2 className="text-white mb-4 text-2xl font-bold">
               Selection Process
             </h2>
             <div className="space-y-4">
@@ -110,10 +116,10 @@ export default function Index({ oauth_providers }: IndexProps) {
           </div>
 
           <div>
-            <h2 className="text-secondary-800 mb-4 text-2xl font-bold">
+            <h2 className="text-white mb-4 text-2xl font-bold">
               Speaker Benefits
             </h2>
-            <div className="space-y-4 text-neutral-700">
+            <div className="space-y-4 text-neutral-400">
               <p>Selected speakers will receive:</p>
               <ul className="list-disc space-y-2 pl-6">
                 <li>A complimentary conference ticket</li>
@@ -148,10 +154,10 @@ export default function Index({ oauth_providers }: IndexProps) {
             )}
             {!cfp_closed && (
               <>
-                <h3 className="mb-6 text-xl font-bold">
+                <h3 className="mb-6 text-gray-800 text-xl font-bold">
                   Ready to share your expertise?
                 </h3>
-                <p className="mb-8 text-neutral-600">
+                <p className="mb-8 text-gray-600">
                   We welcome proposals from speakers of all experience levels.
                   Whether you’re a seasoned presenter or a first-time speaker,
                   we want to hear from you!
@@ -189,8 +195,8 @@ export default function Index({ oauth_providers }: IndexProps) {
             className="card border-secondary-800 animate-slide-up border"
             style={{ animationDelay: "0.2s" }}
           >
-            <h3 className="mb-4 text-xl font-bold">Have questions?</h3>
-            <p className="mb-6">
+            <h3 className="mb-4 text-gray-800 text-xl font-bold">Have questions?</h3>
+            <p className="mb-6 text-gray-600">
               If you have any questions about the CFP process or need help with
               your proposal, feel free to reach out to our team.
             </p>

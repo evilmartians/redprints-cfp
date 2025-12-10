@@ -13,3 +13,11 @@
   font-weight: 100 800;
   /*font-stretch: 75% 150%;*/
 }
+
+@font-face {
+  font-family: 'Transducer';
+  font-display: swap;
+  src: url("https://use.typekit.net/pwf8kms.css");
+  /*font-weight: 100 800;*/ 
+  /*font-stretch: 75% 150%;*/
+}

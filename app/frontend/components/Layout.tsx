@@ -14,7 +14,7 @@ export default function Layout({ currentUser, children }: LayoutProps) {
   const { flash } = usePage().props;
 
   return (
-    <div className="font-display relative flex min-h-screen flex-col overflow-hidden bg-white text-gray-900 transition-colors duration-300">
+    <div className="font-display relative flex min-h-screen flex-col overflow-hidden bg-purple-950 text-white transition-colors duration-300">
       <Header currentUser={currentUser} />
 
       <main className="flex-grow">
