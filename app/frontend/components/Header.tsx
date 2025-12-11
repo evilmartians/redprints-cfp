@@ -43,7 +43,7 @@ export function Header({ currentUser }: HeaderProps) {
             <div className="sm:hidden print:hidden">
               <button
                 onClick={toggleMenu}
-                className="hover:text-primary-700 focus:ring-primary-500 inline-flex items-center justify-center rounded-md p-2 text-neutral-600 hover:bg-neutral-100 focus:ring-2 focus:outline-none focus:ring-inset"
+                className="text-white hover:text-primary-400 focus:ring-primary-500 inline-flex items-center justify-center rounded-md p-2 text-neutral-600 hover:bg-neutral-100 focus:ring-2 focus:outline-none focus:ring-inset"
               >
                 <span className="sr-only">Open main menu</span>
                 {isMenuOpen ? (
@@ -62,8 +62,8 @@ export function Header({ currentUser }: HeaderProps) {
                   href="/proposals/new"
                   className={`text-sm font-medium transition-colors ${
                     url === "/proposals/new"
-                      ? "text-secondary-800 border-secondary-800 border-b"
-                      : "text-primary hover:text-primary-300"
+                      ? "text-white border-secondary-800 border-b"
+                      : "text-white hover:text-primary-300"
                   }`}
                 >
                   Submit proposal
@@ -74,8 +74,8 @@ export function Header({ currentUser }: HeaderProps) {
                 href="/proposals"
                 className={`text-sm font-medium transition-colors ${
                   url === "/proposals"
-                    ? "text-secondary-800 border-secondary-800 border-b"
-                    : "text-primary hover:text-primary-300"
+                    ? "text-white border-secondary-800 border-b"
+                    : "text-white hover:text-primary-300"
                 }`}
               >
                 My proposals
@@ -94,7 +94,7 @@ export function Header({ currentUser }: HeaderProps) {
                 method="delete"
                 onClick={() => router.clearHistory()}
                 as="button"
-                className="text-cloud-800 hover:text-cloud-700 cursor-pointer text-sm font-medium transition-colors"
+                className="text-cloud-300 hover:text-cloud-500 cursor-pointer text-sm font-medium transition-colors"
                 title="Sign out"
               >
                 Sign out
@@ -104,7 +104,7 @@ export function Header({ currentUser }: HeaderProps) {
         </div>
         {currentUser && (
           <div className={`sm:hidden ${isMenuOpen ? "block" : "hidden"}`}>
-            <div className="border-secondary-800 space-y-1 border-b bg-white px-2 pt-2 pb-3">
+            <div className="border-secondary-800 space-y-1 border-b bg-transparent px-2 pt-2 pb-3">
               <Link
                 href="/"
                 className={`block w-full rounded-md px-3 py-2 text-left text-base font-medium`}

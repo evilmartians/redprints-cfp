@@ -19,7 +19,7 @@ export default function Index({ oauth_providers }: IndexProps) {
   return (
     <Layout currentUser={user}>
       <div className="bg-primary-700 shadow-medium animate-fade-in mb-12 rounded-xl p-8 text-white">
-      <div className="flex grid-row">
+      <div className="flex grid grid-flow-row sm:grid-flow-col">
         <div className=""><h1 className="mb-4 text-3xl font-bold text-white md:text-4xl">
           Call for Proposals
         </h1>
@@ -42,7 +42,7 @@ export default function Index({ oauth_providers }: IndexProps) {
         </div>
         </div>  
         <div className="">
-          <img src="/logo_full.svg" alt="" />
+          <img className="mt-12 w-full sm:mt-0 w-full" src="/logo_full.svg" alt="" />
         </div> 
       </div>
       </div>
