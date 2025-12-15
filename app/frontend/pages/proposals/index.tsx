@@ -57,7 +57,7 @@ export default function Index({ proposals }: IndexProps) {
                 <>
                   <p className="text-cloud-700 mx-auto mb-8 max-w-md">
                     Share your knowledge with the Ruby community by submitting a
-                    proposal for EXAMPLE Conference.
+                    proposal for Tropical on Rails.
                   </p>
                   <Link
                     href={`/proposals/new`}

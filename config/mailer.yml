@@ -1,7 +1,6 @@
 default: &default
-  # FIXME: Change to your email
-  from: "conference@example.com"
-  reply_to: "conference@example.com"
+  from: "info@tropicalonrails.com"
+  reply_to: "info@tropicalonrails.com"
 
 development:
   <<: *default

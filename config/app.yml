@@ -11,5 +11,5 @@ test:
 production: &production
   <<: *default
   # FIXME: change to the actual app's hostname
-  host: "cfp.example.com"
+  host: "cfp.tropicalonrails.com"
   port: 443

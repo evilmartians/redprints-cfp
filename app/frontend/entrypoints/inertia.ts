@@ -13,7 +13,8 @@ void createInertiaApp({
   // see https://inertia-rails.netlify.app/guide/title-and-meta
   //
   // FIXME: Replace with your application's title
-  title: (title) => (title ? `${title}, CFP App` : "CFP App"),
+  title: (title) =>
+    title ? `${title}, Tropical on Rails 2026` : "Tropical on Rails 2026",
 
   // Disable progress bar
   //

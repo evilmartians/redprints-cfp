@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for cfp-sfruby on 2025-06-02T12:53:20-07:00
+# fly.toml app configuration file generated for cpf-tor on 2025-11-01T15:41:24-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-# app = 'my=cfp-app'
-primary_region = 'lax'
+app = 'cpf-tor'
+primary_region = 'gru'
 console_command = '/rails/bin/rails console'
 
 [build]
@@ -20,6 +20,18 @@ console_command = '/rails/bin/rails console'
   auto_start_machines = false
   min_machines_running = 1
   processes = ['app']
+
+  [[http_service.checks]]
+    interval = '10s'
+    timeout = '2s'
+    grace_period = '5s'
+    method = 'GET'
+    path = '/up'
+    protocol = 'http'
+    tls_skip_verify = false
+
+    [http_service.checks.headers]
+      X-Forwarded-Proto = 'https'
 
   [[http_service.checks]]
     interval = '10s'

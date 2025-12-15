@@ -1,11 +1,5 @@
 User.create!(
-  name: "Martian Admin",
-  email: "admin@redprints.test",
+  name: "Cirdes Henrique",
+  email: "cirdes@tropicalonrails.com",
   admin: true
 )
-# FIXME: You can add admin users here
-# User.create!(
-#   name: "Vova",
-#   email: "palkan@evilmartians.com",
-#   admin: true
-# )

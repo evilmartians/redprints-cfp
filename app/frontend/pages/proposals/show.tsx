@@ -234,7 +234,7 @@ export default function Show({ proposal, speaker, cfp }: ShowProps) {
                 <>
                   <p className="text-accent-800">
                     Congratulations! Your proposal has been accepted. We’re
-                    excited to have you speak at EXAMPLE Conference.
+                    excited to have you speak at Tropical on Rails.
                   </p>
                 </>
               )}

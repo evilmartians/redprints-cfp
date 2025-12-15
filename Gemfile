@@ -97,3 +97,7 @@ group :test do
   # See https://evilmartians.com/chronicles/system-of-a-test-2-robust-rails-browser-testing-with-siteprism
   gem "site_prism"
 end
+
+gem "dockerfile-rails", ">= 1.7", group: :development
+
+gem "aws-sdk-s3", "~> 1.202", require: false

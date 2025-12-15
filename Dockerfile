@@ -26,7 +26,7 @@ FROM base AS build
 RUN --mount=type=cache,id=dev-apt-cache,sharing=locked,target=/var/cache/apt \
     --mount=type=cache,id=dev-apt-lib,sharing=locked,target=/var/lib/apt \
     apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git curl pkg-config libyaml-dev
+    apt-get install --no-install-recommends -y build-essential git curl pkg-config libyaml-dev libjemalloc2 sqlite3 libffi-dev unzip
 
 # Install application gems
 COPY --link .ruby-version Gemfile Gemfile.lock ./

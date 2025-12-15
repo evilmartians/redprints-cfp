@@ -67,5 +67,5 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :solid_queue
 
-  config.active_storage.service = :local
+  config.active_storage.service = :tigris
 end
