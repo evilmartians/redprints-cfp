@@ -14,7 +14,7 @@ interface NewProps {
 
 export default function New({ proposal, speaker, cfp }: NewProps) {
   const { user } = usePage().props;
-  const homeLink = cfp.id !== "primary" ? `/${cfp.id}` : "/";
+  const homeLink = !cfp.primary ? `/${cfp.id}` : "/";
 
   const fieldName = (field: string, defaultName: string) => {
     return cfp.field_names?.[field] ?? defaultName;

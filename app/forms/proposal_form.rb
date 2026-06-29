@@ -1,5 +1,5 @@
 class ProposalForm < ApplicationForm
-  attribute :cfp_id, default: -> { "primary" }
+  attribute :cfp_id, default: -> { CFP.primary&.id }
 
   attribute :title
   attribute :abstract

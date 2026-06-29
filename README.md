@@ -135,10 +135,11 @@ litestream_rails:
 
 ## CFP(-s) Configuration
 
-This app is meant to be used for a single event and by default has a single ("primary") CFP configured in a YAML file (`config/data/cfps.yml`):
+This app is meant to be used for a single event and by default has a single (`primary: true`) CFP configured in a YAML file (`config/data/cfps.yml`):
 
 ```yml
-- id: primary
+- id: my-event
+  primary: true
   tracks:
     general: "General"
     oss: "Open Source Tooling"
@@ -151,7 +152,8 @@ This app is meant to be used for a single event and by default has a single ("pr
 The app supports handling different submission types (i.e., different forms). For example, if you want to have a separate form for workshops and lightning talks (with different verbiage), you can add another CFP configuration:
 
 ```yml
-- id: primary
+- id: talks
+  primary: true
   # ...
 - id: workshops
   tracks:
@@ -180,6 +182,28 @@ The app supports handling different submission types (i.e., different forms). Fo
 ```
 
 The `field_names` mapping allows you to customize the form field labels.
+
+### Deactivating past events
+
+If you want to continue using the same app for future events, you can deactivate past CFPs to hide the proposals/reviews from the admin interface by marking them as `inactive: true`:
+
+```yml
+- id: talks-2026
+  primary: true
+  # ...
+- id: talks
+  inactive: true
+  # ...
+- id: workshops
+  inactive: true
+  tracks:
+    workshop: ""
+  deadline:  "2026-06-14T00:00:00-07:00"
+  field_names:
+    header: "Submit Your Workshop"
+```
+
+**NOTE:** You must have at least one active primary CFP.
 
 ## Evaluation Configuration
 

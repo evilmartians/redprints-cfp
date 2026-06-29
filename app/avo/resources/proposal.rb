@@ -1,5 +1,6 @@
 class Avo::Resources::Proposal < Avo::BaseResource
   self.includes = [:user]
+  self.index_query = -> { query.active }
 
   self.search = {
     query: -> {
@@ -45,6 +46,28 @@ class Avo::Resources::Proposal < Avo::BaseResource
     end
 
     def options = ::Proposal.statuses
+  end
+
+  class ShowInactiveFilter < Avo::Filters::BooleanFilter
+    self.name = "Show inactive events"
+
+    def apply(request, query, values)
+      return query unless values["show_inactive"]
+
+      query.rewhere(cfp_id: [nil, *CFP.all.map(&:id)])
+    end
+
+    def options
+      {
+        show_inactive: "Show Inactive"
+      }
+    end
+
+    def default
+      {
+        show_inactive: false
+      }
+    end
   end
 
   class InvalidateScore < Avo::BaseAction
@@ -103,5 +126,6 @@ class Avo::Resources::Proposal < Avo::BaseResource
   def filters
     filter TrackFilter
     filter StatusFilter
+    filter ShowInactiveFilter
   end
 end
