@@ -6,7 +6,7 @@ class Avo::Resources::Evaluation < Avo::BaseResource
   # }
   class Invalidate < Avo::BaseAction
     self.name = "Prepare review sheets"
-    self.no_confirmation = true
+    self.confirmation = false
     self.visible = -> { view.show? }
 
     def handle(query:, fields:, current_user:, resource:, **args)

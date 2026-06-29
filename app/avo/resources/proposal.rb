@@ -72,7 +72,7 @@ class Avo::Resources::Proposal < Avo::BaseResource
 
   class InvalidateScore < Avo::BaseAction
     self.name = "Invalidate Score"
-    self.no_confirmation = true
+    self.confirmation = false
     self.visible = -> { view.show? }
 
     def handle(query:, fields:, current_user:, resource:, **args)
@@ -85,7 +85,7 @@ class Avo::Resources::Proposal < Avo::BaseResource
 
   class ResendConfirmation < Avo::BaseAction
     self.name = "Resend Confirmation"
-    self.no_confirmation = false
+    self.confirmation = true
 
     def handle(query:, fields:, current_user:, resource:, **args)
       proposals = Array(resource.record || query.all.to_a)

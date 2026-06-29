@@ -53,8 +53,7 @@ gem "anyway_config"
 gem "after_commit_everywhere"
 
 # Admin panel [https://docs.avohq.io/]
-gem "avo", "~> 3.2"
-gem "pagy", "~> 9.3"
+gem "avo", ">= 4.0.0"
 
 gem "mission_control-jobs"
 

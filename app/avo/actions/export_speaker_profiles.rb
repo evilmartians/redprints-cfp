@@ -4,7 +4,7 @@ class Avo::Actions::ExportSpeakerProfiles < Avo::BaseAction
   self.message = "Export selected speaker profiles to JSON"
   self.confirm_button_label = "Export"
   self.cancel_button_label = "Cancel"
-  self.no_confirmation = true
+  self.confirmation = false
 
   def handle(query:, fields:, current_user:, resource:, **args)
     speaker_profiles = query

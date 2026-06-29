@@ -58,7 +58,7 @@ In development, use a corresponding record from `db/seeds.rb` or log in via Goog
 
 ### Admin console
 
-You can access our [Avo](https://avohq.io) admin console at: [localhost:3000/admin](http://localhost:3000/admin).
+You can access our [Avo 4](https://avohq.io) admin console at: [localhost:3000/admin](http://localhost:3000/admin).
 
 **NOTE:** You must have `admin: true` in your user record to access the admin console. Feel free to update it from the Rails console.
 
@@ -260,7 +260,7 @@ You may want to add your conference name and various links to some Inertia pages
 
 ### Admin
 
-Go to `config/initializers/avo.rb` and update the corresponding configuration. See [Avo docs](https://docs.avohq.io/3.0/branding.html).
+Go to `config/initializers/avo.rb` and update the corresponding configuration. See [Avo docs](https://docs.avohq.io/4.0/appearance.html).
 
 ## Deployment
 
