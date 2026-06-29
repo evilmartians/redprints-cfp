@@ -6,7 +6,7 @@ describe "/evaluations" do
 
   before { sign_in(reviewer) }
 
-  describe "GET /", :inertia do
+  describe "GET /" do
     subject { get "/evaluations" }
 
     context "when reviewer has multiple evaluations" do

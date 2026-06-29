@@ -6,7 +6,7 @@ describe "/proposals" do
 
   before { sign_in(user) }
 
-  describe "GET /", :inertia do
+  describe "GET /" do
     before_all { create_pair(:proposal, user:) }
 
     subject { get "/proposals" }
@@ -58,7 +58,7 @@ describe "/proposals" do
     end
   end
 
-  describe "GET /:id", :inertia do
+  describe "GET /:id" do
     subject { get "/proposals/#{proposal.external_id}" }
 
     specify do
@@ -75,7 +75,7 @@ describe "/proposals" do
     end
   end
 
-  describe "GET /new", :inertia do
+  describe "GET /new" do
     subject { get "/proposals/new" }
 
     specify do
@@ -90,7 +90,7 @@ describe "/proposals" do
     end
   end
 
-  describe "GET /:id/edit", :inertia do
+  describe "GET /:id/edit" do
     let_it_be(:proposal) { create(:proposal, user:) }
 
     subject { get "/proposals/#{proposal.external_id}/edit" }
@@ -110,7 +110,7 @@ describe "/proposals" do
     end
   end
 
-  describe "PATCH /:id", :inertia do
+  describe "PATCH /:id" do
     let(:form_params) do
       {
         title: "Updated Title",
@@ -144,7 +144,7 @@ describe "/proposals" do
       end
     end
 
-    context "when validation fails", :inertia do
+    context "when validation fails" do
       let(:form_params) { {title: ""} }
 
       it "renders the form with errors" do

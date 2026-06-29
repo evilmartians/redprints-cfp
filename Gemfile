@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.0.0"
+gem "rails", "~> 8.1.0"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -53,7 +53,8 @@ gem "anyway_config"
 gem "after_commit_everywhere"
 
 # Admin panel [https://docs.avohq.io/]
-gem "avo", ">= 3.2"
+gem "avo", "~> 3.2"
+gem "pagy", "~> 9.3"
 
 gem "mission_control-jobs"
 
@@ -66,8 +67,8 @@ gem "freezolite"
 gem "bootsnap", require: false
 
 group :production do
-  gem "sentry-ruby", "~> 5.15"
-  gem "sentry-rails", "~> 5.15"
+  gem "sentry-ruby", "~> 6.6"
+  gem "sentry-rails", "~> 6.6"
 end
 
 group :development do

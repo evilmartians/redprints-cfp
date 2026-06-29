@@ -5,7 +5,7 @@ class Avo::Resources::User < Avo::BaseResource
 
       query.where(
         users_table[:name].matches("%#{params[:q]}%")
-          .or(users_table[:email].matches("%#{params[:q]}%"))
+        .or(users_table[:email].matches("%#{params[:q]}%"))
       )
     },
     item: -> do

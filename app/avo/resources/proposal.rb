@@ -8,8 +8,8 @@ class Avo::Resources::Proposal < Avo::BaseResource
 
       query.joins(:user).where(
         proposals_table[:title].matches("%#{params[:q]}%")
-          .or(users_table[:name].matches("%#{params[:q]}%"))
-          .or(users_table[:email].matches("%#{params[:q]}%"))
+        .or(users_table[:name].matches("%#{params[:q]}%"))
+        .or(users_table[:email].matches("%#{params[:q]}%"))
       )
     },
     item: -> do

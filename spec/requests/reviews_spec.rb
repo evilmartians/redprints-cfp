@@ -8,7 +8,7 @@ describe "/evaluations/:id/reviews" do
 
   before { sign_in(reviewer) }
 
-  describe "GET /", :inertia do
+  describe "GET /" do
     subject { get "/evaluations/#{evaluation.id}/reviews" }
 
     it "renders the index page with the reviews" do

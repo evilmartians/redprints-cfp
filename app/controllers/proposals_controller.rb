@@ -70,6 +70,6 @@ class ProposalsController < ApplicationController
   end
 
   def redirect_on_cfp_closed
-    redirect_back(fallback_location: root_path, alert: "CFP is now closed")
+    redirect_back_or_to(root_path, alert: "CFP is now closed")
   end
 end
