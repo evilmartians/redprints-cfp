@@ -8,4 +8,8 @@ class Evaluation < ApplicationRecord
   has_object :distribution
 
   delegate :invalidate!, to: :distribution
+
+  scope :active, -> { where(cfp_id: CFP.active.map(&:id)) }
+
+  def cfp = CFP.find_by(id: cfp_id)
 end

@@ -7,7 +7,7 @@ class Evaluation
   # The default implementation picks proposals based on the evaluation tracks
   # and create a pending review for each proposal-reviewer pair.
   class Distribution < ActiveRecord::AssociatedObject
-    delegate :tracks, :reviewers, to: :evaluation
+    delegate :tracks, :reviewers, :cfp_id, to: :evaluation
 
     def invalidate!
       Review.upsert_all(
@@ -39,7 +39,13 @@ class Evaluation
     end
 
     def proposals
-      @proposals ||= tracks.blank? ? Proposal.submitted : Proposal.submitted.where(track: tracks)
+      return @proposals if defined?(@proposals)
+
+      scope = Proposal.submitted
+      scope = scope.where(cfp_id:) if cfp_id
+      scope = scope.where(track: tracks) unless tracks.blank?
+
+      @proposals = scope
     end
   end
 end

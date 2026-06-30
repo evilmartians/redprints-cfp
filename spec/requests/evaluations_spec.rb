@@ -17,7 +17,19 @@ describe "/evaluations" do
 
         expect(response).to be_successful
         expect(inertia).to render_component "evaluations/index"
-        expect(inertia.props[:evaluations].as_json.size).to eq reviewer.evaluations.count
+        expect(inertia.props[:evaluations].as_json.size).to eq 2
+      end
+
+      context "with inactive CFPs" do
+        before { create(:evaluation, reviewers: [reviewer], cfp_id: "primary") }
+
+        it "doesn't show evaluations for inactive CFPs" do
+          subject
+
+          expect(response).to be_successful
+          expect(inertia).to render_component "evaluations/index"
+          expect(inertia.props[:evaluations].as_json.size).to eq 2
+        end
       end
     end
 
