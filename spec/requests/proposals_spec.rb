@@ -18,7 +18,21 @@ describe "/proposals" do
 
       expect(inertia).to render_component "proposals/index"
 
-      expect(inertia.props[:proposals].as_json.size).to eq user.proposals.count
+      expect(inertia.props[:proposals].as_json.size).to eq 3
+    end
+
+    context "with inactive CFPs" do
+      before { create(:proposal, user:, cfp_id: "primary") }
+
+      it "doesn't show proposals for inactive CFPs" do
+        subject
+
+        expect(response).to be_successful
+
+        expect(inertia).to render_component "proposals/index"
+
+        expect(inertia.props[:proposals].as_json.size).to eq 3
+      end
     end
   end
 

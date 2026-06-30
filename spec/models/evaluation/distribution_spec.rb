@@ -7,6 +7,7 @@ describe Evaluation::Distribution do
   let_it_be(:proposal_draft) { create(:proposal, :draft, track: "general") }
   let_it_be(:proposal_accepted) { create(:proposal, track: "general", status: "accepted") }
   let_it_be(:proposal_rejected) { create(:proposal, track: "oss", status: "rejected") }
+  let_it_be(:proposal_inactive) { create(:proposal, track: "general", cfp_id: "primary") }
 
   let_it_be(:reviewer_a) { create(:reviewer) }
   let_it_be(:reviewer_b) { create(:reviewer) }

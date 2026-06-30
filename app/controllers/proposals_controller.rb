@@ -9,7 +9,7 @@ class ProposalsController < ApplicationController
   end
 
   def index
-    render inertia: {proposals: serialize(current_user.proposals)}
+    render inertia: {proposals: serialize(current_user.proposals.active)}
   end
 
   def new
