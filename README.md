@@ -54,7 +54,7 @@ bundle exec rspec --tag type:system
 
 ### Logging in
 
-In development, use a corresponding record from `db/seeds.rb` or log in via Google or GitHub. If you need admin access, use `admin: true`, or login as a developer using the following email: `admin@redprints.test`.
+In development, use a corresponding record from `db/seeds.rb` or log in via Google or GitHub. If you need admin access, use `admin: true`, or login as a developer using the following email: `karl@sfruby.com`.
 
 ### Admin console
 

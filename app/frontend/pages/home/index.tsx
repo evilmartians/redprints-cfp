@@ -23,20 +23,30 @@ export default function Index({ oauth_providers }: IndexProps) {
           Call for Proposals
         </h1>
         <p className="text-cloud-50 max-w-3xl text-lg">
-          Share your knowledge and experience at the EXAMPLE conference!
+          Share your Ruby knowledge and experience at the{" "}
+          <a
+            className="underline"
+            href="https://sfruby.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            San Francisco Ruby Startup Conference 2026
+          </a>
+          . We’re looking for talks to support and inspire the new generation of
+          successful startups built on Ruby and Rails.
         </p>
         <div className="text-primary-100 mt-8 flex flex-wrap gap-4">
           <div className="flex items-center">
             <CalendarIcon className="mr-2 h-5 w-5" />
-            <span>Neverber 39-40, 2025</span>
+            <span>November 10-12, 2026</span>
           </div>
           <div className="flex items-center">
             <MapPinIcon className="mr-2 h-5 w-5" />
-            <span>Olympus Mons, Mars</span>
+            <span>SF Jazz, San Francisco</span>
           </div>
           <div className="flex items-center">
             <UsersIcon className="mr-2 h-5 w-5" />
-            <span>1500+ Attendees</span>
+            <span>400+ Attendees</span>
           </div>
         </div>
       </div>
@@ -102,9 +112,9 @@ export default function Index({ oauth_providers }: IndexProps) {
                 <span className="font-medium">Important dates:</span>
               </p>
               <ul className="list-disc space-y-1 pl-6">
-                <li>CFP opens: June 4, 2025</li>
-                <li>CFP closes: July 13, 2035</li>
-                <li>Notifications: July 21, 2035</li>
+                <li>CFP opens: July 3, 2026</li>
+                <li>CFP closes: July 28, 2026</li>
+                <li>Notifications: August 7, 2026</li>
               </ul>
             </div>
           </div>
@@ -194,9 +204,8 @@ export default function Index({ oauth_providers }: IndexProps) {
               If you have any questions about the CFP process or need help with
               your proposal, feel free to reach out to our team.
             </p>
-            {/* FIXME: Replace with your contact email */}
             <a
-              href="mailto:conference@example.com"
+              href="mailto:conference@sfruby.com"
               className="text-primary-600 hover:text-primary-800 inline-flex items-center font-medium transition-colors"
             >
               Contact the CFP team
