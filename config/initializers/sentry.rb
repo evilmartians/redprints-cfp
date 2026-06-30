@@ -8,6 +8,6 @@ if ENV["SENTRY_DSN"] && defined?(Sentry)
     # Rails integration is disabled by default: https://github.com/rails/rails/pull/43625
     config.rails.register_error_subscriber = true
 
-    config.logger = Rails.logger
+    config.sdk_logger = Rails.logger
   end
 end
