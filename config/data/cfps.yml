@@ -1,13 +1,23 @@
+- id: primary-2026
+  primary: true
+  tracks:
+    startup: Starting up with Rails
+    scale: Scaling Ruby and Rails
+    general: General
+  deadline: "2026-07-28T00:00:00-07:00"
 - id: primary
+  inactive: true
   tracks:
     oss: New Open Source and Tooling
     scale: Scaling Ruby and Rails
     general: General
   deadline: "2025-07-14T00:00:00-07:00"
 - id: workshops
+  inactive: true
   tracks:
     workshop:
 - id: startups
+  inactive: true
   tracks:
     startup: ""
   deadline: "2025-10-14T00:00:00-07:00"
