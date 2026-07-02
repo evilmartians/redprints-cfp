@@ -1,13 +1,12 @@
 import type { PageProps as InertiaPageProps } from "@inertiajs/core";
 
-import type { User } from "@/serializers";
+import type { CFP, User } from "@/serializers";
 
 type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> =
   T & {
     user: User;
     flash: Record<"alert" | "notice", string?>;
-    cfp_closed: boolean;
-    startup_cfp_closed: boolean;
+    primary_cfp: CFP;
   };
 
 declare module "@inertiajs/core" {

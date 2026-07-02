@@ -6,4 +6,9 @@ class CFPSerializer < ApplicationSerializer
     it.closed?
   end
   typelize is_closed: "boolean"
+
+  attribute :is_future do
+    it.future?
+  end
+  typelize is_future: "boolean"
 end

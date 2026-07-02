@@ -14,7 +14,10 @@ interface IndexProps {
 }
 
 export default function Index({ oauth_providers }: IndexProps) {
-  const { user, cfp_closed } = usePage().props;
+  const { user, primary_cfp } = usePage().props;
+
+  const cfp_closed = primary_cfp?.is_closed ?? true;
+  const cfp_future = primary_cfp?.is_future ?? false;
 
   return (
     <Layout currentUser={user}>
@@ -137,13 +140,22 @@ export default function Index({ oauth_providers }: IndexProps) {
           >
             {cfp_closed && (
               <>
-                <h3 className="mb-6 text-xl font-bold">
-                  The call for proposals is now closed
-                </h3>
-                <p className="mb-8 text-neutral-600">
-                  Than you everyone for your submissions! You will hear from us
-                  shortly!
-                </p>
+                {cfp_future && (
+                  <h3 className="text-lg font-bold text-center">
+                    The call for proposals has not opened yet
+                  </h3>
+                )}
+                {!cfp_future && (
+                  <h3 className="mb-6 text-xl font-bold">
+                    The call for proposals is now closed
+                  </h3>
+                )}
+                {!cfp_future && (
+                  <p className="mb-8 text-neutral-600">
+                    Than you everyone for your submissions! You will hear from us
+                    shortly!
+                  </p>
+                )}
               </>
             )}
             {!cfp_closed && (
@@ -173,7 +185,7 @@ export default function Index({ oauth_providers }: IndexProps) {
                 </Link>
               )}
 
-              {user && (
+              {user && !cfp_future && (
                 <Link
                   href={`/proposals`}
                   className="btn btn-outline flex items-center justify-center"

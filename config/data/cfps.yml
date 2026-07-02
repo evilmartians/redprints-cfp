@@ -4,6 +4,7 @@
     startup: Starting up with Rails
     scale: Scaling Ruby and Rails
     general: General
+  open_at: "2026-07-10T00:00:00-07:00"
   deadline: "2026-12-14T00:00:00-07:00"
   field_names: {}
 - id: primary

@@ -1,5 +1,9 @@
 # Change log
 
+## 2026-07-01
+
+- Add `open_at` to CFPs to prevent submitting before the provided date.
+
 ## 2026-06-29
 
 - Use `primary: true` instead of `id: "primary"` for specifying the primary CFP.

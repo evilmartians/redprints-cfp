@@ -13,7 +13,9 @@ interface HeaderProps {
 
 export function Header({ currentUser }: HeaderProps) {
   const { url } = usePage();
-  const { cfp_closed } = usePage().props;
+  const { primary_cfp } = usePage().props;
+
+  const cfp_closed = primary_cfp?.is_closed ?? true;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

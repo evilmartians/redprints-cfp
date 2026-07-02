@@ -10,7 +10,9 @@ interface IndexProps {
 }
 
 export default function Index({ proposals }: IndexProps) {
-  const { user, cfp_closed } = usePage().props;
+  const { user, primary_cfp } = usePage().props;
+
+  const cfp_closed = primary_cfp?.is_closed ?? true;
 
   // Helper function to format the date
   const formatDate = (dateString: string | null) => {
