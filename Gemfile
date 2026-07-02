@@ -75,6 +75,9 @@ group :development do
   gem "lefthook", require: false
 
   gem "letter_opener_web"
+
+  gem "ruby-lsp-rails", require: false
+  gem "ruby-lsp-rspec", require: false
 end
 
 group :development, :test do
