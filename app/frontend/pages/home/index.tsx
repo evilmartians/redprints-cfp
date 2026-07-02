@@ -141,7 +141,7 @@ export default function Index({ oauth_providers }: IndexProps) {
             {cfp_closed && (
               <>
                 {cfp_future && (
-                  <h3 className="text-lg font-bold text-center">
+                  <h3 className="text-center text-lg font-bold">
                     The call for proposals has not opened yet
                   </h3>
                 )}
@@ -152,8 +152,8 @@ export default function Index({ oauth_providers }: IndexProps) {
                 )}
                 {!cfp_future && (
                   <p className="mb-8 text-neutral-600">
-                    Than you everyone for your submissions! You will hear from us
-                    shortly!
+                    Than you everyone for your submissions! You will hear from
+                    us shortly!
                   </p>
                 )}
               </>
