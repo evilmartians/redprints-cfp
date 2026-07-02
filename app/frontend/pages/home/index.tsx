@@ -142,7 +142,7 @@ export default function Index({ oauth_providers }: IndexProps) {
               <>
                 {cfp_future && (
                   <h3 className="text-center text-lg font-bold">
-                    The call for proposals has not opened yet
+                    The call for proposals is not open yet
                   </h3>
                 )}
                 {!cfp_future && (
