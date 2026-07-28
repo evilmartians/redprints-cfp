@@ -111,7 +111,7 @@ export default function Index({ reviews, evaluation }: IndexProps) {
                     {!evaluation.blind && (
                       <td className="p-2 whitespace-nowrap sm:px-6 sm:py-4">
                         <div className="text-secondary-800 text-sm">
-                          {review.user!.name}
+                          {review.speaker.name}
                         </div>
                       </td>
                     )}
