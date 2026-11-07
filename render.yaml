@@ -1,0 +1,25 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: tropical-cfp
+    runtime: docker
+    repo: https://github.com/rubinostrilhos/redprints-cfp
+    branch: main
+    region: virginia
+    plan: starter
+    # Deploy only after GitHub checks (CI) pass on main.
+    autoDeployTrigger: checksPass
+    healthCheckPath: /up
+    domains:
+      - cfp.tropicalonrails.com
+    # SQLite databases and Active Storage files live here (DATA_PATH=/data).
+    # Render takes a daily snapshot of the disk and keeps it for 7 days.
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: SENTRY_DSN
+        sync: false
