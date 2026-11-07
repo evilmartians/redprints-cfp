@@ -243,7 +243,7 @@ export default function Show({ proposal, speaker, cfp }: ShowProps) {
                 <>
                   <p className="text-accent-800">
                     Congratulations! You’re a part of our amazing program! See
-                    you in San Francisco!
+                    you in São Paulo!
                   </p>
                 </>
               )}
