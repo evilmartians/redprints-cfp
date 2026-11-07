@@ -10,3 +10,6 @@ test:
 
 production:
   <<: *default
+  # Resend sends from the verified mail.tropicalonrails.com domain;
+  # replies still go to info@tropicalonrails.com.
+  from: "Tropical on Rails <cfp@mail.tropicalonrails.com>"
