@@ -1,3 +1,6 @@
 production: &production
-  address: "smtp.mailersend.net"
+  # Resend SMTP: the password is a Resend API key (kept in credentials).
+  address: "smtp.resend.com"
   port: 587
+  username: "resend"
+  domain: "mail.tropicalonrails.com"
