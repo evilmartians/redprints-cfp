@@ -1,5 +1,6 @@
 class Avo::Resources::Review < Avo::BaseResource
   self.includes = [:proposal, :user]
+  self.index_query = -> { query.active }
   # self.attachments = []
   # self.search = {
   #   query: -> { query.ransack(id_eq: params[:q], m: "or").result(distinct: false) }
@@ -25,6 +26,28 @@ class Avo::Resources::Review < Avo::BaseResource
     def options = ::User.reviewer.collect { [it.id, it.name] }.to_h
   end
 
+  class ShowInactiveFilter < Avo::Filters::BooleanFilter
+    self.name = "Show inactive events"
+
+    def apply(request, query, values)
+      return query unless values["show_inactive"]
+
+      query.rewhere(proposals: {cfp_id: [nil, *CFP.all.map(&:id)]})
+    end
+
+    def options
+      {
+        show_inactive: "Show Inactive"
+      }
+    end
+
+    def default
+      {
+        show_inactive: false
+      }
+    end
+  end
+
   def fields
     field :id, as: :id
     field :status, as: :select, enum: ::Review.statuses, sortable: true
@@ -41,5 +64,6 @@ class Avo::Resources::Review < Avo::BaseResource
   def filters
     filter ReviewerFilter
     filter StatusFilter
+    filter ShowInactiveFilter
   end
 end

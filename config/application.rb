@@ -29,7 +29,7 @@ module RedprintsCFP
     # config.anyway_config.autoload_static_config_path = "config/configs"
     #
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 8.0
+    config.load_defaults 8.1
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -88,7 +88,7 @@ module RedprintsCFP
       config.paths["app/views"] << Rails.root.join("lookbook/app/views")
       config.paths["app/controllers"] << Rails.root.join("lookbook/app/controllers")
       config.view_component.show_previews = true
-      config.view_component.preview_paths << Rails.root.join("lookbook/previews")
+      config.view_component.previews.paths << Rails.root.join("lookbook/previews")
       config.lookbook.preview_controller = "LookbookController"
     end
   end

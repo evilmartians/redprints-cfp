@@ -9,6 +9,7 @@ FactoryBot.define do
     track { "general" }
     status { "submitted" }
     submitted_at { Time.current }
+    cfp_id { CFP.primary.id }
 
     trait :draft do
       status { "draft" }

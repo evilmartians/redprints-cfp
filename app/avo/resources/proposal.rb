@@ -1,5 +1,6 @@
 class Avo::Resources::Proposal < Avo::BaseResource
   self.includes = [:user]
+  self.index_query = -> { query.active }
 
   self.search = {
     query: -> {
@@ -8,8 +9,8 @@ class Avo::Resources::Proposal < Avo::BaseResource
 
       query.joins(:user).where(
         proposals_table[:title].matches("%#{params[:q]}%")
-          .or(users_table[:name].matches("%#{params[:q]}%"))
-          .or(users_table[:email].matches("%#{params[:q]}%"))
+        .or(users_table[:name].matches("%#{params[:q]}%"))
+        .or(users_table[:email].matches("%#{params[:q]}%"))
       )
     },
     item: -> do
@@ -47,9 +48,31 @@ class Avo::Resources::Proposal < Avo::BaseResource
     def options = ::Proposal.statuses
   end
 
+  class ShowInactiveFilter < Avo::Filters::BooleanFilter
+    self.name = "Show inactive events"
+
+    def apply(request, query, values)
+      return query unless values["show_inactive"]
+
+      query.rewhere(cfp_id: [nil, *CFP.all.map(&:id)])
+    end
+
+    def options
+      {
+        show_inactive: "Show Inactive"
+      }
+    end
+
+    def default
+      {
+        show_inactive: false
+      }
+    end
+  end
+
   class InvalidateScore < Avo::BaseAction
     self.name = "Invalidate Score"
-    self.no_confirmation = true
+    self.confirmation = false
     self.visible = -> { view.show? }
 
     def handle(query:, fields:, current_user:, resource:, **args)
@@ -62,7 +85,7 @@ class Avo::Resources::Proposal < Avo::BaseResource
 
   class ResendConfirmation < Avo::BaseAction
     self.name = "Resend Confirmation"
-    self.no_confirmation = false
+    self.confirmation = true
 
     def handle(query:, fields:, current_user:, resource:, **args)
       proposals = Array(resource.record || query.all.to_a)
@@ -103,5 +126,6 @@ class Avo::Resources::Proposal < Avo::BaseResource
   def filters
     filter TrackFilter
     filter StatusFilter
+    filter ShowInactiveFilter
   end
 end

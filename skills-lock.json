@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "layered-rails": {
+      "source": "palkan/skills",
+      "sourceType": "github",
+      "skillPath": "layered-rails/skills/layered-rails/SKILL.md",
+      "computedHash": "1f8d39e10ae3d51352ca6856a41133f57ed01fc446304f411952959b124275dc"
+    }
+  }
+}

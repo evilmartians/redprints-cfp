@@ -122,15 +122,15 @@ Avo.configure do |config|
   # config.resource_parent_controller = "Avo::ResourcesController"
   # config.first_sorting_option = :desc # :desc or :asc
 
-  ## == Branding ==
-  config.branding = {
-    colors: {
-      :background => "248 246 242",
-      100 => "#dcedfa",
-      400 => "#4bb3ff",
-      500 => "#00358d",
-      600 => "#C0C0C0"
+  ## == Appearance  ==
+  config.appearance = {
+    accent: :brand,
+    accent_colors: {
+      color: "oklch(65% 0.2313 22.61)",
+      content: "oklch(75% 0.2313 22.61)",
+      foreground: "oklch(99% 0 0)"
     },
+    neutral: :sand,
     chart_colors: ["#0B8AE2", "#34C683", "#2AB1EE", "#34C6A8"],
     logo: "/logo.png",
     logomark: "/logo.png",
