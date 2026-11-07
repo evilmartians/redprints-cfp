@@ -2,6 +2,7 @@
   primary: true
   tracks:
     general: General
+  open_at: null
   deadline: "2026-01-15T00:00:00-03:00"
   field_names: {}
 # - id: workshops
