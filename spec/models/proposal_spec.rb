@@ -1,6 +1,12 @@
 require "rails_helper"
 
 describe Proposal do
+  describe ".tracks" do
+    specify "only include tracks from active CFPs" do
+      expect(described_class.tracks.keys).to match_array(%w[general oss scale startup])
+    end
+  end
+
   describe "#invalidate_score!" do
     let_it_be(:proposal) { create(:proposal, track: "general") }
     let_it_be(:evaluation) { create_default(:evaluation) }
