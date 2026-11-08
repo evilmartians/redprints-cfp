@@ -25,5 +25,30 @@ describe Auth::OAuthForm do
         expect(user.reload.name).to eq("Vasya")
       end
     end
+
+    context "when user signed up with another provider using the same email" do
+      let_it_be(:user) { create(:user, email: "example@some-website.com") }
+      let(:params) { {provider: "google_oauth2", uid: "google-uid", email:, name: "Alien"} }
+
+      before { user.oauth_providers.create!(provider: "github", uid: "github-uid") }
+
+      it "links the new provider to the existing user" do
+        result = nil
+        expect { result = form.save }.to change(user.oauth_providers, :count).by(1)
+
+        expect(result).to eq(user)
+        expect(User.where(email: "example@some-website.com").count).to eq(1)
+        expect(user.oauth_providers.pluck(:provider)).to contain_exactly("github", "google_oauth2")
+      end
+    end
+
+    context "when the provider returns no email (e.g. unverified Google email)" do
+      let(:email) { nil }
+
+      it "fails without creating a user" do
+        expect { form.save }.not_to change(User, :count)
+        expect(form.errors[:email]).to be_present
+      end
+    end
   end
 end
